@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
-import { Dashboard } from '@app/Dashboard/Dashboard';
+import { GridItems } from '@app/components/GridItems';
 import { Support } from '@app/Support/Support';
 import { GeneralSettings } from '@app/Settings/General/GeneralSettings';
 import { ProfileSettings } from '@app/Settings/Profile/ProfileSettings';
@@ -31,11 +31,11 @@ export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
   {
-    component: Dashboard,
+    component: GridItems,
     exact: true,
-    label: 'Dashboard',
+    label: 'GridItems',
     path: '/',
-    title: 'PatternFly Seed | Main Dashboard',
+    title: 'PatternFly Seed | Main GridItems',
   },
   {
     component: Support,
