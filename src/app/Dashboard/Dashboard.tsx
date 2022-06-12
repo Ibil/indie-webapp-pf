@@ -4,7 +4,7 @@ import { Product, ProductGridItem } from '@app/components/Dashboard/ProductGridI
 
 const generateMockItems = (size: number) => {
   const array: Product[] = [];
-  while( size-- > 0){
+  while (size-- > 0) {
     array.push({
       name: `product #${size}`,
       photo: 'abc',
@@ -15,8 +15,8 @@ const generateMockItems = (size: number) => {
 }
 
 const fillGrid = (items: Product[]) => {
-  return items.map(({name, photo, price}: Product) => 
-    <ProductGridItem name={name} photo={photo} price={price}/>
+  return items.map(({ name, photo, price }: Product) =>
+    <ProductGridItem name={name} photo={photo} price={price} />
   );
 }
 
