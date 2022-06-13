@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ActionGroup, Button, Checkbox, FlexItem, Form, FormGroup, Popover, TextInput } from '@patternfly/react-core';
 import { HelpIcon } from '@patternfly/react-icons';
+import { readOnly } from 'stories/ProductForm.stories';
 
 
 export interface Product {
@@ -17,9 +18,10 @@ export class ProductForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value1: '',
-      value2: '',
-      value3: ''
+      value1: props.name,
+      value2: props.mail,
+      value3: '',
+      readOnly: props.readOnly
     };
     this.handleTextInputChange1 = value1 => {
       this.setState({ value1 });
@@ -33,7 +35,7 @@ export class ProductForm extends React.Component {
   }
 
   render() {
-    const { value1, value2, value3 } = this.state;
+    const { value1, value2, value3, readOnly } = this.state;
 
     return (
       <Form>
@@ -84,6 +86,7 @@ export class ProductForm extends React.Component {
         >
           <TextInput
             isRequired
+            isReadOnly={readOnly}
             type="text"
             id="simple-form-name-01"
             name="simple-form-name-01"
@@ -95,16 +98,18 @@ export class ProductForm extends React.Component {
         <FormGroup label="Email" isRequired fieldId="simple-form-email-01">
           <TextInput
             isRequired
+            isReadOnly={readOnly}
             type="email"
             id="simple-form-email-01"
             name="simple-form-email-01"
-            value={this.state.value2}
+            value={value2}
             onChange={this.handleTextInputChange2}
           />
         </FormGroup>
         <FormGroup label="Phone number" isRequired fieldId="simple-form-number-01">
           <TextInput
             isRequired
+            isDisabled
             type="tel"
             id="simple-form-number-01"
             placeholder="555-555-5555"
