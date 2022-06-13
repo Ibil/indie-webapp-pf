@@ -2,8 +2,8 @@
 
 ## Development Process
 
-This application is being build first on storybook. Each Component is created and a test case is added to storybook.
-Whenever deemed appropriate, the component will be added to the main application
+This application is being built first on storybook. Each Component is created and a test case is added to storybook.
+Whenever deemed appropriate, the component will be added to the main application.
 
 For this reason, the storybook will always have more components than the actual application.
 
@@ -68,4 +68,5 @@ npm run build:storybook
 
 
 
-[More details](./info.md)
+[More details](./docs/info.md)
+[TODO list](./docs/todo.md)
