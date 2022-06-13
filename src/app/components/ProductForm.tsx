@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ActionGroup, Button, Checkbox, FlexItem, Form, FormGroup, Popover, TextInput } from '@patternfly/react-core';
 import { HelpIcon } from '@patternfly/react-icons';
-import { readOnly } from 'stories/ProductForm.stories';
 
 
 export interface Product {
