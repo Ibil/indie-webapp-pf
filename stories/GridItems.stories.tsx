@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import { GridItems } from '@app/components/GridItems';
 import { Story } from '@storybook/react';
-import { Product } from '@app/components/ProductGridItem';
+import { Product } from '@app/components/GridTitem';
 
 //👇 This default export determines where your story goes in the story list
 export default {
