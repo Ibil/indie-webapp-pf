@@ -1,0 +1,6 @@
+
+const getProduct = () => {
+}
+
+const updateProduct = () => {
+}

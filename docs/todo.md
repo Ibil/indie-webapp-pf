@@ -6,7 +6,8 @@ listar produtos : layouts : flex or gallery
 
 products : CRU : form
 editar produtos : form 
-- view and upload images
+- rotas
+- view and upload images :: ver IAC
 - consulta stock
 - adicionar stock
 

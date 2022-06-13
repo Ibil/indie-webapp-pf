@@ -1,0 +1,6 @@
+
+const getProducts = () => {
+}
+
+const deleteProduct = () => {
+}

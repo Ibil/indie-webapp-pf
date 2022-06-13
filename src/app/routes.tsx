@@ -33,11 +33,11 @@ const routes: AppRouteConfig[] = [
   {
     component: GridItems,
     exact: true,
-    label: 'GridItems',
+    label: 'Produtos',
     path: '/',
-    title: 'PatternFly Seed | Main GridItems',
+    title: 'Produtos',
   },
-  {
+/*   {
     component: Support,
     exact: true,
     isAsync: true,
@@ -63,7 +63,7 @@ const routes: AppRouteConfig[] = [
         title: 'PatternFly Seed | Profile Settings',
       },
     ],
-  },
+  }, */
 ];
 
 // a custom hook for sending focus to the primary content container
