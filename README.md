@@ -29,7 +29,7 @@ npm run start:dev
 
 Run the storybook
 ```bash
-npm run start:dev
+npm run storybook
 ```
 
 [More details](./docs/info.md)
