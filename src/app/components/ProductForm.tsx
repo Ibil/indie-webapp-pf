@@ -108,7 +108,6 @@ export class ProductForm extends React.Component {
         <FormGroup label="Phone number" isRequired fieldId="simple-form-number-01">
           <TextInput
             isRequired
-            isDisabled
             type="tel"
             id="simple-form-number-01"
             placeholder="555-555-5555"
@@ -123,7 +122,7 @@ export class ProductForm extends React.Component {
           <Checkbox label="Please don't contact me." aria-label="Please don't contact me." id="inlinecheck03" />
         </FormGroup>
         <FormGroup label="Additional note" fieldId="simple-form-note-01">
-          <TextInput isDisabled type="text" id="simple-form-note-01" name="simple-form-number" value="disabled" />
+          <TextInput type="text" id="simple-form-note-01" name="simple-form-number" value="disabled" />
         </FormGroup>
         <FormGroup fieldId="checkbox01">
           <Checkbox

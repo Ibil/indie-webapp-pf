@@ -4,6 +4,8 @@ listar produtos : layouts : flex or gallery
 
 ##############################
 
+usar isDisabled
+
 products : CRU : form
 editar produtos : form 
 - rotas
