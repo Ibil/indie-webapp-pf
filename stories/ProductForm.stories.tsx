@@ -16,13 +16,13 @@ editable.args = {
   name: `name x`,
   mail: 'ola@gmail.com',
   photo: '',
-  readOnly: false,
+  isDisabled: false,
 };
 
-export const readOnly = Template.bind({});
-readOnly.args = {
+export const disabled = Template.bind({});
+disabled.args = {
   name: `name x`,
   mail: 'ola@gmail.com',
   photo: '',
-  readOnly: true,
+  isDisabled: true,
 };
