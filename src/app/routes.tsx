@@ -1,13 +1,11 @@
-import * as React from 'react';
-import { Route, RouteComponentProps, Switch } from 'react-router-dom';
-import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import { GridItems } from '@app/components/GridItems';
-import { Support } from '@app/Support/Support';
-import { GeneralSettings } from '@app/Settings/General/GeneralSettings';
-import { ProfileSettings } from '@app/Settings/Profile/ProfileSettings';
 import { NotFound } from '@app/NotFound/NotFound';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
+import { accessibleRouteChangeHandler } from '@app/utils/utils';
+import * as React from 'react';
+import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { ProductForm } from './components/ProductForm';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -36,6 +34,13 @@ const routes: AppRouteConfig[] = [
     label: 'Produtos',
     path: '/',
     title: 'Produtos',
+  },
+  {
+    component: ProductForm,
+    exact: true,
+    label: 'Produto',
+    path: '/editProduct',
+    title: 'Produto',
   },
 /*   {
     component: Support,

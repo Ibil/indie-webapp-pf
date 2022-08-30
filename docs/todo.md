@@ -1,34 +1,59 @@
 
 listar produtos : layouts : flex or gallery
 
+grid links:edit and add
 
 ##############################
 
-usar isDisabled
+parameter based route building
 
-products : CRU : form
-editar produtos : form 
-- rotas
-- view and upload images :: ver IAC
+view read-only products  form :
+- rota 
+- ver dados
+- view image
 - consulta stock
+- butao buy
+- back usehistory
+
+criar / editar produtos : form 
+- upload images :: ver IAC
 - adicionar stock
+- delete products
+- back usehistory
 
-serviços
+Pontos de venda : 
+- associar produto a ponto de venda
 
-vendedor: registar vendas ie
-	- logica de butoes do griditem com add/remove, 
-	- shooping cart
+users: criar, editar, associar, remover
+
+vendedor: 
+	- gerir período de venda
+	- shooping cart: ui && add and remove functions
+	- butoes add/remove qty no griditem e product view
+	- registar vendas
+
+gerar fatura pdf
+
+serviços / comunicacao be fe : reverse proxy cors 
+deploy
+
 
 ---
-alinhar textos gridItem
-grid item link
-delete products
+MUST
+alinhar textos gridItemç
+
+
+Could:
+listar produtos por ponto de venda
+consultar stock por ponto de venda
+
+
+
+ui:
+grid item remove qty
 
 grid items pagination
 
 topbar
 
-Pontos de venda
-editar users
-
-
+reserva

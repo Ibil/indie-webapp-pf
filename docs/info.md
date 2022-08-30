@@ -1,3 +1,7 @@
+index.tsx : router -> applayout -> approutes
+
+
+
 ## Other Development scripts
 ```sh
 # Install development/build dependencies
