@@ -3,12 +3,14 @@ listar produtos : layouts : flex or gallery
 
 grid links:edit and add
 
-##############################
-
 parameter based route building
 
+hide certain side items like view product
+
+##############################
+
+
 view read-only products  form :
-- rota 
 - ver dados
 - view image
 - consulta stock

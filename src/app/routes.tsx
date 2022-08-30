@@ -18,11 +18,13 @@ export interface IAppRoute {
   title: string;
   isAsync?: boolean;
   routes?: undefined;
+  sidebarHide?: boolean;
 }
 
 export interface IAppRouteGroup {
   label: string;
   routes: IAppRoute[];
+  sidebarHide?: boolean;
 }
 
 export type AppRouteConfig = IAppRoute | IAppRouteGroup;
@@ -41,6 +43,7 @@ const routes: AppRouteConfig[] = [
     label: 'Produto',
     path: '/editProduct/:id',
     title: 'Produto',
+    sidebarHide: true,
   },
 /*   {
     component: Support,
