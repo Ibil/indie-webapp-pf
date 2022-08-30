@@ -39,7 +39,7 @@ const routes: AppRouteConfig[] = [
     component: ProductForm,
     exact: true,
     label: 'Produto',
-    path: '/editProduct',
+    path: '/editProduct/:id',
     title: 'Produto',
   },
 /*   {

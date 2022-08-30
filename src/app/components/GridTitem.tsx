@@ -13,9 +13,9 @@ export const GridItem = ({ name, photo, price }: Product) => {
   const history = useHistory();
   return (
     <FlexItem>
-      <a onClick={() => history.push('editProduct')}>
+      <a onClick={() => history.push(`editProduct/${name}`)}>
         <p>{name}</p>
-        <img src={photo} alt="Product" onClick={() => history.push('editProduct')} />
+        <img src={photo} alt="Product"/>
         <p>{price}</p>
       </a>
       <Button variant="primary" onClick={() => alert("ola")}>Adicionar</Button>
