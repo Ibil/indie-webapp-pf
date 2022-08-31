@@ -1,6 +1,9 @@
 
-const getProduct = () => {
+export const getProduct = () => {
 }
 
-const updateProduct = () => {
+export const updateProduct = () => {
+}
+
+export const saveProduct = () => {
 }

@@ -71,7 +71,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
     </NavExpandable>
   );
 
-  const Navigation = (
+  const SideBarNavigation = (
     <Nav id="nav-primary-simple" theme="dark">
       <NavList id="nav-list-simple">
         {/* fixme */}
@@ -85,7 +85,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const Sidebar = (
     <PageSidebar
       theme="dark"
-      nav={Navigation}
+      nav={SideBarNavigation}
       isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />
   );
 
