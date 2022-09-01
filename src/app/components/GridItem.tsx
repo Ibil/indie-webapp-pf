@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, FlexItem } from '@patternfly/react-core';
 import { useHistory } from 'react-router-dom';
+import textStyles from './GridItem.module.css';
 
 
 export interface Product {
@@ -12,7 +13,7 @@ export interface Product {
 export const GridItem = ({ name, photo, price }: Product) => {
   const history = useHistory();
   return (
-    <FlexItem>
+    <FlexItem className={textStyles.align}>
       <a onClick={() => history.push(`editProduct/${name}`)}>
         <p>{name}</p>
         <img src={photo} alt="Product"/>
