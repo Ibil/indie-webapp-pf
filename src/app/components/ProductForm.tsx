@@ -4,6 +4,7 @@ import { HelpIcon } from '@patternfly/react-icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { saveProduct } from '@app/services/ProductForm';
+import { ImageUpload } from './ImageUpload';
 
 
 export interface Product {
@@ -47,6 +48,7 @@ export const ProductForm: React.FC<Product> = product => {
 
   return (
     <Form>
+      <ImageUpload/>
       <FormGroup
         label="Full name"
         labelIcon={
