@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { Flex, PageSection, Title } from '@patternfly/react-core';
 import { Product, GridItem } from '@app/components/GridItem';
-import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
+import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
 
 const generateMockItems = (size: number) => {
   const array: Product[] = [];
   while (size-- > 0) {
+    const imageIndex = size % 3;
     array.push({
       name: `product #${size}`,
-      photo: INDIDE_LOGO_GRID_ITEM_BASE64,
+      photo: imageIndex == 0 ? PANTS_BASE64 : imageIndex == 1 ? INDIDE_LOGO_GRID_ITEM_BASE64 : SKATE_BASE64,
       price: '35€'
     });
   }

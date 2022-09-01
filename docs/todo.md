@@ -8,54 +8,56 @@ parameter based route building
 hide certain side items like view product
 
 ##############################
+Tables
+	lista produtos : table
+	- crud, navigation
 
+	Pontos de venda : table
+	- CRUD, navigation
 
-view read-only products  form :
-- ver dados
-- view image
-- consulta stock
-- butao buy
-- back usehistory
+	users: table
+	- crud, navigation,
+	- user?type
 
-criar / editar produtos : form 
-- upload images :: ver IAC
-- adicionar stock
-- delete products
-- back usehistory
-
-Pontos de venda : 
-- associar produto a ponto de venda
-
-users: criar, editar, associar, remover
-
-vendedor: 
+	Vendas: table 
+	- list, navigation
 	- gerir período de venda
-	- shooping cart: ui && add and remove functions
-	- butoes add/remove qty no griditem e product view
-	- registar vendas
+	- view (itemlist and buyer form )
+	- gerar fatura
 
-gerar fatura pdf
+Forms>
+	shooping cart: 
+		- itemlist view(sales view) with add remove
+		- user form
+		- gerar fatura pdf
+		- make sell
 
+	view read-only products  form :
+	- alternar entre variantes
+	- ver dados
+	- consulta stock
+	- butoes buy, add/remove qty
+
+	user form
+
+	criar / editar produtos : form 
+	- upload images
+	- adicionar stock
+	- associar produto a ponto de venda (dropdown)
+
+MUST
 serviços / comunicacao be fe : reverse proxy cors 
 deploy
+grid items : vertical align each item
 
-
----
-MUST
-alinhar textos gridItemç
-
-
+---------------------------------------------------
 Could:
 listar produtos por ponto de venda
 consultar stock por ponto de venda
-
+reserva
 
 
 ui:
-grid item remove qty
-
-grid items pagination
-
+grid item add/remove qty
+grid items and table pagination
 topbar
-
-reserva
