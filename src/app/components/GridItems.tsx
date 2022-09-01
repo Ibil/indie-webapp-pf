@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Flex, PageSection, Title } from '@patternfly/react-core';
-import { Product, GridItem } from '@app/components/GridTitem';
+import { Product, GridItem } from '@app/components/GridItem';
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
 
 const generateMockItems = (size: number) => {
