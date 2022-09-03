@@ -7,12 +7,25 @@ parameter based route building
 
 hide certain side items like view product
 
+table
+
 ##############################
-table, periodo venda, cartview, 
+periodo venda, cartview(sale view), 
 buyerform, fatura pdf, 
 login, be integration,
 form alternar entre variantes, associar produto a ponto de venda, 
 deploy, vertical allign
+
+Tables
+	Vendas: table 
+	- list, navigation
+	- gerir período de venda
+	- view (itemlist and buyer form )
+	- gerar fatura pdf
+
+login
+
+serviços / comunicacao be fe : reverse proxy cors 
 
 Tables
 	lista produtos : table
@@ -25,14 +38,6 @@ Tables
 	users: table
 	- crud, navigation,
 	- user?type
-
-	Vendas: table 
-	- list, navigation
-	- gerir período de venda
-	- view (itemlist and buyer form )
-	- gerar fatura pdf
-
-login
 
 Forms>
 	shooping cart: 
@@ -55,12 +60,12 @@ Forms>
 	- associar produto a ponto de venda (dropdown)
 
 MUST
-serviços / comunicacao be fe : reverse proxy cors 
 deploy
 grid items : vertical align each item
 
 ---------------------------------------------------
 Could:
+table : actions in dots dropdown instead of button
 listar produtos por ponto de venda
 consultar stock por ponto de venda
 reserva

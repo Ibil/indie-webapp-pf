@@ -4,6 +4,7 @@ import React from 'react';
 import { TableComposable, TableText, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
 import { Bullseye, Button, EmptyState, EmptyStateBody, EmptyStateIcon, EmptyStateVariant, Title } from "@patternfly/react-core";
 import { SearchIcon } from "@patternfly/react-icons";
+import { useHistory } from "react-router-dom";
 
 export interface Repository {
   name: string;
@@ -20,6 +21,8 @@ export interface TableData {
 }
 
 export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, rowData, getSortableRowValues }: TableData) => {
+
+  const history = useHistory();
 
   // Note: if you intend to make columns reorderable, you may instead want to use a non-numeric key
   // as the identifier of the sorted column. See the "Compound expandable" example.
@@ -82,7 +85,7 @@ export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, rowD
       <Td dataLabel={columnNames.prs}>{data.prs}</Td>
       <Td dataLabel={columnNames.workspaces}>
         <TableText>
-          <Button variant="secondary">edit</Button>
+          <Button variant="secondary" onClick={() => history.push(`editProduct/${data.name}`)}>edit</Button>
         </TableText>
       </Td>
       <Td dataLabel={columnNames.price}>{data.price}</Td>
