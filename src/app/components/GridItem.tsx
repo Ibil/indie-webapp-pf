@@ -12,7 +12,7 @@ export interface Product {
   price: string
 }
 
-export const GridItem = ({ name, photo, price }: Product) => {
+export const GridItem: React.FC<Product> = ({ name, photo, price }: Product) => {
   const history = useHistory();
   return (
     <FlexItem className={gridItemStyle.align}>

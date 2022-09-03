@@ -8,9 +8,16 @@ parameter based route building
 hide certain side items like view product
 
 ##############################
+table, periodo venda, cartview, 
+buyerform, fatura pdf, 
+login, be integration,
+form alternar entre variantes, associar produto a ponto de venda, 
+deploy, vertical allign
+
 Tables
 	lista produtos : table
 	- crud, navigation
+	- sort, actions, cell width, breakpoint modifiers, empty state, controlling text
 
 	Pontos de venda : table
 	- CRUD, navigation
@@ -23,7 +30,9 @@ Tables
 	- list, navigation
 	- gerir período de venda
 	- view (itemlist and buyer form )
-	- gerar fatura
+	- gerar fatura pdf
+
+login
 
 Forms>
 	shooping cart: 

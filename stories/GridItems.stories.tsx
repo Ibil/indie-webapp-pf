@@ -28,7 +28,6 @@ const Template: Story<ComponentProps<typeof GridItems>> = (args) => <GridItems {
 
 export const FirstStory = Template.bind({});
 FirstStory.args = {
-  //products: generateMockItems(12),
   products: generateMockItems(12)
 };
 
