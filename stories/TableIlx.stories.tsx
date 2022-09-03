@@ -1,11 +1,11 @@
 import React, { ComponentProps } from 'react';
-import { Repository, TableIl } from '@app/components/TableIl';
+import { Repository, TableIlx } from '@app/components/TableIlx';
 import { Story } from '@storybook/react';
 
 //👇 This default export determines where your story goes in the story list
 export default {
-  title: 'Components/TableIl',
-  component: TableIl,
+  title: 'Components/TableIlx',
+  component: TableIlx,
 };
 
 /* const generateMockItems = (size: number) => {
@@ -20,10 +20,12 @@ export default {
 } */
 
 //👇 We create a “template” of how args map to rendering
-const Template: Story<ComponentProps<typeof TableIl>> = (args) => <TableIl {...args} />;
+const Template: Story<ComponentProps<typeof TableIlx>> = (args) => <TableIlx {...args} />;
 
 
-export const FirstStory = Template.bind({});
+export const EmptyTable = Template.bind({});
+
+export const TableWithData = Template.bind({});
 
 const rowData: Repository[] = [
   { name: 'one', branches: 'two', prs: 'a', workspaces: 'four', price: 'five' },
@@ -47,9 +49,14 @@ const getSortableRowValues =
   (string | number)[] =>
   [name, branches, prs, workspaces, price];
 
-FirstStory.args = {
+EmptyTable.args = {
+  columnNames,
+  rowData: [],
+  getSortableRowValues
+};
+
+TableWithData.args = {
   columnNames,
   rowData,
   getSortableRowValues
 };
-

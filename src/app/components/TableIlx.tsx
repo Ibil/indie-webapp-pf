@@ -1,7 +1,9 @@
 import "@patternfly/react-core/dist/styles/base.css";
 
 import React from 'react';
-import { TableComposable, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
+import { TableComposable, TableText, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
+import { Bullseye, Button, EmptyState, EmptyStateBody, EmptyStateIcon, EmptyStateVariant, Title } from "@patternfly/react-core";
+import { SearchIcon } from "@patternfly/react-icons";
 
 export interface Repository {
   name: string;
@@ -13,11 +15,11 @@ export interface Repository {
 
 export interface TableData {
   columnNames: any;
-  rowData: any []; // T
+  rowData: any[]; // T
   getSortableRowValues: (repo: Repository) => (string | number)[]; // T
 }
 
-export const TableIl: React.FunctionComponent<TableData> = ({ columnNames, rowData, getSortableRowValues }: TableData) => {
+export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, rowData, getSortableRowValues }: TableData) => {
 
   // Note: if you intend to make columns reorderable, you may instead want to use a non-numeric key
   // as the identifier of the sorted column. See the "Compound expandable" example.
@@ -57,7 +59,49 @@ export const TableIl: React.FunctionComponent<TableData> = ({ columnNames, rowDa
     },
     columnIndex
   });
-  
+
+
+  // TODO generate headers dynamically
+  const buildTableHeaders = () =>
+    <Tr>
+      <Th sort={getSortParams(0)}>{columnNames.name}</Th>
+      <Th modifier="wrap">{columnNames.branches}</Th>
+      <Th modifier="wrap" sort={getSortParams(2)} info={{ tooltip: 'More information ' }}>
+        {columnNames.prs}
+      </Th>
+      <Th modifier="wrap">{columnNames.workspaces}</Th>
+      <Th modifier="wrap">{columnNames.price}</Th>
+    </Tr>;
+
+
+  // TODO generate dynamically
+  const buildTableBody = (data, rowIndex) =>
+    <Tr key={rowIndex}>
+      <Td dataLabel={columnNames.name}>{data.name}</Td>
+      <Td dataLabel={columnNames.branches}>{data.branches}</Td>
+      <Td dataLabel={columnNames.prs}>{data.prs}</Td>
+      <Td dataLabel={columnNames.workspaces}>
+        <TableText>
+          <Button variant="secondary">edit</Button>
+        </TableText>
+      </Td>
+      <Td dataLabel={columnNames.price}>{data.price}</Td>
+    </Tr>;
+
+  const buildEmptyTableBody = () =>
+    <Td colSpan={8}>
+      <Bullseye>
+        <EmptyState variant={EmptyStateVariant.small}>
+          <EmptyStateIcon icon={SearchIcon} />
+          <Title headingLevel="h2" size="lg">
+            No results found
+          </Title>
+          <EmptyStateBody>Clear all filters and try again.</EmptyStateBody>
+          <Button variant="link">Clear all filters</Button>
+        </EmptyState>
+      </Bullseye>
+    </Td>;
+
 
   // Note that we perform the sort as part of the component's render logic and not in onSort.
   // We shouldn't store the list of data in state because we don't want to have to sync that with props.
@@ -66,31 +110,15 @@ export const TableIl: React.FunctionComponent<TableData> = ({ columnNames, rowDa
     sortedRowData = sortRowData(activeSortIndex);
   }
 
-  // TODO generate dynamically
+
   // In this example, we wrap all but the 1st column and make the 1st and 3rd columns sortable just to demonstrate.
   return (
     <TableComposable aria-label="Sortable table">
       <Thead>
-        <Tr>
-          <Th sort={getSortParams(0)}>{columnNames.name}</Th>
-          <Th modifier="wrap">{columnNames.branches}</Th>
-          <Th modifier="wrap" sort={getSortParams(2)} info={{ tooltip: 'More information ' }}>
-            {columnNames.prs}
-          </Th>
-          <Th modifier="wrap">{columnNames.workspaces}</Th>
-          <Th modifier="wrap">{columnNames.price}</Th>
-        </Tr>
+        {buildTableHeaders()}
       </Thead>
       <Tbody>
-        {sortedRowData.map((repo, rowIndex) => (
-          <Tr key={rowIndex}>
-            <Td dataLabel={columnNames.name}>{repo.name}</Td>
-            <Td dataLabel={columnNames.branches}>{repo.branches}</Td>
-            <Td dataLabel={columnNames.prs}>{repo.prs}</Td>
-            <Td dataLabel={columnNames.workspaces}>{repo.workspaces}</Td>
-            <Td dataLabel={columnNames.price}>{repo.price}</Td>
-          </Tr>
-        ))}
+        {sortedRowData.length == 0 ? buildEmptyTableBody() : sortedRowData.map((data, rowIndex) => buildTableBody(data, rowIndex))}
       </Tbody>
     </TableComposable>
   );
