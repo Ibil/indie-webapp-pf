@@ -16,7 +16,7 @@ export const GridItem: React.FC<Product> = ({ name, photo, price }: Product) => 
   const history = useHistory();
   return (
     <FlexItem className={gridItemStyle.align}>
-      <a onClick={() => history.push(`editProduct/${name}`)}>
+      <a onClick={() => history.push(`viewProduct/${name}`)}>
         <p>{name}</p>
         <img className={imageStyles.thumbnailGrid} src={photo} alt="Product"/>
         <p>{price}</p>
@@ -26,6 +26,6 @@ export const GridItem: React.FC<Product> = ({ name, photo, price }: Product) => 
   )
 };
 function getMyPageRoute(name: string): string {
-  return "editProduct";
+  return "viewProduct";
 }
 

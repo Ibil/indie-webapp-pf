@@ -14,7 +14,7 @@ periodo venda, cartview(sale view),
 buyerform, fatura pdf, 
 login, be integration,
 form alternar entre variantes, associar produto a ponto de venda, 
-deploy, vertical allign
+deploy, vertical allign, search
 
 Tables
 	Vendas: table 

@@ -85,7 +85,7 @@ export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, rowD
       <Td dataLabel={columnNames.prs}>{data.prs}</Td>
       <Td dataLabel={columnNames.workspaces}>
         <TableText>
-          <Button variant="secondary" onClick={() => history.push(`editProduct/${data.name}`)}>edit</Button>
+          <Button variant="secondary" onClick={() => history.push(`${data.name}`)}>edit</Button>
         </TableText>
       </Td>
       <Td dataLabel={columnNames.price}>{data.price}</Td>

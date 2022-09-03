@@ -6,6 +6,8 @@ import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 import { ProductForm } from './components/ProductForm';
+import { TableIlx } from './components/TableIlx';
+import { TableProduct } from './components/TableProduct';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -41,8 +43,23 @@ const routes: AppRouteConfig[] = [
     component: ProductForm,
     exact: true,
     label: 'Produto',
+    path: '/viewProduct/:id',
+    title: 'Product',
+    sidebarHide: true,
+  },
+  {
+    component: TableProduct,
+    exact: true,
+    label: 'Products table',
+    path: '/editProduct/',
+    title: 'Products',
+  },
+  {
+    component: ProductForm,
+    exact: true,
+    label: 'Produto',
     path: '/editProduct/:id',
-    title: 'Produto',
+    title: 'Product',
     sidebarHide: true,
   },
 /*   {
