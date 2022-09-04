@@ -11,9 +11,9 @@ table
 
 ##############################
 cartview(sale view), buyerform, fatura pdf, 
-login, be integration,
+login, be integration, deploy
 form alternar entre variantes, associar produto a ponto de venda, 
-deploy, vertical allign, search
+vertical allign, search
 
 
 Tables

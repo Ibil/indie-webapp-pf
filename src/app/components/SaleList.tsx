@@ -6,6 +6,7 @@ import saleListStyles from './SaleView.module.css';
 
 import '@patternfly/react-core/dist/styles/base.css';
 import '@app/app.css';
+import { useHistory } from 'react-router-dom';
 
 
 const generateMockItems = (size: number) => {
@@ -31,9 +32,10 @@ interface props {
   products: Product[],
 }
 
-export const SaleList = (props) =>
-  <>
-    Total : 150€  <Button variant="tertiary" onClick={() => alert("print pdf")}>print to pdf</Button>
+export const SaleList: React.FC = (props) => {
+  const history = useHistory();
+  return <>
+    Total : 150€  <Button variant="tertiary" onClick={() => history.push(`/printSale`)}>print to pdf</Button>
     <Flex className={saleListStyles.itemalign} direction={{ default: 'column', lg: 'row' }}>
       <FlexItem><img className={saleListStyles.thumbnail} src={INDIDE_LOGO_GRID_ITEM_BASE64} alt="Product" /></FlexItem>
       <FlexItem> product x</FlexItem>
@@ -54,5 +56,5 @@ export const SaleList = (props) =>
       <FlexItem> product x</FlexItem>
       <FlexItem> qty remove add decrease</FlexItem>
     </Flex>
-    
   </>;
+};

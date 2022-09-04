@@ -5,6 +5,7 @@ import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { PdfDoc } from './components/pdfDoc';
 import { ProductForm } from './components/ProductForm';
 import { TableIlx } from './components/TableIlx';
 import { TableProduct } from './components/TableProduct';
@@ -69,6 +70,14 @@ const routes: AppRouteConfig[] = [
     label: 'Sales table',
     path: '/viewSales/',
     title: 'Sales',
+  },
+  {
+    component: PdfDoc,
+    exact: true,
+    label: 'print sale',
+    path: '/printSale/',
+    title: ' Print sale',
+    sidebarHide: true,
   },
 /*   {
     component: Support,
