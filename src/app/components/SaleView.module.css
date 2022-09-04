@@ -1,0 +1,10 @@
+.thumbnail {
+    max-height: 100px;
+    max-width: 1000px;
+    width: auto;
+    vertical-align: middle
+}
+
+.itemalign {
+    padding-bottom: 15px;
+}
