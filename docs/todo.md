@@ -10,11 +10,11 @@ hide certain side items like view product
 table
 
 ##############################
-periodo venda, cartview(sale view), 
-buyerform, fatura pdf, 
+cartview(sale view), buyerform, fatura pdf, 
 login, be integration,
 form alternar entre variantes, associar produto a ponto de venda, 
 deploy, vertical allign, search
+
 
 Tables
 	Vendas: table 
@@ -62,10 +62,12 @@ Forms>
 MUST
 deploy
 grid items : vertical align each item
+search
 
 ---------------------------------------------------
 Could:
 table : actions in dots dropdown instead of button
+date picker in modal and set hour validations if same date
 listar produtos por ponto de venda
 consultar stock por ponto de venda
 reserva

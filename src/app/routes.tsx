@@ -8,6 +8,7 @@ import { LastLocationProvider, useLastLocation } from 'react-router-last-locatio
 import { ProductForm } from './components/ProductForm';
 import { TableIlx } from './components/TableIlx';
 import { TableProduct } from './components/TableProduct';
+import { TableSales } from './components/TableSales';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -61,6 +62,13 @@ const routes: AppRouteConfig[] = [
     path: '/editProduct/:id',
     title: 'Product',
     sidebarHide: true,
+  },
+  {
+    component: TableSales,
+    exact: true,
+    label: 'Sales table',
+    path: '/viewSales/',
+    title: 'Sales',
   },
 /*   {
     component: Support,

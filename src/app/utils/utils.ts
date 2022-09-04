@@ -6,3 +6,8 @@ export function accessibleRouteChangeHandler() {
     }
   }, 50);
 }
+
+export const isSameDate = (date1: Date, date2: Date) =>
+  date1.getFullYear() == date2.getFullYear() && 
+  date1.getMonth() == date2.getMonth() && 
+  date1.getDay() == date2.getDay();
