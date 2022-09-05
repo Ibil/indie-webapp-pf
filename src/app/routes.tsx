@@ -7,6 +7,7 @@ import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 import { PdfDoc } from './components/pdfDoc';
 import { ProductForm } from './components/ProductForm';
+import { SaleList } from './components/SaleList';
 import { TableIlx } from './components/TableIlx';
 import { TableProduct } from './components/TableProduct';
 import { TableSales } from './components/TableSales';
@@ -70,6 +71,13 @@ const routes: AppRouteConfig[] = [
     label: 'Sales table',
     path: '/viewSales/',
     title: 'Sales',
+  },
+  {
+    component: SaleList,
+    exact: true,
+    label: 'Sale list',
+    path: '/viewSales/:id',
+    title: 'Sale',
   },
   {
     component: PdfDoc,
