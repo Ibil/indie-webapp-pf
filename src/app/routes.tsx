@@ -5,8 +5,10 @@ import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { LoginIlx } from './components/LoginIlx';
 import { PdfDoc } from './components/pdfDoc';
 import { ProductForm } from './components/ProductForm';
+import { RegisterIlx } from './components/RegisterIlx';
 import { SaleList } from './components/SaleList';
 import { TableIlx } from './components/TableIlx';
 import { TableProduct } from './components/TableProduct';
@@ -35,6 +37,20 @@ export interface IAppRouteGroup {
 export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
+  {
+    component: RegisterIlx,
+    exact: true,
+    label: 'Register',
+    path: '/register/',
+    title: 'Register',
+  },
+  {
+    component: LoginIlx,
+    exact: true,
+    label: 'Login',
+    path: '/login/',
+    title: 'Login',
+  },
   {
     component: GridItems,
     exact: true,

@@ -10,21 +10,14 @@ hide certain side items like view product
 table
 
 ##############################
-cartview(sale view), buyerform, fatura pdf, 
 login, be integration, deploy
 form alternar entre variantes, associar produto a ponto de venda, 
 vertical allign, search
 
 
-Tables
-	Vendas: table 
-	- list, navigation
-	- gerir período de venda
-	- view (itemlist and buyer form )
-	- gerar fatura pdf
 
-login
-
+login 
+deploy
 serviços / comunicacao be fe : reverse proxy cors 
 
 Tables
@@ -38,6 +31,12 @@ Tables
 	users: table
 	- crud, navigation,
 	- user?type
+
+	Vendas: table 
+	- list, navigation
+	- gerir período de venda
+	- view (itemlist and buyer form )
+	- gerar fatura pdf
 
 Forms>
 	shooping cart: 
@@ -60,7 +59,6 @@ Forms>
 	- associar produto a ponto de venda (dropdown)
 
 MUST
-deploy
 grid items : vertical align each item
 search
 
