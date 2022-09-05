@@ -6,7 +6,7 @@ import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 import { LoginIlx } from './components/LoginIlx';
-import { PdfDoc } from './components/pdfDoc';
+import { PdfDoc } from './components/PdfDoc';
 import { ProductForm } from './components/ProductForm';
 import { RegisterIlx } from './components/RegisterIlx';
 import { SaleList } from './components/SaleList';
