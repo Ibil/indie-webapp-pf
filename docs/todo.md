@@ -10,15 +10,18 @@ hide certain side items like view product
 table
 
 ##############################
-login, be integration, deploy
-form alternar entre variantes, associar produto a ponto de venda, 
-vertical allign, search
 
-
-
-login 
 deploy
 serviços / comunicacao be fe : reverse proxy cors 
+- login 
+- serviços, loading e error msg
+- rotas protegidas
+https
+form alternar entre variantes, associar produto a ponto de venda, 
+vertical allign, search
+topbar
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Tables
 	lista produtos : table
