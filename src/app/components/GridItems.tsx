@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Flex, PageSection, Title } from '@patternfly/react-core';
 import { Product, GridItem } from '@app/components/GridItem';
 import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
+import { getProducts } from '@app/services/GridItems';
 
 const generateMockItems = (size: number) => {
   const array: Product[] = [];
@@ -17,6 +18,7 @@ const generateMockItems = (size: number) => {
 }
 
 const fillGrid = (items: Product[]) => {
+  getProducts();
   return items.map(({ name, photo, price }: Product) =>
     <GridItem name={name} photo={photo} price={price} />
   );

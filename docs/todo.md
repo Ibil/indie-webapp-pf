@@ -9,14 +9,19 @@ hide certain side items like view product
 
 table
 
+deploy
+
 ##############################
 
-deploy
-serviços / comunicacao be fe : reverse proxy cors 
+cors (?reverse proxy cors)
+
+https
+serviços / comunicacao be fe : 
+relatório
 - login 
 - serviços, loading e error msg
 - rotas protegidas
-https
+
 form alternar entre variantes, associar produto a ponto de venda, 
 vertical allign, search
 topbar
