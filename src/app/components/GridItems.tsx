@@ -6,6 +6,7 @@ import { getProducts } from '@app/services/Products';
 import { GridItemModel } from '@app/model/GridItemModel';
 import { ProductCategory } from '@app/model/Product';
 import { useEffect, useState } from 'react';
+import { LoadingSpinner } from './LoadingSpinner';
 
 
 // MOCKS
@@ -64,7 +65,7 @@ export const GridItems = (props: props) => {
       <PageSection>
         <Title headingLevel="h1" size="lg">Lista de Produtos</Title>
         <Flex>
-          { !loading ? fillGrid() : fillGridMock(generateMockItems(20)) }
+          { !loading ? fillGrid() : <LoadingSpinner /> }
         </Flex>
       </PageSection>
     </>
