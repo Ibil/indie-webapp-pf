@@ -8,7 +8,3 @@ export const getProducts = async (category: ProductCategory | undefined) => {
         return result.data;
     }
 }
-
-
-const deleteProduct = () => {
-}

@@ -1,17 +1,20 @@
 import React, { ComponentProps } from 'react';
 import { GridItems } from '@app/components/GridItems';
 import { Story } from '@storybook/react';
-import { GridItem } from "@app/components/GridItem";
+import { GridItemModel } from "@app/model/GridItemModel";
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
+import withMock from 'storybook-addon-mock';
+import { ProductCategory } from '@app/model/Product';
 
 //👇 This default export determines where your story goes in the story list
 export default {
   title: 'Components/GridItems',
   component: GridItems,
+  decorators: [withMock],
 };
 
 const generateMockItems = (size: number) => {
-  const array: GridItem[] = [];
+  const array: GridItemModel[] = [];
   while (size-- > 0) {
     array.push({
       name: `product #${size}`,
@@ -28,6 +31,18 @@ const Template: Story<ComponentProps<typeof GridItems>> = (args) => <GridItems {
 
 export const FirstStory = Template.bind({});
 FirstStory.args = {
-  products: generateMockItems(12)
+  category: ProductCategory.T_SHIRT
 };
 
+FirstStory.parameters = {
+  mockData: [
+      {
+          url: 'https://api-store-indielisboa.herokuapp.com/v1/products?limit=100&page=0&stock=false',
+          method: 'GET',
+          status: 200,
+          response: {
+              data: generateMockItems(20),
+          },
+      },
+  ]
+};
