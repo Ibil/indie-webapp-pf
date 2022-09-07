@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
-import { GridItems } from '@app/components/GridItems';
+import { GridItems } from '@app/components/common/GridItems';
 import { Story } from '@storybook/react';
-import { GridItem } from '@app/components/GridItem';
+import { GridItem } from '@app/components/common/GridItem';
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
 
 //👇 This default export determines where your story goes in the story list

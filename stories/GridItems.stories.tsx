@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { GridItems } from '@app/components/GridItems';
+import { GridItems } from '@app/components/common/GridItems';
 import { Story } from '@storybook/react';
 import { GridItemModel } from "@app/model/GridItemModel";
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';

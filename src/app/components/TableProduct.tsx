@@ -1,5 +1,5 @@
 import React from "react"
-import { Repository, TableIlx } from "./TableIlx"
+import { Repository, TableIlx } from "./common/TableIlx"
 
 
 const rowData: Repository[] = [

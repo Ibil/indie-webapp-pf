@@ -1,6 +1,6 @@
 import React from "react"
-import { DateTimeRangePickerIlx } from "./DateTimeRangePickerIlx";
-import { Repository, TableIlx } from "./TableIlx"
+import { DateTimeRangePickerIlx } from "./common/DateTimeRangePickerIlx";
+import { Repository, TableIlx } from "./common/TableIlx"
 
 
 const rowData: Repository[] = [

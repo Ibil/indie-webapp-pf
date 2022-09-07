@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Flex, PageSection, Title } from '@patternfly/react-core';
-import { GridItem } from '@app/components/GridItem';
+import { GridItem } from '@app/components/common/GridItem';
 import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
 import { getProducts } from '@app/services/Products';
 import { GridItemModel } from '@app/model/GridItemModel';

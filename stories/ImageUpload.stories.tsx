@@ -1,4 +1,4 @@
-import { ImageUpload } from '@app/components/ImageUpload';
+import { ImageUpload } from '@app/components/common/ImageUpload';
 import { Story } from '@storybook/react';
 import React, { ComponentProps } from 'react';
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';

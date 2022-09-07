@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { Repository, TableIlx } from '@app/components/TableIlx';
+import { Repository, TableIlx } from '@app/components/common/TableIlx';
 import { Story } from '@storybook/react';
 
 //👇 This default export determines where your story goes in the story list

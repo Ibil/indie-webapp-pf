@@ -1,4 +1,4 @@
-import { GridItems } from '@app/components/GridItems';
+import { GridItems } from '@app/components/common/GridItems';
 import { NotFound } from '@app/NotFound/NotFound';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
@@ -11,7 +11,7 @@ import { PdfDoc } from './components/PdfDoc';
 import { ProductForm } from './components/ProductForm';
 import { RegisterIlx } from './components/RegisterIlx';
 import { SaleList } from './components/SaleList';
-import { TableIlx } from './components/TableIlx';
+import { TableIlx } from './components/common/TableIlx';
 import { TableProduct } from './components/TableProduct';
 import { TableSales } from './components/TableSales';
 

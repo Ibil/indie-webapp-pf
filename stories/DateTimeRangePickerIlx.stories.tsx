@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
-import { DateTimeRangePickerIlx } from '@app/components/DateTimeRangePickerIlx';
+import { DateTimeRangePickerIlx } from '@app/components/common/DateTimeRangePickerIlx';
 
 //👇 This default export determines where your story goes in the story list
 export default {
