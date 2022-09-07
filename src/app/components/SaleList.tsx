@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, Flex, FlexItem, PageSection, Title } from '@patternfly/react-core';
-import { Product, GridItem } from '@app/components/GridItem';
+import { GridItem } from '@app/components/GridItem';
+import { GridItem } from "@app/components/GridItem";
 import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
 import saleListStyles from './SaleView.module.css';
 
@@ -10,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 
 
 const generateMockItems = (size: number) => {
-  const array: Product[] = [];
+  const array: GridItem[] = [];
   while (size-- > 0) {
     const imageIndex = size % 3;
     array.push({
@@ -22,14 +23,14 @@ const generateMockItems = (size: number) => {
   return array;
 }
 
-const fillGrid = (items: Product[]) => {
-  return items.map(({ name, photo, price }: Product) =>
+const fillGrid = (items: GridItem[]) => {
+  return items.map(({ name, photo, price }: GridItem) =>
     <GridItem name={name} photo={photo} price={price} />
   );
 }
 
 interface props {
-  products: Product[],
+  products: GridItem[],
 }
 
 export const SaleList: React.FC = (props) => {

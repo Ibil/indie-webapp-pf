@@ -5,6 +5,7 @@ import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { GridTshirt } from './components/GridTShirt';
 import { LoginIlx } from './components/LoginIlx';
 import { PdfDoc } from './components/PdfDoc';
 import { ProductForm } from './components/ProductForm';
@@ -52,11 +53,11 @@ const routes: AppRouteConfig[] = [
     title: 'Login',
   },
   {
-    component: GridItems,
+    component: GridTshirt,
     exact: true,
-    label: 'Produtos',
+    label: 'T-shirts',
     path: '/',
-    title: 'Produtos',
+    title: 'T-Shirts',
   },
   {
     component: ProductForm,

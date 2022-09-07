@@ -9,15 +9,14 @@ hide certain side items like view product
 
 table
 
-deploy
+deploy, cors (?reverse proxy cors)
 
 ##############################
 
-cors (?reverse proxy cors)
 
+relatório
 https
 serviços / comunicacao be fe : 
-relatório
 - login 
 - serviços, loading e error msg
 - rotas protegidas

@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import { SaleList } from '@app/components/SaleList';
 import { Story } from '@storybook/react';
-import { Product } from '@app/components/GridItem';
+import { GridItem } from "@app/components/GridItem";
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
 
 //👇 This default export determines where your story goes in the story list
@@ -11,7 +11,7 @@ export default {
 };
 
 const generateMockItems = (size: number) => {
-  const array: Product[] = [];
+  const array: GridItem[] = [];
   while (size-- > 0) {
     array.push({
       name: `product #${size}`,

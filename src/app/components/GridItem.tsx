@@ -3,16 +3,10 @@ import { Button, FlexItem } from '@patternfly/react-core';
 import { useHistory } from 'react-router-dom';
 import gridItemStyle from './GridItem.module.css';
 import imageStyles from './ImageUpload.module.css';
+import { GridItemModel } from '@app/model/GridItemModel';
 
 
-
-export interface Product {
-  name: string;
-  photo: string;
-  price: string
-}
-
-export const GridItem: React.FC<Product> = ({ name, photo, price }: Product) => {
+export const GridItem: React.FC<GridItemModel> = ({ name, photo, price }: GridItemModel) => {
   const history = useHistory();
   return (
     <FlexItem className={gridItemStyle.align}>
