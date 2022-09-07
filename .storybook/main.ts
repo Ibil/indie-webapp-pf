@@ -7,6 +7,7 @@ module.exports = {
   stories: ['../stories/*.stories.tsx'],
   addons: [
     '@storybook/addon-knobs',
+    'storybook-addon-mock/register'
   ],
   typescript: {
     check: false,
