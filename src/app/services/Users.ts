@@ -1,4 +1,4 @@
-import { getLocations } from "./Locations";
+
 
 
 export const registerUser = async (un: string, pw: string) => {
@@ -50,7 +50,6 @@ export const login = async (un: string, pw: string) => {
         console.log(response.headers);
         console.log(result.data);
         
-        //getLocations();
         return result.data.role;
     }
 }

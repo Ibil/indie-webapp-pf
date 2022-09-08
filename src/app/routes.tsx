@@ -13,6 +13,7 @@ import { RegisterIlx } from './components/RegisterIlx';
 import { SaleList } from './components/SaleList';
 import { TableProduct } from './components/TableProduct';
 import { TableSales } from './components/TableSales';
+import { useAuth } from './hooks/useAuth';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -188,14 +189,14 @@ function mapRoutes(routes: IAppRoute[]): string | number | boolean | {} | React.
   ));
 }
 
-function mapProtectedRoutes(routes: IAppRoute[]): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined {
+function mapProtectedRoutes(routes: IAppRoute[], role?: string): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined {
   return flattenedProtectedRoutes.map(({ path, exact, component, title, isAsync }, idx) => (
     <ProtectedRoute
       path={path}
       exact={exact}
       component={component}
       key={idx}
-      isAuthenticated={false} /> // FIXME
+      isAuthenticated={role !== undefined} /> // FIXME
   ));
 }
 
@@ -203,28 +204,21 @@ function concatRoutes() {
   const allRoutes: IAppRoute[] = flattenedRoutes.concat(flattenedProtectedRoutes);
   console.log()
   return mapRoutes(allRoutes);
-
-  return (
-    <Route
-      component={RequireAuth}
-      title={"auth"}> */
-      {mapRoutes(allRoutes)}
-    </Route>
-  );
-  
 }
 
 
-const AppRoutes = (): React.ReactElement => (
+const AppRoutes = (): React.ReactElement => {
+  const { auth } = useAuth();
+  return (
   <LastLocationProvider>
 
     <Switch>
       {mapRoutes(flattenedRoutes)}
-      {mapProtectedRoutes(flattenedProtectedRoutes)}
+      {mapProtectedRoutes(flattenedProtectedRoutes, auth.role)}
       <PageNotFound title="404 Page Not Found" />
     </Switch>
   </LastLocationProvider>
-);
+)};
 
 export { AppRoutes, routes };
 

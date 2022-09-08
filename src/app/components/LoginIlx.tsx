@@ -14,13 +14,20 @@ const brandImg2 = "https://www.patternfly.org/v4/v4/images/brandImgColor2.e2aeff
 import logo from '@app/bgimages/indie-logo-r.svg';
 import { useAuth } from '@app/hooks/useAuth';
 import { login } from '@app/services/Users';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { LoadingSpinner } from './common/LoadingSpinner';
 
 export const LoginIlx: React.FunctionComponent = () => {
   const history = useHistory();
 
   const { setAuth } = useAuth();
+
+  const { state } = useLocation()
+
+  const [
+    redirectToReferrer,
+    setRedirectToReferrer
+  ] = React.useState(false)
   
   const [loading, setLoading] = useState<boolean>(false);
   const [showHelperText, setShowHelperText] = React.useState(false);
@@ -51,6 +58,7 @@ export const LoginIlx: React.FunctionComponent = () => {
     login(username, password).then(role => {
       setLoading(false);
       setAuth({username, role});
+      setRedirectToReferrer(true)
     });
   };
 
@@ -141,6 +149,11 @@ export const LoginIlx: React.FunctionComponent = () => {
 
   useEffect(() => {
   }, [loading]);
+
+  if (redirectToReferrer === true) {
+    console.log(state);
+    return <Redirect to={state?.from || '/'} />
+  }
 
   return (
     <>

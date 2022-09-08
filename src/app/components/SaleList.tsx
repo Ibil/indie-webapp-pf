@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, Flex, FlexItem, PageSection, Title } from '@patternfly/react-core';
 import { GridItem } from '@app/components/common/GridItem';
-import { GridItem } from "@app/components/common/GridItem";
 import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
 import saleListStyles from './SaleView.module.css';
 

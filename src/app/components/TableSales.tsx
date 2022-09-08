@@ -1,3 +1,4 @@
+import { getLocations } from "@app/services/Locations";
 import React from "react"
 import { DateTimeRangePickerIlx } from "./common/DateTimeRangePickerIlx";
 import { Repository, TableIlx } from "./common/TableIlx"
@@ -26,6 +27,7 @@ const getSortableRowValues =
         [name, branches, prs, workspaces, price];
 
 export const TableSales: React.FunctionComponent = () => {
+    getLocations()
     return <>
         <DateTimeRangePickerIlx />
         <TableIlx
