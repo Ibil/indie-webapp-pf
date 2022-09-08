@@ -40,12 +40,18 @@ export const login = async (un: string, pw: string) => {
 
     const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/auth/login`, 
     {
-        method: 'POST', headers: myHeaders, body: JSON.stringify(myBody)
+        method: 'POST', 
+        headers: myHeaders, 
+        credentials: "include",
+        body: JSON.stringify(myBody)
     });
     if (response.status >= 200 && response.status < 300) {
         const result = await response.json();
+        console.log(response.headers);
         console.log(result.data);
-        getLocations();
+        
+        //getLocations();
+        return result.data.role;
     }
 }
 

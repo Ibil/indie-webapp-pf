@@ -4,13 +4,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AppLayout } from '@app/AppLayout/AppLayout';
 import { AppRoutes } from '@app/routes';
 import '@app/app.css';
+import { AuthProvider } from './components/common/AuthProvider';
 
 const App: React.FunctionComponent = () => (
-  <Router>
-    <AppLayout>
-      <AppRoutes />
-    </AppLayout>
-  </Router>
+  <React.StrictMode>
+    <Router>
+      <AuthProvider>
+        <AppLayout>
+          <AppRoutes />
+        </AppLayout>
+      </AuthProvider>
+    </Router>
+
+  </React.StrictMode >
 );
 
 export default App;

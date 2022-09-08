@@ -1,26 +1,27 @@
-import ReactDOM from 'react-dom';
-
-import React, { useEffect, useState } from 'react';
-const brandImg2 = "https://www.patternfly.org/v4/v4/images/brandImgColor2.e2aeff4b068c7bc6bdef555bbda8effb.svg";
 import {
-  LoginFooterItem,
+  ListItem,
+  ListVariant, LoginFooterItem,
   LoginForm,
   LoginMainFooterBandItem,
   LoginMainFooterLinksItem,
-  LoginPage,
-  ListItem,
-  ListVariant
+  LoginPage
 } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
+import React, { useEffect, useState } from 'react';
+const brandImg2 = "https://www.patternfly.org/v4/v4/images/brandImgColor2.e2aeff4b068c7bc6bdef555bbda8effb.svg";
+
 
 import logo from '@app/bgimages/indie-logo-r.svg';
-import { useHistory } from 'react-router-dom';
+import { useAuth } from '@app/hooks/useAuth';
 import { login } from '@app/services/Users';
+import { useHistory } from 'react-router-dom';
 import { LoadingSpinner } from './common/LoadingSpinner';
 
 export const LoginIlx: React.FunctionComponent = () => {
   const history = useHistory();
 
+  const { setAuth } = useAuth();
+  
   const [loading, setLoading] = useState<boolean>(false);
   const [showHelperText, setShowHelperText] = React.useState(false);
   const [username, setUsername] = React.useState('');
@@ -47,7 +48,10 @@ export const LoginIlx: React.FunctionComponent = () => {
     setIsValidPassword(!!password);
     setShowHelperText(!username || !password);
     setLoading(true);
-    login(username, password).then(() => setLoading(false));
+    login(username, password).then(role => {
+      setLoading(false);
+      setAuth({username, role});
+    });
   };
 
   const socialMediaLoginContent = (
