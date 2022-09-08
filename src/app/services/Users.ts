@@ -45,12 +45,31 @@ export const login = async (un: string, pw: string) => {
         credentials: "include",
         body: JSON.stringify(myBody)
     });
+    console.log("cookies");
+    console.log(response.headers);
+    console.log(response.headers.get('set-cookie')); // undefined
+    console.log(response.headers.get('jwt_access'));
+    console.log(response.headers.get('jwt_refresh'));
+    console.log(document.cookie); // nope
+    console.log("end cookies?");
     if (response.status >= 200 && response.status < 300) {
         const result = await response.json();
         console.log(response.headers);
-        console.log(result.data);
         
         return result.data.role;
+    }
+}
+
+export const refresh = async () => {
+
+
+    const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/auth/refresh`, 
+    {
+        method: 'POST', 
+        credentials: "include", // ?? needed?
+    });
+    if (response.status >= 200 && response.status < 300) {
+        console.log(response.headers);
     }
 }
 

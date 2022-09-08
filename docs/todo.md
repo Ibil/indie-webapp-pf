@@ -18,9 +18,13 @@ addd routes for each product type
 relatório
 https
 serviços / comunicacao be fe : 
+- enviar o token nos requests
+- refresh token on error x ou logout e redirect
+- protected routes dependem da role
+- protected routes na sidebar
+- log out ver https://ui.dev/react-router-v5-protected-routes-authentication
 - serviços, loading e error msg
-- login 
-- rotas protegidas
+
 
 
 
