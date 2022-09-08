@@ -74,7 +74,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const SideBarNavigation = (
     <Nav id="nav-primary-simple" theme="dark">
       <NavList id="nav-list-simple">
-        {/* fixme */}
+        {/* fixme again */}
         {routes.filter(route => !route.sidebarHide).map(
           (route, idx) => route.label && (!route.routes ? renderNavItem(route, idx) : renderNavGroup(route, idx))
         )}

@@ -1,17 +1,16 @@
-import { GridItems } from '@app/components/common/GridItems';
 import { NotFound } from '@app/NotFound/NotFound';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { ProtectedRoute } from './components/common/ProtectedRoute';
 import { GridTshirt } from './components/GridTShirt';
 import { LoginIlx } from './components/LoginIlx';
 import { PdfDoc } from './components/PdfDoc';
 import { ProductForm } from './components/ProductForm';
 import { RegisterIlx } from './components/RegisterIlx';
 import { SaleList } from './components/SaleList';
-import { TableIlx } from './components/common/TableIlx';
 import { TableProduct } from './components/TableProduct';
 import { TableSales } from './components/TableSales';
 
@@ -22,7 +21,7 @@ export interface IAppRoute {
   component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
   /* eslint-enable @typescript-eslint/no-explicit-any */
   exact?: boolean;
-  path: string;
+  path?: string;
   title: string;
   isAsync?: boolean;
   routes?: undefined;
@@ -83,13 +82,6 @@ const routes: AppRouteConfig[] = [
     sidebarHide: true,
   },
   {
-    component: TableSales,
-    exact: true,
-    label: 'Sales table',
-    path: '/viewSales/',
-    title: 'Sales',
-  },
-  {
     component: SaleList,
     exact: true,
     label: 'Sale list',
@@ -104,35 +96,44 @@ const routes: AppRouteConfig[] = [
     title: ' Print sale',
     sidebarHide: true,
   },
-/*   {
-    component: Support,
-    exact: true,
-    isAsync: true,
-    label: 'Support',
-    path: '/support',
-    title: 'PatternFly Seed | Support Page',
-  },
-  {
-    label: 'Settings',
-    routes: [
-      {
-        component: GeneralSettings,
-        exact: true,
-        label: 'General',
-        path: '/settings/general',
-        title: 'PatternFly Seed | General Settings',
-      },
-      {
-        component: ProfileSettings,
-        exact: true,
-        label: 'Profile',
-        path: '/settings/profile',
-        title: 'PatternFly Seed | Profile Settings',
-      },
-    ],
-  }, */
+  /*   {
+      component: Support,
+      exact: true,
+      isAsync: true,
+      label: 'Support',
+      path: '/support',
+      title: 'PatternFly Seed | Support Page',
+    },
+    {
+      label: 'Settings',
+      routes: [
+        {
+          component: GeneralSettings,
+          exact: true,
+          label: 'General',
+          path: '/settings/general',
+          title: 'PatternFly Seed | General Settings',
+        },
+        {
+          component: ProfileSettings,
+          exact: true,
+          label: 'Profile',
+          path: '/settings/profile',
+          title: 'PatternFly Seed | Profile Settings',
+        },
+      ],
+    }, */
 ];
 
+const protectedRoutes: AppRouteConfig[] = [
+  {
+    component: TableSales,
+    exact: true,
+    label: 'Sales table',
+    path: '/viewSales/',
+    title: 'Sales',
+  },
+];
 // a custom hook for sending focus to the primary content container
 // after a view has loaded so that subsequent press of tab key
 // sends focus directly to relevant content
@@ -156,7 +157,7 @@ const RouteWithTitleUpdates = ({ component: Component, isAsync = false, title, .
     return <Component {...rest} {...routeProps} />;
   }
 
-  return <Route render={routeWithTitle} {...rest}/>;
+  return <Route render={routeWithTitle} {...rest} />;
 };
 
 const PageNotFound = ({ title }: { title: string }) => {
@@ -169,22 +170,62 @@ const flattenedRoutes: IAppRoute[] = routes.reduce(
   [] as IAppRoute[]
 );
 
+const flattenedProtectedRoutes: IAppRoute[] = protectedRoutes.reduce(
+  (flattened, route) => [...flattened, ...(route.routes ? route.routes : [route])],
+  [] as IAppRoute[]
+);
+
+
+function mapRoutes(routes: IAppRoute[]): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined {
+  return routes.map(({ path, exact, component, title, isAsync }, idx) => (
+    <RouteWithTitleUpdates
+      path={path}
+      exact={exact}
+      component={component}
+      key={idx}
+      title={title}
+      isAsync={isAsync} />
+  ));
+}
+
+function mapProtectedRoutes(routes: IAppRoute[]): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined {
+  return flattenedProtectedRoutes.map(({ path, exact, component, title, isAsync }, idx) => (
+    <ProtectedRoute
+      path={path}
+      exact={exact}
+      component={component}
+      key={idx}
+      isAuthenticated={false} /> // FIXME
+  ));
+}
+
+function concatRoutes() {
+  const allRoutes: IAppRoute[] = flattenedRoutes.concat(flattenedProtectedRoutes);
+  console.log()
+  return mapRoutes(allRoutes);
+
+  return (
+    <Route
+      component={RequireAuth}
+      title={"auth"}> */
+      {mapRoutes(allRoutes)}
+    </Route>
+  );
+  
+}
+
+
 const AppRoutes = (): React.ReactElement => (
   <LastLocationProvider>
+
     <Switch>
-      {flattenedRoutes.map(({ path, exact, component, title, isAsync }, idx) => (
-        <RouteWithTitleUpdates
-          path={path}
-          exact={exact}
-          component={component}
-          key={idx}
-          title={title}
-          isAsync={isAsync}
-        />
-      ))}
+      {mapRoutes(flattenedRoutes)}
+      {mapProtectedRoutes(flattenedProtectedRoutes)}
       <PageNotFound title="404 Page Not Found" />
     </Switch>
   </LastLocationProvider>
 );
 
 export { AppRoutes, routes };
+
+
