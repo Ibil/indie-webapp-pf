@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 const brandImg2 = "https://www.patternfly.org/v4/v4/images/brandImgColor2.e2aeff4b068c7bc6bdef555bbda8effb.svg";
 import {
   LoginFooterItem,
@@ -15,10 +15,13 @@ import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclam
 
 import logo from '@app/bgimages/indie-logo-r.svg';
 import { useHistory } from 'react-router-dom';
+import { login } from '@app/services/Users';
+import { LoadingSpinner } from './common/LoadingSpinner';
 
 export const LoginIlx: React.FunctionComponent = () => {
   const history = useHistory();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [showHelperText, setShowHelperText] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [isValidUsername, setIsValidUsername] = React.useState(true);
@@ -43,6 +46,8 @@ export const LoginIlx: React.FunctionComponent = () => {
     setIsValidUsername(!!username);
     setIsValidPassword(!!password);
     setShowHelperText(!username || !password);
+    setLoading(true);
+    login(username, password).then(() => setLoading(false));
   };
 
   const socialMediaLoginContent = (
@@ -130,21 +135,27 @@ export const LoginIlx: React.FunctionComponent = () => {
     xs2x: '/assets/images/pfbg_576@2x.jpg'
   };
 
+  useEffect(() => {
+  }, [loading]);
+
   return (
-    <LoginPage
-      footerListVariants={ListVariant.inline}
-      brandImgSrc={logo}
-      brandImgAlt="Indielx logo"
-      backgroundImgSrc={images}
-      /* footerListItems={listItem} */
-      /* textContent="This is placeholder text only. Use this area to place any information or introductory message about your application that may be relevant to users." */
-      loginTitle="Log in to your account"
-      /* loginSubtitle="Enter your single sign-on LDAP credentials." */
-      socialMediaLoginContent={socialMediaLoginContent}
-      signUpForAccountMessage={signUpForAccountMessage}
+    <>
+      {loading ? <LoadingSpinner /> : <LoginPage
+        footerListVariants={ListVariant.inline}
+        brandImgSrc={logo}
+        brandImgAlt="Indielx logo"
+        backgroundImgSrc={images}
+        /* footerListItems={listItem} */
+        /* textContent="This is placeholder text only. Use this area to place any information or introductory message about your application that may be relevant to users." */
+        loginTitle="Log in to your account"
+        /* loginSubtitle="Enter your single sign-on LDAP credentials." */
+        socialMediaLoginContent={socialMediaLoginContent}
+        signUpForAccountMessage={signUpForAccountMessage}
       /* forgotCredentials={forgotCredentials} */
-    >
-      {loginForm}
-    </LoginPage>
+      >
+        {loginForm}
+      </LoginPage>
+      }
+    </>
   );
 };

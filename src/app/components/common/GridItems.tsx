@@ -9,29 +9,6 @@ import { useEffect, useState } from 'react';
 import { LoadingSpinner } from './LoadingSpinner';
 
 
-// MOCKS
-const generateMockItems = (size: number) => {
-
-  const array: GridItemModel[] = [];
-  while (size-- > 0) {
-    const imageIndex = size % 3;
-    array.push({
-      name: `product #${size}`,
-      photo: imageIndex == 0 ? PANTS_BASE64 : imageIndex == 1 ? INDIDE_LOGO_GRID_ITEM_BASE64 : SKATE_BASE64,
-      price: '35€'
-    });
-  }
-  return array;
-}
-
-const fillGridMock = (items: GridItemModel[]) => {
-  return items.map(({ name, photo, price }: GridItemModel) =>
-    <GridItem name={name} photo={photo} price={price} />
-  );
-}
-
-// END MOCKS
-
 interface props {
   category?: ProductCategory,
 }

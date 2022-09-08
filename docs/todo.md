@@ -13,18 +13,21 @@ deploy, cors (?reverse proxy cors)
 
 ##############################
 
+addd routes for each product type
 
 relatório
 https
 serviços / comunicacao be fe : 
-- login 
 - serviços, loading e error msg
+- login 
 - rotas protegidas
+
+
 
 form alternar entre variantes, associar produto a ponto de venda, 
 vertical allign, search
 topbar
-
+new Date(Date.UTC(...))
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Tables
@@ -46,12 +49,6 @@ Tables
 	- gerar fatura pdf
 
 Forms>
-	shooping cart: 
-		- itemlist view(sales view) with add remove
-		- user form
-		- gerar fatura pdf
-		- make sell
-
 	view read-only products  form :
 	- alternar entre variantes
 	- ver dados
@@ -64,6 +61,12 @@ Forms>
 	- upload images
 	- adicionar stock
 	- associar produto a ponto de venda (dropdown)
+
+		shooping cart: 
+		- itemlist view(sales view) with add remove
+		- user form
+		- gerar fatura pdf
+		- make sell
 
 MUST
 grid items : vertical align each item
