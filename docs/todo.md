@@ -17,20 +17,21 @@ deploy, cors (?reverse proxy cors)
 
 ##############################
 
-- log out ver https://ui.dev/react-router-v5-protected-routes-authentication
 relatório
 serviços / comunicacao be fe : 
 	addd routes for each product type
 - serviços, loading e error msg
 - (/) enviar o token nos requests
 - (x) refresh token on error x ou logout e redirect
-
+. notification for sucess or error on submit
 
 
 form alternar entre variantes, associar produto a ponto de venda, 
 https
 cookie persistent && best practices
-vertical allign, search
+vertical allign, 
+pdf nao funca em mobile
+search
 topbar
 new Date(Date.UTC(...))
 ++++++++++++++++++++++++++++++++++++++++++++++++++
