@@ -113,7 +113,6 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   );
 
   useEffect(() => {
-    console.log(auth.role)
   }, [auth]);
 
   return (

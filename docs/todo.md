@@ -17,6 +17,7 @@ deploy, cors (?reverse proxy cors)
 
 ##############################
 
+registo
 relatório
 serviços / comunicacao be fe : 
 	addd routes for each product type

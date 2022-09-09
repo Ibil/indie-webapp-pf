@@ -8,11 +8,25 @@ import {
   LoginPage
 } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import logo from '@app/bgimages/indie-logo-r.svg';
+import { useAuth } from '@app/hooks/useAuth';
+import { registerUser } from '@app/services/Users';
+import { LoadingSpinner } from './common/LoadingSpinner';
+import { Redirect } from 'react-router-dom';
+import { UserRole } from '@app/model/User';
 
 export const RegisterIlx: React.FunctionComponent = () => {
+
+  const { setAuth } = useAuth();
+
+  const [
+    redirectToReferrer,
+    setRedirectToReferrer
+  ] = React.useState(false)
+
+  const [loading, setLoading] = useState<boolean>(false);
   const [showHelperText, setShowHelperText] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [isValidUsername, setIsValidUsername] = React.useState(true);
@@ -28,15 +42,17 @@ export const RegisterIlx: React.FunctionComponent = () => {
     setPassword(value);
   };
 
-  const onRememberMeClick = () => {
-    setIsRememberMeChecked(!isRememberMeChecked);
-  };
-
-  const onLoginButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onRegisterButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     setIsValidUsername(!!username);
     setIsValidPassword(!!password);
     setShowHelperText(!username || !password);
+    setLoading(true);
+    registerUser(username, password).then(() => {
+      setLoading(false);
+      setAuth({ username, role: UserRole.basic });
+      setRedirectToReferrer(true)
+    });
   };
 
   const socialMediaLoginContent = (
@@ -111,7 +127,7 @@ export const RegisterIlx: React.FunctionComponent = () => {
       /* rememberMeLabel="Keep me logged in for 30 days."
       isRememberMeChecked={isRememberMeChecked}
       onChangeRememberMe={onRememberMeClick} */
-      onLoginButtonClick={onLoginButtonClick}
+      onLoginButtonClick={onRegisterButtonClick}
       loginButtonLabel="Create Account"
     />
   );
@@ -124,21 +140,31 @@ export const RegisterIlx: React.FunctionComponent = () => {
     xs2x: '/assets/images/pfbg_576@2x.jpg'
   };
 
+  useEffect(() => {
+  }, [loading]);
+
+  if (redirectToReferrer === true) {
+    return  <Redirect to={'/'} />
+  }
+
   return (
-    <LoginPage
-      footerListVariants={ListVariant.inline}
-      brandImgSrc={logo}
-      brandImgAlt="Indielx logo"
-      backgroundImgSrc={images}
-      /* footerListItems={listItem} */
-      /* textContent="This is placeholder text only. Use this area to place any information or introductory message about your application that may be relevant to users." */
-      loginTitle="Register a new account"
+    <>
+      {loading ? <LoadingSpinner /> : <LoginPage
+        footerListVariants={ListVariant.inline}
+        brandImgSrc={logo}
+        brandImgAlt="Indielx logo"
+        backgroundImgSrc={images}
+        /* footerListItems={listItem} */
+        /* textContent="This is placeholder text only. Use this area to place any information or introductory message about your application that may be relevant to users." */
+        loginTitle="Register a new account"
       /* loginSubtitle="Enter your single sign-on LDAP credentials." */
       /* socialMediaLoginContent={socialMediaLoginContent} */
       /* signUpForAccountMessage={signUpForAccountMessage} */
       /* forgotCredentials={forgotCredentials} */
-    >
-      {loginForm}
-    </LoginPage>
+      >
+        {loginForm}
+      </LoginPage>
+      }
+    </>
   );
 };

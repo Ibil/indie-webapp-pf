@@ -45,10 +45,6 @@ export const LoginIlx: React.FunctionComponent = () => {
     setPassword(value);
   };
 
-  const onRememberMeClick = () => {
-    setIsRememberMeChecked(!isRememberMeChecked);
-  };
-
   const onLoginButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     setIsValidUsername(!!username);

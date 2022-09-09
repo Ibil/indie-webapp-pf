@@ -2,13 +2,7 @@ index.tsx : router -> applayout -> approutes
 
 restricted node and npm versions
 
-deploy:
-> npm run build
-install heroku cli
-create a new app
-> heroku git:remote -a <name of app>
-> git push heroku master
-https://indielx-pf.herokuapp.com/
+
 
 
 ## Other Development scripts
