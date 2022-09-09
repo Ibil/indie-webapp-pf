@@ -45,17 +45,8 @@ export const login = async (un: string, pw: string) => {
         credentials: "include",
         body: JSON.stringify(myBody)
     });
-    console.log("cookies");
-    console.log(response.headers);
-    console.log(response.headers.get('set-cookie')); // undefined
-    console.log(response.headers.get('jwt_access'));
-    console.log(response.headers.get('jwt_refresh'));
-    console.log(document.cookie); // nope
-    console.log("end cookies?");
     if (response.status >= 200 && response.status < 300) {
-        const result = await response.json();
-        console.log(response.headers);
-        
+        const result = await response.json();        
         return result.data.role;
     }
 }
@@ -80,12 +71,3 @@ export const logout = async () => {
         console.log(result.data);
     }
 }
-
-/*
-ex
-  const myHeaders = new Headers({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "Authorization": `Bearer ${btEdit.dataset.token}`
-        })
-*/

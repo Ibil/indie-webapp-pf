@@ -1,38 +1,13 @@
+import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import * as React from 'react';
-import { Button, Flex, FlexItem, PageSection, Title } from '@patternfly/react-core';
-import { GridItem } from '@app/components/common/GridItem';
-import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
+import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
 import saleListStyles from './SaleView.module.css';
 
-import '@patternfly/react-core/dist/styles/base.css';
 import '@app/app.css';
+import '@patternfly/react-core/dist/styles/base.css';
 import { useHistory } from 'react-router-dom';
 
-
-const generateMockItems = (size: number) => {
-  const array: GridItem[] = [];
-  while (size-- > 0) {
-    const imageIndex = size % 3;
-    array.push({
-      name: `product #${size}`,
-      photo: imageIndex == 0 ? PANTS_BASE64 : imageIndex == 1 ? INDIDE_LOGO_GRID_ITEM_BASE64 : SKATE_BASE64,
-      price: '35€'
-    });
-  }
-  return array;
-}
-
-const fillGrid = (items: GridItem[]) => {
-  return items.map(({ name, photo, price }: GridItem) =>
-    <GridItem name={name} photo={photo} price={price} />
-  );
-}
-
-interface props {
-  products: GridItem[],
-}
-
-export const SaleList: React.FC = (props) => {
+export const SaleList: React.FC = () => {
   const history = useHistory();
   return <>
     Total : 150€  <Button variant="tertiary" onClick={() => history.push(`/printSale`)}>print to pdf</Button>

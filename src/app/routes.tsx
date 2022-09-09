@@ -14,6 +14,7 @@ import { SaleList } from './components/SaleList';
 import { TableProduct } from './components/TableProduct';
 import { TableSales } from './components/TableSales';
 import { useAuth } from './hooks/useAuth';
+import { UserRole } from './model/User';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -27,12 +28,14 @@ export interface IAppRoute {
   isAsync?: boolean;
   routes?: undefined;
   sidebarHide?: boolean;
+  allowedRoles?: UserRole[];
 }
 
 export interface IAppRouteGroup {
   label: string;
   routes: IAppRoute[];
   sidebarHide?: boolean;
+  allowedRoles?: UserRole[];
 }
 
 export type AppRouteConfig = IAppRoute | IAppRouteGroup;
@@ -73,6 +76,7 @@ const routes: AppRouteConfig[] = [
     label: 'Products table',
     path: '/editProduct/',
     title: 'Products',
+    allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
     component: ProductForm,
@@ -81,6 +85,7 @@ const routes: AppRouteConfig[] = [
     path: '/editProduct/:id',
     title: 'Product',
     sidebarHide: true,
+    allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
     component: SaleList,
@@ -88,6 +93,7 @@ const routes: AppRouteConfig[] = [
     label: 'Sale list',
     path: '/viewSales/:id',
     title: 'Sale',
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
   {
     component: PdfDoc,
@@ -96,6 +102,7 @@ const routes: AppRouteConfig[] = [
     path: '/printSale/',
     title: ' Print sale',
     sidebarHide: true,
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
   /*   {
       component: Support,
@@ -133,6 +140,7 @@ const protectedRoutes: AppRouteConfig[] = [
     label: 'Sales table',
     path: '/viewSales/',
     title: 'Sales',
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
 ];
 // a custom hook for sending focus to the primary content container
@@ -190,22 +198,16 @@ function mapRoutes(routes: IAppRoute[]): string | number | boolean | {} | React.
 }
 
 function mapProtectedRoutes(routes: IAppRoute[], role?: string): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined {
-  return flattenedProtectedRoutes.map(({ path, exact, component, title, isAsync }, idx) => (
+  return routes.map(({ path, exact, component, allowedRoles }, idx) => (
     <ProtectedRoute
       path={path}
       exact={exact}
       component={component}
       key={idx}
-      isAuthenticated={role !== undefined} /> // FIXME
+      userRole={role}
+      allowedRoles={allowedRoles} />
   ));
 }
-
-function concatRoutes() {
-  const allRoutes: IAppRoute[] = flattenedRoutes.concat(flattenedProtectedRoutes);
-  console.log()
-  return mapRoutes(allRoutes);
-}
-
 
 const AppRoutes = (): React.ReactElement => {
   const { auth } = useAuth();
@@ -220,6 +222,6 @@ const AppRoutes = (): React.ReactElement => {
   </LastLocationProvider>
 )};
 
-export { AppRoutes, routes };
+export { AppRoutes, routes, protectedRoutes };
 
 

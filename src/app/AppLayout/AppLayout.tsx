@@ -10,14 +10,20 @@ import {
   PageSidebar,
   SkipToContent
 } from '@patternfly/react-core';
-import { routes, IAppRoute, IAppRouteGroup } from '@app/routes';
+import { routes, IAppRoute, IAppRouteGroup, protectedRoutes } from '@app/routes';
 import logo from '@app/bgimages/indie-logo-r.svg';
+import { useAuth } from '@app/hooks/useAuth';
+import { isRouteAllowedForUser } from '@app/components/common/ProtectedRoute';
+import { useEffect } from 'react';
 
 interface IAppLayout {
   children: React.ReactNode;
 }
 
 const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
+
+  const { auth } = useAuth();
+
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
   const [isNavOpenMobile, setIsNavOpenMobile] = React.useState(false);
@@ -71,21 +77,29 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
     </NavExpandable>
   );
 
-  const SideBarNavigation = (
+  const mapRoutes = () => {
+
+    console.log(auth.role);
+    
+    return routes.concat(protectedRoutes)
+            .filter(route => !route.sidebarHide && isRouteAllowedForUser(auth.role, route.allowedRoles))
+            .map((route, idx) => route.label && (!route.routes ? renderNavItem(route, idx) : renderNavGroup(route, idx)));
+  }
+
+  const generateSideBarNavigation = () => (
     <Nav id="nav-primary-simple" theme="dark">
       <NavList id="nav-list-simple">
-        {/* fixme again */}
-        {routes.filter(route => !route.sidebarHide).map(
-          (route, idx) => route.label && (!route.routes ? renderNavItem(route, idx) : renderNavGroup(route, idx))
-        )}
+        {
+          mapRoutes()
+        }
       </NavList>
     </Nav>
   );
 
-  const Sidebar = (
+  const generateSideBar = () => (
     <PageSidebar
       theme="dark"
-      nav={SideBarNavigation}
+      nav={generateSideBarNavigation()}
       isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />
   );
 
@@ -100,11 +114,16 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
       Skip to Content
     </SkipToContent>
   );
+
+  useEffect(() => {
+    console.log(auth.role)
+  }, [auth]);
+
   return (
     <Page
       mainContainerId={pageId}
       header={Header}
-      sidebar={Sidebar}
+      sidebar={generateSideBar()}
       onPageResize={onPageResize}
       skipToContent={PageSkipToContent}>
       {children}
