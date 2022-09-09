@@ -14,13 +14,11 @@ export const isRouteAllowedForUser = (userRoleAsString?: string, allowedRoles?: 
             userRoleAsString !== undefined &&
             (
                  undefined != allowedRoles.find( roleEnum => {
-                    console.log("inside isRouteAllowedForUser");
+/*                     console.log("inside isRouteAllowedForUser");
                     console.log(roleEnum);
                     console.log(UserRole[userRoleAsString as keyof typeof UserRole]);
                     console.log("result = ");
-                    /* console.log(UserRole[roleEnum] == userRoleAsString);
-                    return UserRole[roleEnum] == userRoleAsString; */
-                    console.log(roleEnum == UserRole[userRoleAsString as keyof typeof UserRole]);;
+                    console.log(roleEnum == UserRole[userRoleAsString as keyof typeof UserRole]);; */
                     return roleEnum == UserRole[userRoleAsString as keyof typeof UserRole];
                 })
             )
@@ -31,9 +29,6 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = (props: ProtectedRo
     const currentLocation = useLocation();
 
     const isRoleAllowedForUser = isRouteAllowedForUser(props.userRole, props.allowedRoles);
-    if (props.path == "/viewSales/") {
-        console.log("isRoleAllowedForUser " + isRoleAllowedForUser + " userrole: " + props.userRole + " allowed: " + props.allowedRoles);
-    }
     if (!isRoleAllowedForUser) {
         const renderComponent = () => <Redirect to={{ pathname: "/login", state: { from: currentLocation.pathname } }} />;
         return <Route {...props} component={renderComponent} render={undefined} />

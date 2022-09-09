@@ -41,9 +41,7 @@ export const ProductForm: React.FC<Product> = product => {
 
   const submitProduct = () => {
     saveProduct();
-    console.log("saved");
     history.goBack();
-    console.log("back");
   }
 
   return (

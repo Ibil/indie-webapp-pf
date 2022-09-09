@@ -78,9 +78,6 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   );
 
   const mapRoutes = () => {
-
-    console.log(auth.role);
-    
     return routes.concat(protectedRoutes)
             .filter(route => !route.sidebarHide && isRouteAllowedForUser(auth.role, route.allowedRoles))
             .map((route, idx) => route.label && (!route.routes ? renderNavItem(route, idx) : renderNavGroup(route, idx)));
