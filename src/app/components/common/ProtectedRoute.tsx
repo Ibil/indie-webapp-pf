@@ -9,11 +9,12 @@ export interface ProtectedRouteProps extends RouteProps {
 }
 
 export const isRouteAllowedForUser = (userRoleAsString?: string, allowedRoles?: UserRole[]): boolean => {
-    return (allowedRoles == undefined || allowedRoles.length == 0) ||
+    return (allowedRoles == undefined) ||
+        (userRoleAsString == undefined && allowedRoles.length == 0) ||
         (
             userRoleAsString !== undefined &&
             (
-                 undefined != allowedRoles.find( roleEnum => {
+                undefined != allowedRoles.find(roleEnum => {
 /*                     console.log("inside isRouteAllowedForUser");
                     console.log(roleEnum);
                     console.log(UserRole[userRoleAsString as keyof typeof UserRole]);

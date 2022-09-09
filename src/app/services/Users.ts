@@ -67,7 +67,6 @@ export const refresh = async () => {
 export const logout = async () => {
     const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/auth/logout`, { method: 'POST' });
     if (response.status >= 200 && response.status < 300) {
-        const result = await response.json();
-        console.log(result.data);
+        console.log("logged out");
     }
 }

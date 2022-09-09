@@ -13,25 +13,23 @@ deploy, cors (?reverse proxy cors)
 
 
 - protected routes dependem da role
+- protected routes na sidebar
 
 ##############################
 
-testar rotas por user
-- protected routes na sidebar
 - log out ver https://ui.dev/react-router-v5-protected-routes-authentication
-
-
 relatório
 serviços / comunicacao be fe : 
 	addd routes for each product type
 - serviços, loading e error msg
 - (/) enviar o token nos requests
-- (/) refresh token on error x ou logout e redirect
+- (x) refresh token on error x ou logout e redirect
 
 
 
-https
 form alternar entre variantes, associar produto a ponto de venda, 
+https
+cookie persistent && best practices
 vertical allign, search
 topbar
 new Date(Date.UTC(...))

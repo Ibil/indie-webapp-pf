@@ -7,6 +7,7 @@ import { LastLocationProvider, useLastLocation } from 'react-router-last-locatio
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import { GridTshirt } from './components/GridTShirt';
 import { LoginIlx } from './components/LoginIlx';
+import { LogoutIlx } from './components/LogoutIlx';
 import { PdfDoc } from './components/PdfDoc';
 import { ProductForm } from './components/ProductForm';
 import { RegisterIlx } from './components/RegisterIlx';
@@ -41,20 +42,7 @@ export interface IAppRouteGroup {
 export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
-  {
-    component: RegisterIlx,
-    exact: true,
-    label: 'Register',
-    path: '/register/',
-    title: 'Register',
-  },
-  {
-    component: LoginIlx,
-    exact: true,
-    label: 'Login',
-    path: '/login/',
-    title: 'Login',
-  },
+  
   {
     component: GridTshirt,
     exact: true,
@@ -104,6 +92,30 @@ const routes: AppRouteConfig[] = [
     sidebarHide: true,
     allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
+  {
+    component: RegisterIlx,
+    exact: true,
+    label: 'Register',
+    path: '/register/',
+    title: 'Register',
+    sidebarHide: true,
+  },
+  {
+    component: LoginIlx,
+    exact: true,
+    label: 'Login',
+    path: '/login/',
+    title: 'Login',
+    allowedRoles: [],
+  },
+  {
+    component: LogoutIlx,
+    exact: true,
+    label: 'Logout',
+    path: '/logout/',
+    title: 'Logout',
+    allowedRoles: [UserRole.basic, UserRole.seller, UserRole.manager, UserRole.admin],
+  }
   /*   {
       component: Support,
       exact: true,

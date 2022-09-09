@@ -40,7 +40,7 @@ export const GridItems = (props: props) => {
   return (
     <>
       <PageSection>
-        <Title headingLevel="h1" size="lg">Lista de Produtos</Title>
+        <Title headingLevel="h1" size="lg">Products</Title>
         <Flex>
           { !loading ? fillGrid() : <LoadingSpinner /> }
         </Flex>
