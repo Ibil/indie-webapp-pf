@@ -4,8 +4,11 @@ import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { GridItems } from './components/common/GridItems';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
-import { GridTshirt } from './components/GridTShirt';
+import { GridBag } from './components/grids/GridBag';
+import { GridBook } from './components/grids/GridBook';
+import { GridTshirt } from './components/grids/GridTShirt';
 import { LoginIlx } from './components/LoginIlx';
 import { LogoutIlx } from './components/LogoutIlx';
 import { PdfDoc } from './components/PdfDoc';
@@ -42,55 +45,41 @@ export interface IAppRouteGroup {
 export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
-  
+  {
+    component: GridItems,
+    exact: true,
+    label: 'Products',
+    path: '/',
+    title: 'Products',
+  },
   {
     component: GridTshirt,
     exact: true,
     label: 'T-shirts',
-    path: '/',
+    path: '/tshirts',
     title: 'T-Shirts',
   },
   {
+    component: GridBag,
+    exact: true,
+    label: 'Bags',
+    path: '/bags',
+    title: 'Bags',
+  },
+  {
+    component: GridBook,
+    exact: true,
+    label: 'Books',
+    path: '/Books',
+    title: 'Books',
+  },
+  {
     component: ProductForm,
     exact: true,
-    label: 'Produto',
+    label: 'Product',
     path: '/viewProduct/:id',
     title: 'Product',
     sidebarHide: true,
-  },
-  {
-    component: TableProduct,
-    exact: true,
-    label: 'Products table',
-    path: '/editProduct/',
-    title: 'Products',
-    allowedRoles: [UserRole.manager, UserRole.admin],
-  },
-  {
-    component: ProductForm,
-    exact: true,
-    label: 'Produto',
-    path: '/editProduct/:id',
-    title: 'Product',
-    sidebarHide: true,
-    allowedRoles: [UserRole.manager, UserRole.admin],
-  },
-  {
-    component: SaleList,
-    exact: true,
-    label: 'Sale list',
-    path: '/viewSales/:id',
-    title: 'Sale',
-    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
-  },
-  {
-    component: PdfDoc,
-    exact: true,
-    label: 'print sale',
-    path: '/printSale/',
-    title: ' Print sale',
-    sidebarHide: true,
-    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
   {
     component: RegisterIlx,
@@ -146,12 +135,47 @@ const routes: AppRouteConfig[] = [
 ];
 
 const protectedRoutes: AppRouteConfig[] = [
+
+  {
+    component: TableProduct,
+    exact: true,
+    label: 'Products table',
+    path: '/editProduct/',
+    title: 'Products',
+    allowedRoles: [UserRole.manager, UserRole.admin],
+  },
+  {
+    component: ProductForm,
+    exact: true,
+    label: 'Produto',
+    path: '/editProduct/:id',
+    title: 'Product',
+    sidebarHide: true,
+    allowedRoles: [UserRole.manager, UserRole.admin],
+  },
   {
     component: TableSales,
     exact: true,
     label: 'Sales table',
     path: '/viewSales/',
     title: 'Sales',
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: SaleList,
+    exact: true,
+    label: 'Sale list',
+    path: '/viewSales/:id',
+    title: 'Sale',
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: PdfDoc,
+    exact: true,
+    label: 'print sale',
+    path: '/printSale/',
+    title: ' Print sale',
+    sidebarHide: true,
     allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
 ];

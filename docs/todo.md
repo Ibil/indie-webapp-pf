@@ -1,6 +1,6 @@
 
 grids
-test refresh
+
 
 serviços / comunicacao be fe : 
 	addd routes for each product type
@@ -11,27 +11,23 @@ serviços / comunicacao be fe :
 
 storyboard
 
-form alternar entre variantes, associar produto a ponto de venda, 
-https
-cookie persistent && best practices
-vertical allign, 
-pdf nao funca em mobile
-search
-topbar
-new Date(Date.UTC(...))
+
+
+
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Tables
-	lista produtos : table
+	produtos : table
+	delete
 	- crud, navigation
-	- sort, actions, cell width, breakpoint modifiers, empty state, controlling text
-
-	Pontos de venda : table
-	- CRUD, navigation
 
 	users: table
 	- crud, navigation,
 	- user?type
+
+	Pontos de venda : table
+	- CRUD, navigation
 
 	Vendas: table 
 	- list, navigation
@@ -44,7 +40,7 @@ Forms>
 	- alternar entre variantes
 	- ver dados
 	- consulta stock
-	- butoes buy, add/remove qty
+	- add product -> make sale
 
 	user form
 
@@ -59,20 +55,26 @@ Forms>
 		- gerar fatura pdf
 		- make sell
 
-MUST
-grid items : vertical align each item
-search
 
----------------------------------------------------
+
+MUST:
+Gridt item : add product -> make sale
+
+Should:
+https
+cookie persistent && best practices
+grid items : vertical align each item
+pdf nao funca em mobile
+search
+topbar
+new Date(Date.UTC(...))
+grid item e product form add/remove qty
+grid items and table pagination
+cell width, breakpoint modifiers, empty state, controlling text
+
 Could:
 table : actions in dots dropdown instead of button
 date picker in modal and set hour validations if same date
 listar produtos por ponto de venda
 consultar stock por ponto de venda
 reserva
-
-
-ui:
-grid item add/remove qty
-grid items and table pagination
-topbar
