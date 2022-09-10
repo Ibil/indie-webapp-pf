@@ -1,24 +1,7 @@
 
-listar produtos : layouts : flex or gallery
+grids
+test refresh
 
-grid links:edit and add
-
-parameter based route building
-
-hide certain side items like view product
-
-table
-
-deploy, cors (?reverse proxy cors)
-
-
-- protected routes dependem da role
-- protected routes na sidebar
-
-##############################
-
-registo
-relatório
 serviços / comunicacao be fe : 
 	addd routes for each product type
 - serviços, loading e error msg
@@ -26,6 +9,7 @@ serviços / comunicacao be fe :
 - (x) refresh token on error x ou logout e redirect
 . notification for sucess or error on submit
 
+storyboard
 
 form alternar entre variantes, associar produto a ponto de venda, 
 https

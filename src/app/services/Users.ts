@@ -1,3 +1,4 @@
+import { WEB_API_HOST } from "./common";
 
 
 
@@ -14,7 +15,7 @@ export const registerUser = async (un: string, pw: string) => {
         "name": un
     }
 
-    const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/users`,
+    const response = await fetch(WEB_API_HOST + `users`,
         {
             method: 'POST', 
             headers: myHeaders, 
@@ -22,11 +23,15 @@ export const registerUser = async (un: string, pw: string) => {
             body: JSON.stringify(myBody)
         });
     if (response.status >= 200 && response.status < 300) {
+        return;
     }
-    return;
+    else {
+        throw Error;
+    }
 }
 
 export const login = async (un: string, pw: string) => {
+    let role: string | undefined;
 
     const myBody = { 
         "username": un,
@@ -38,7 +43,7 @@ export const login = async (un: string, pw: string) => {
         'Content-Type': 'application/json',
     })
 
-    const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/auth/login`, 
+    const response = await fetch(WEB_API_HOST + `auth/login`, 
     {
         method: 'POST', 
         headers: myHeaders, 
@@ -46,26 +51,33 @@ export const login = async (un: string, pw: string) => {
         body: JSON.stringify(myBody)
     });
     if (response.status >= 200 && response.status < 300) {
-        const result = await response.json();        
-        return result.data.role;
+        const result = await response.json(); 
+        role = result.data.role;
+        return role;
     }
+    else {
+        throw Error;
+    }    
 }
 
 export const refresh = async () => {
 
 
-    const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/auth/refresh`, 
+    const response = await fetch(WEB_API_HOST + `auth/refresh`, 
     {
         method: 'POST', 
-        credentials: "include", // ?? needed?
+        credentials: "include"
     });
     if (response.status >= 200 && response.status < 300) {
-        console.log(response.headers);
+        return;
+    }
+    else{
+        throw Error;
     }
 }
 
 export const logout = async () => {
-    const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/auth/logout`, { method: 'POST' });
+    const response = await fetch(WEB_API_HOST + `auth/logout`, { method: 'POST' });
     if (response.status >= 200 && response.status < 300) {
     }
 }

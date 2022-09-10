@@ -1,0 +1,1 @@
+export const WEB_API_HOST = `https://api-store-indielisboa.herokuapp.com/v1/`;

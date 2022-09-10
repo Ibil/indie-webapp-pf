@@ -35,7 +35,6 @@ export const LoginIlx: React.FunctionComponent = () => {
   const [isValidUsername, setIsValidUsername] = React.useState(true);
   const [password, setPassword] = React.useState('');
   const [isValidPassword, setIsValidPassword] = React.useState(true);
-  const [isRememberMeChecked, setIsRememberMeChecked] = React.useState(false);
 
   const handleUsernameChange = (value: string) => {
     setUsername(value);
@@ -55,7 +54,13 @@ export const LoginIlx: React.FunctionComponent = () => {
       setLoading(false);
       setAuth({username, role});
       setRedirectToReferrer(true)
-    });
+    })
+    .catch(() =>{;
+      setShowHelperText(true)
+      setIsValidUsername(false);
+      setIsValidPassword(false);
+      setLoading(false);
+    } );
   };
 
   const socialMediaLoginContent = (

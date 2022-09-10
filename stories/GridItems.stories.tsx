@@ -5,6 +5,8 @@ import { GridItemModel } from "@app/model/GridItemModel";
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
 import withMock from 'storybook-addon-mock';
 import { ProductCategory } from '@app/model/Product';
+import { WEB_API_HOST } from '@app/services/common';
+import { PRODUCTS_ENDPOINT } from '@app/services/Products';
 
 //👇 This default export determines where your story goes in the story list
 export default {
@@ -12,6 +14,7 @@ export default {
   component: GridItems,
   decorators: [withMock],
 };
+const mockedProductsEndpoint = PRODUCTS_ENDPOINT + `&category=tshirt`;
 
 const generateMockItems = (size: number) => {
   const array: GridItemModel[] = [];
@@ -29,20 +32,94 @@ const generateMockItems = (size: number) => {
 const Template: Story<ComponentProps<typeof GridItems>> = (args) => <GridItems {...args} />;
 
 
-export const FirstStory = Template.bind({});
-FirstStory.args = {
+export const OK = Template.bind({});
+OK.args = {
   category: ProductCategory.T_SHIRT
 };
-
-FirstStory.parameters = {
+OK.parameters = {
   mockData: [
-      {
-          url: 'https://api-store-indielisboa.herokuapp.com/v1/products?limit=100&page=0&stock=false',
-          method: 'GET',
-          status: 200,
-          response: {
-              data: generateMockItems(20),
-          },
+    {
+      url: mockedProductsEndpoint,
+      method: 'GET',
+      status: 200,
+      response: {
+        data: generateMockItems(20),
       },
+    },
   ]
 };
+
+export const ERROR = Template.bind({});
+ERROR.args = {
+  category: ProductCategory.T_SHIRT
+};
+ERROR.parameters = {
+  mockData: [
+    {
+      url: mockedProductsEndpoint,
+      method: 'GET',
+      status: 500,
+      response: {
+        data: generateMockItems(20),
+      },
+    },
+  ]
+};
+
+// cant use api to mock same request twice.
+/* export const refreshSuccess = Template.bind({});
+refreshSuccess.args = {
+  category: ProductCategory.T_SHIRT
+};
+refreshSuccess.parameters = {
+  mockData: [
+    {
+      url: mockedProductsEndpoint,
+      method: 'GET',
+      status: 401,
+      response: {
+      },
+    },
+    {
+      url: WEB_API_HOST + `auth/refresh`,
+      method: 'POST',
+      credentials: "include",
+      status: 200,
+      response: {
+      },
+    },
+    {
+      url: mockedProductsEndpoint,
+      method: 'GET',
+      status: 200,
+      response: {
+        data: generateMockItems(20),
+      },
+    }
+  ]
+}; */
+
+export const refresFailSecondTime = Template.bind({});
+refresFailSecondTime.args = {
+  category: ProductCategory.T_SHIRT
+};
+refresFailSecondTime.parameters = {
+  mockData: [
+    {
+      url: mockedProductsEndpoint,
+      method: 'GET',
+      status: 401,
+      response: {
+      },
+    },
+    {
+      url: WEB_API_HOST + `auth/refresh`,
+      method: 'POST',
+      credentials: "include",
+      status: 200,
+      response: {
+      },
+    }
+  ]
+};
+

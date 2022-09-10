@@ -1,8 +1,3 @@
-index.tsx : router -> applayout -> approutes
-
-restricted node and npm versions
-
-
 
 
 ## Other Development scripts

@@ -52,6 +52,12 @@ export const RegisterIlx: React.FunctionComponent = () => {
       setLoading(false);
       setAuth({ username, role: UserRole.basic });
       setRedirectToReferrer(true)
+    })
+    .catch(() => {
+      setShowHelperText(true)
+      setIsValidUsername(false);
+      setIsValidPassword(false);
+      setLoading(false);
     });
   };
 
@@ -114,7 +120,7 @@ export const RegisterIlx: React.FunctionComponent = () => {
   const loginForm = (
     <LoginForm
       showHelperText={showHelperText}
-      helperText="Invalid login credentials."
+      helperText="Username must have have 4-19 character and begin with a letter. Password must have between 8 and 19 characters"
       helperTextIcon={<ExclamationCircleIcon />}
       usernameLabel="Username"
       usernameValue={username}

@@ -1,7 +1,8 @@
+import { WEB_API_HOST } from "./common";
 import { refresh } from "./Users";
 
 export const getLocations = async () => {
-    const response = await fetch(`https://api-store-indielisboa.herokuapp.com/v1/locations`,
+    const response = await fetch(WEB_API_HOST + `locations`,
     {
         credentials: "include",
     });
