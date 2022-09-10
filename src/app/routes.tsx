@@ -25,6 +25,7 @@ import { LocationForm } from './components/LocationForm';
 import { UserForm } from './components/UserForm';
 import { ProductFormWithTable } from './components/ProductFormWithTable';
 import { TableLocationStock } from './components/tables/TableLocationStock';
+import { ViewProduct } from './components/ViewProduct';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -80,7 +81,7 @@ const routes: AppRouteConfig[] = [
     title: 'Books',
   },
   {
-    component: ProductForm,
+    component: ViewProduct,
     exact: true,
     label: 'Product',
     path: '/viewProduct/:id',

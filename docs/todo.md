@@ -14,17 +14,13 @@ Forms>
 
 
 	criar / editar produtos : form 
-	3 forms por product type
-	1 stock table
+	3 forms por product type : falta por generico
+	1 stock table : falta editar o stock
 	- upload images
 	- adicionar stock
 	- associar produto a ponto de venda (dropdown)
 
-	view read-only products  form :
-	- alternar entre variantes
-	- ver dados
-	- consulta stock
-	- add product -> make sale
+
 
 	sale/shooping cart:  -> tornar dinamico
 	
@@ -35,6 +31,12 @@ Forms>
 
 
 MUST:
+	view read-only products  form :
+	- alternar entre variantes
+	- ver dados
+	- consulta stock
+	- add product -> make sale
+
 Gridt item : add product -> make sale
 // adicionar datas de vendas no modelo, na tabela e na view
 sales table: mostrar nomes em vez de ids...
