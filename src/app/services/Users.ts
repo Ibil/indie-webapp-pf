@@ -1,3 +1,4 @@
+import { User } from "@app/model/User";
 import { WEB_API_HOST } from "./common";
 
 
@@ -119,11 +120,12 @@ export const getUserByID = async (id: string, skipRetry?: boolean) => {
     }
 }
 
-export const updateUserByID = async (id: string, skipRetry?: boolean) => {
-    const response = await fetch(WEB_API_HOST + "users/" + id + "/fullinfo",
+export const updateUserByID = async (user: User, skipRetry?: boolean) => {
+    const response = await fetch(WEB_API_HOST + "users/" + user.userId + "/fullinfo",
     {
         method: 'PATCH', 
         credentials: "include",
+        body: JSON.stringify(user)
     });
     if (response.status >= 200 && response.status < 300) {
         const result = await response.json();

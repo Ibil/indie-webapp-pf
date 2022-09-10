@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 
 export interface DropDownInterface {
-    values: DropDownData[]
+    startingValue: any;
+    values: DropDownData[];
+    getDropdownValue: (value) => void;
 }
 
 export interface DropDownData {
@@ -10,16 +12,11 @@ export interface DropDownData {
 }
 
 export const DropDown: React.FC<DropDownInterface> = (
-    { values }: DropDownInterface) => {
-    console.log("values");
-    console.log(values);
+    { startingValue, values, getDropdownValue}: DropDownInterface) => {
     const [options, setOptions] = useState<any>(values);
-
-    console.log("options");
-    console.log(options);
-    const [state, setState] = useState<any>({
+    const [dropDownState, setState] = useState<any>({
         isOpen: false,
-        selected: null,
+        selected: startingValue,
         isDisabled: false
     });
 
@@ -37,7 +34,7 @@ export const DropDown: React.FC<DropDownInterface> = (
                 selected: selection,
                 isOpen: false
             });
-            console.log('selected:', selection);
+            getDropdownValue(selection);
         }
     };
 
@@ -48,11 +45,14 @@ export const DropDown: React.FC<DropDownInterface> = (
         });
     };
 
-    const titleId = 'select-descriptions-title';
+    const isSelected = (option): boolean => {
+        return dropDownState.selected == option.value;
+    }
+
 
     return (
         <div>
-            <span id={titleId}>
+            <span id={'select-descriptions-title'}>
                 Title
             </span>
             <Select
@@ -61,19 +61,21 @@ export const DropDown: React.FC<DropDownInterface> = (
                 aria-label="Select Input with descriptions"
                 onToggle={onToggle}
                 onSelect={onSelect}
-                selections={state.selected}
-                isOpen={state.isOpen}
-                aria-labelledby={titleId}
+                selections={dropDownState.selected}
+                isOpen={dropDownState.isOpen}
+                aria-labelledby={'select-descriptions-title'}
                 isDisabled={false}
             >
-                {options.map((option, index) => (
+                {options.map((option, index) => {
+                    return (
                     <SelectOption
+                        isSelected={isSelected(option)}
                         isDisabled={false}
                         key={index}
                         value={option.value}
                         isPlaceholder={option.isPlaceholder}
                     />
-                ))}
+                )})}
             </Select>
         </div>
     );

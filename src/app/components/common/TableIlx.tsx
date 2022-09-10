@@ -83,10 +83,7 @@ export const TableIlx: React.FunctionComponent<TableData> = (
 
   const reloadItems = async () => {
     getItems().then(items => {
-      console.log("items");
-      console.log(items);
       setRowsData(items);
-      console.log("set sorted items");
       setSortedRowsData(items);
       setLoading(false);
     })
@@ -98,25 +95,18 @@ export const TableIlx: React.FunctionComponent<TableData> = (
 
   const fillBody = () => {
     if (sortedRowsData.length !== 0) {
-      console.log("sortedRowData at fillBody");
-      console.log(sortedRowsData);
-      console.log(" force sort");
-      /* console.log(sortRowData()); */
       return sortedRowsData.map((data, rowIndex) => buildTableBody(data, rowIndex, history));
     }
     else {
-      console.log("empty");
       return buildEmptyTableBody();
     }
   }
 
   const drawBody = () => {
     if (loading) {
-      console.log("Spinner");
       return <LoadingSpinner />;
     }
     else if (hasError) {
-      console.log("error");
       return <ErrorFetchingData />
     }
     else {

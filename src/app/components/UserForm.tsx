@@ -5,6 +5,8 @@ import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/rea
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { ErrorFetchingData } from './common/ErrorFetchingData';
+import { LoadingSpinner } from './common/LoadingSpinner';
 import { DropDown } from './tables/DropDown';
 
 export const UserForm: React.FC = () => {
@@ -25,18 +27,22 @@ export const UserForm: React.FC = () => {
   const handleNameChange = name => {
     setItemEditing({...itemEditing, name});
   };
-  const handleRoleChange = role => {
+
+  const handleRoleChange = (role) => {
     setItemEditing({...itemEditing, role});
-  };
+  }; 
 
 
   const submitForm = () => {
-    updateUserByID(itemEditing.userId);
+    updateUserByID(itemEditing);
   }
 
   useEffect(() => {
     getUserByID(getIdFromPath(location.pathname))
-      .then(data => setItemEditing(data))
+      .then(data => {
+        setItemEditing(data);
+        setLoading(false);
+      })
       .catch(() => {
         setHasError(true);
         setLoading(false)
@@ -44,38 +50,44 @@ export const UserForm: React.FC = () => {
   }, []);
 
   useEffect(() => {
-  }, [loading, hasError]);
+  }, [loading, hasError, itemEditing]);
 
-  // TODO add loading and error page
-  return (
-    <Form>
-      <FormGroup label="name" isRequired fieldId="simple-form-name-01">
-        <TextInput
-          isRequired
-          type="text"
-          id="simple-form-name-01"
-          name="simple-form-name-01"
-          value={itemEditing.name}
-          onChange={handleNameChange}
-        />
-      </FormGroup>
-      <FormGroup label="role" isRequired fieldId="simple-form-role-01">
-        <TextInput
-          isRequired
-          type="text"
-          id="simple-form-role-01"
-          name="simple-form-role-01"
-          value={itemEditing.role}
-          onChange={handleRoleChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <DropDown values={[{ value: UserRole.basic }]}/>
-      </FormGroup>
-      <ActionGroup>
-        <Button variant="primary" onClick={submitForm}>Submit</Button>
-        <Button variant="link" onClick={() => history.goBack()} >Cancel</Button>
-      </ActionGroup>
-    </Form>
-  );
+
+  const mapEnumValuesToDropDown = () => 
+    Object.values(UserRole).map(role => { return {value: role };})
+  
+  
+  const drawForm= () => {
+    if (loading) {
+      return <LoadingSpinner />;
+    }
+    else if (hasError) {
+      return <ErrorFetchingData />
+    }
+    else {
+      return (
+        <Form>
+          <FormGroup label="name" isRequired fieldId="simple-form-name-01">
+            <TextInput
+              isRequired
+              type="text"
+              id="simple-form-name-01"
+              name="simple-form-name-01"
+              value={itemEditing.name}
+              onChange={handleNameChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <DropDown startingValue={itemEditing.role} values={mapEnumValuesToDropDown()} getDropdownValue={handleRoleChange}/>
+          </FormGroup>
+          <ActionGroup>
+            <Button variant="primary" onClick={submitForm}>Submit</Button>
+            <Button variant="link" onClick={() => history.goBack()} >Cancel</Button>
+          </ActionGroup>
+        </Form>
+      );
+    }
+  }
+
+  return drawForm();
 }
