@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 
-export const DropDown: React.FC = () => {
+export interface DropDownInterface {
+    values: DropDownData[]
+}
 
-    const [options, setOptions] = useState<any>([
-        { value: 'Mr', disabled: false },
-        { value: 'Miss', disabled: false },
-        { value: 'Mrs', disabled: false },
-        { value: 'Ms', disabled: false },
-        { value: 'Dr', disabled: false },
-        { value: 'Other', disabled: false }
-    ]);
+export interface DropDownData {
+    value: any
+}
 
+export const DropDown: React.FC<DropDownInterface> = (
+    { values }: DropDownInterface) => {
+    console.log("values");
+    console.log(values);
+    const [options, setOptions] = useState<any>(values);
+
+    console.log("options");
+    console.log(options);
     const [state, setState] = useState<any>({
         isOpen: false,
         selected: null,
@@ -47,7 +52,7 @@ export const DropDown: React.FC = () => {
 
     return (
         <div>
-            <span id={titleId} hidden>
+            <span id={titleId}>
                 Title
             </span>
             <Select
@@ -59,15 +64,14 @@ export const DropDown: React.FC = () => {
                 selections={state.selected}
                 isOpen={state.isOpen}
                 aria-labelledby={titleId}
-                isDisabled={state.isDisabled}
+                isDisabled={false}
             >
                 {options.map((option, index) => (
                     <SelectOption
-                        isDisabled={option.disabled}
+                        isDisabled={false}
                         key={index}
                         value={option.value}
                         isPlaceholder={option.isPlaceholder}
-                        description="This is a description"
                     />
                 ))}
             </Select>

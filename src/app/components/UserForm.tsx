@@ -70,7 +70,7 @@ export const UserForm: React.FC = () => {
         />
       </FormGroup>
       <FormGroup>
-        <DropDown/>
+        <DropDown values={[{ value: UserRole.basic }]}/>
       </FormGroup>
       <ActionGroup>
         <Button variant="primary" onClick={submitForm}>Submit</Button>
