@@ -12,10 +12,10 @@ Forms>
 	preços em centimos?
 	notification for sucess or error on submit
 
-	user form:
-	- user?type
-
+	
 	locations form
+	create
+	edit products
 
 	criar / editar produtos : form 
 	- upload images
@@ -28,20 +28,19 @@ Forms>
 	- consulta stock
 	- add product -> make sale
 
-	sale/shooping cart: 
+	sale/shooping cart:  -> tornar dinamico
+	
 	- itemlist view(sales view) with add remove
 	- user form
 	- gerar fatura pdf
 	- make sell
 
-	update stock of product in location? see api location to add stock
-
-
-sales table: mostrar nomes em vez de ids...
 
 MUST:
+update stock of product in location? see api location to add stock
 Gridt item : add product -> make sale
 // adicionar datas de vendas no modelo, na tabela e na view
+sales table: mostrar nomes em vez de ids...
 
 Should:
 - gerir período de venda (desactivado)

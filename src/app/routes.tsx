@@ -168,9 +168,18 @@ const protectedRoutes: AppRouteConfig[] = [
   {
     component: LocationForm,
     /* exact: true, */
-    label: 'Location',
+    label: 'Create Location',
+    path: '/listLocations/create',
+    title: 'Create Location',
+    sidebarHide: true,
+    allowedRoles: [UserRole.manager, UserRole.admin],
+  },
+  {
+    component: LocationForm,
+    /* exact: true, */
+    label: 'Edit Location',
     path: '/listLocations/:id',
-    title: 'Location',
+    title: 'Edit Location',
     sidebarHide: true,
     allowedRoles: [UserRole.manager, UserRole.admin],
   },

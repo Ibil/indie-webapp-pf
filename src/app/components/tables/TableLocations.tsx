@@ -3,6 +3,7 @@ import { getLocations } from "@app/services/Locations";
 import { Button } from "@patternfly/react-core";
 import { TableText, Td, Th, Tr } from '@patternfly/react-table';
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { TableIlx } from "../common/TableIlx";
 
 
@@ -34,10 +35,15 @@ export const buildTableBody = (data, rowIndex, history) =>
     </Tr>;
 
 export const TableLocations: React.FunctionComponent = () => {
-    return <TableIlx
+    const history = useHistory();
+
+    return <>
+    <Button variant="primary" onClick={() => history.push('create')}>Create new Location</Button>
+    <TableIlx
         getSortableRowValues={getSortableRowValues}
         buildTableHeaders={buildTableHeaders}
         buildTableBody={buildTableBody}
         getItems={getLocations} // todo
     />
+    </>
 }

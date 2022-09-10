@@ -25,22 +25,33 @@ export const UserForm: React.FC = () => {
   });
 
   const handleNameChange = name => {
-    setItemEditing({...itemEditing, name});
+    setItemEditing({ ...itemEditing, name });
   };
 
   const handleRoleChange = (role) => {
-    setItemEditing({...itemEditing, role});
-  }; 
+    setItemEditing({ ...itemEditing, role });
+  };
 
 
-  const submitForm = () => {
-    updateUserByID(itemEditing);
+  const submitForm = e => {
+    e.preventDefault();
+    setLoading(true)
+    updateUserByID(itemEditing)
+      .then(() => {
+        setHasError(false);
+        setLoading(false);
+      })
+      .catch(() => {
+        setHasError(true);
+        setLoading(false)
+      })
   }
 
   useEffect(() => {
     getUserByID(getIdFromPath(location.pathname))
       .then(data => {
         setItemEditing(data);
+        setHasError(false);
         setLoading(false);
       })
       .catch(() => {
@@ -53,11 +64,11 @@ export const UserForm: React.FC = () => {
   }, [loading, hasError, itemEditing]);
 
 
-  const mapEnumValuesToDropDown = () => 
-    Object.values(UserRole).map(role => { return {value: role };})
-  
-  
-  const drawForm= () => {
+  const mapEnumValuesToDropDown = () =>
+    Object.values(UserRole).map(role => { return { value: role }; })
+
+
+  const drawForm = () => {
     if (loading) {
       return <LoadingSpinner />;
     }
@@ -78,7 +89,7 @@ export const UserForm: React.FC = () => {
             />
           </FormGroup>
           <FormGroup>
-            <DropDown startingValue={itemEditing.role} values={mapEnumValuesToDropDown()} getDropdownValue={handleRoleChange}/>
+            <DropDown startingValue={itemEditing.role} values={mapEnumValuesToDropDown()} getDropdownValue={handleRoleChange} />
           </FormGroup>
           <ActionGroup>
             <Button variant="primary" onClick={submitForm}>Submit</Button>

@@ -121,9 +121,15 @@ export const getUserByID = async (id: string, skipRetry?: boolean) => {
 }
 
 export const updateUserByID = async (user: User, skipRetry?: boolean) => {
+
+    const myHeaders = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    })
     const response = await fetch(WEB_API_HOST + "users/" + user.userId + "/fullinfo",
     {
         method: 'PATCH', 
+        headers: myHeaders,
         credentials: "include",
         body: JSON.stringify(user)
     });
@@ -133,7 +139,7 @@ export const updateUserByID = async (user: User, skipRetry?: boolean) => {
     }
     else if(response.status === 401 && !skipRetry){
         await refresh();
-        return updateUserByID(id, true);
+        return updateUserByID(user, true);
     }
     else{
         throw Error;
