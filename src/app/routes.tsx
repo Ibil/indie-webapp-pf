@@ -167,7 +167,7 @@ const protectedRoutes: AppRouteConfig[] = [
     path: '/listProducts/:id',
     title: 'Edit Product',
     sidebarHide: true,
-    allowedRoles: [UserRole.manager, UserRole.admin],
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
   {
     component: TableLocations,

@@ -20,10 +20,9 @@ Forms>
 	- adicionar stock
 	- associar produto a ponto de venda (dropdown)
 
-
+	view product -> make sale
 
 	sale/shooping cart:  -> tornar dinamico
-	
 	- itemlist view(sales view) with add remove
 	- user form
 	- gerar fatura pdf
@@ -31,13 +30,8 @@ Forms>
 
 
 MUST:
-	view read-only products  form :
-	- alternar entre variantes
-	- ver dados
-	- consulta stock
-	- add product -> make sale
 
-Gridt item : add product -> make sale
+
 // adicionar datas de vendas no modelo, na tabela e na view
 sales table: mostrar nomes em vez de ids...
 

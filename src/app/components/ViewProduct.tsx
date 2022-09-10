@@ -82,7 +82,9 @@ export const ViewProduct: React.FC = () => {
           </DescriptionList>
         </FlexItem >
         <FlexItem className={gridItemStyle.align}>
-          <Button variant="primary" onClick={() => alert("ola")}>Add</Button>
+          <Button variant="primary" onClick={() => alert("ola")}>Buy at Cinema</Button>
+          <hr></hr>
+          <Button variant="primary" onClick={() => alert("ola")}>Buy at Expo</Button>
         </FlexItem>
       </Flex>
     </>

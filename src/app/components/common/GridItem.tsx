@@ -15,7 +15,7 @@ export const GridItem: React.FC<GridItemModel> = ({ productId, name, photo, pric
         <img className={imageStyles.thumbnailGrid} src={photo} alt="Product"/>
         <p>{price}</p>
       </a>
-      <Button variant="primary" onClick={() => alert("ola")}>Adicionar</Button>
+   {/*    <Button variant="primary" onClick={() => alert("ola")}>Adicionar</Button> */}
     </FlexItem >
   )
 };
