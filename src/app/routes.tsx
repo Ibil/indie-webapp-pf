@@ -21,6 +21,8 @@ import { useAuth } from './hooks/useAuth';
 import { UserRole } from './model/User';
 import { TableUsers } from './components/tables/TableUsers';
 import { TableLocations } from './components/tables/TableLocations';
+import { LocationForm } from './components/LocationForm';
+import { UserForm } from './components/UserForm';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -164,6 +166,15 @@ const protectedRoutes: AppRouteConfig[] = [
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
+    component: LocationForm,
+    /* exact: true, */
+    label: 'Location',
+    path: '/listLocations/:id',
+    title: 'Location',
+    sidebarHide: true,
+    allowedRoles: [UserRole.manager, UserRole.admin],
+  },
+  {
     component: TableUsers,
     exact: true,
     label: 'Users table',
@@ -171,7 +182,14 @@ const protectedRoutes: AppRouteConfig[] = [
     title: 'Users',
     allowedRoles: [UserRole.admin],
   },
-  
+  {
+    component: UserForm,
+    label: 'User',
+    path: '/listUsers/:id',
+    title: 'User',
+    sidebarHide: true,
+    allowedRoles: [UserRole.admin],
+  },
   {
     component: TableSales,
     exact: true,

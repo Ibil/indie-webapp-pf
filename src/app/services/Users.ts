@@ -100,3 +100,40 @@ export const getUsers = async (skipRetry?: boolean) => {
         throw Error;
     }
 }
+
+export const getUserByID = async (id: string, skipRetry?: boolean) => {
+    const response = await fetch(WEB_API_HOST + "users/" + id + "/fullinfo",
+    {
+        credentials: "include",
+    });
+    if (response.status >= 200 && response.status < 300) {
+        const result = await response.json();
+        return result.data;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return getUserByID(id, true);
+    }
+    else{
+        throw Error;
+    }
+}
+
+export const updateUserByID = async (id: string, skipRetry?: boolean) => {
+    const response = await fetch(WEB_API_HOST + "users/" + id + "/fullinfo",
+    {
+        method: 'PATCH', 
+        credentials: "include",
+    });
+    if (response.status >= 200 && response.status < 300) {
+        const result = await response.json();
+        return result.data;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return updateUserByID(id, true);
+    }
+    else{
+        throw Error;
+    }
+}

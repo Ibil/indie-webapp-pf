@@ -31,7 +31,7 @@ export const buildTableBody = (data, rowIndex, history) =>
         <Td dataLabel={columnNames.role}>{data.role}</Td>
         <Td dataLabel={"Actions"}>
             <TableText>
-                <Button variant="secondary" onClick={() => history.push(`${data.name}`)}>edit</Button>
+                <Button variant="secondary" onClick={() => history.push(`${data.userId}`)}>edit</Button>
             </TableText>
         </Td>
     </Tr>;

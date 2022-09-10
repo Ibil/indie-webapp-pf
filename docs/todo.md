@@ -34,6 +34,8 @@ Forms>
 	- gerar fatura pdf
 	- make sell
 
+	update stock of product in location? see api location to add stock
+
 
 sales table: mostrar nomes em vez de ids...
 

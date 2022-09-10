@@ -22,7 +22,7 @@ export const LoginIlx: React.FunctionComponent = () => {
 
   const { setAuth } = useAuth();
 
-  const { state } = useLocation()
+  const { state } = useLocation();
 
   const [
     redirectToReferrer,
