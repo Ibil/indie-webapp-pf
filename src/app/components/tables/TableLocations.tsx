@@ -29,7 +29,7 @@ export const buildTableBody = (data, rowIndex, history) =>
         <Td dataLabel={columnNames.address}>{data.address}</Td>
         <Td dataLabel={"Actions"}>
             <TableText>
-                <Button variant="secondary" onClick={() => history.push(`${data.locationId}`)}>edit</Button>
+                <Button variant="secondary" onClick={() => history.push(`/listLocations/viewStock/${data.locationId}`)}>View Stock</Button>
             </TableText>
         </Td>
     </Tr>;
@@ -43,7 +43,7 @@ export const TableLocations: React.FunctionComponent = () => {
         getSortableRowValues={getSortableRowValues}
         buildTableHeaders={buildTableHeaders}
         buildTableBody={buildTableBody}
-        getItems={getLocations} // todo
+        getItems={getLocations}
     />
     </>
 }

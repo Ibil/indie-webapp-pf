@@ -12,10 +12,11 @@ Forms>
 	preços em centimos?
 	notification for sucess or error on submit
 
-	
-	locations form
-	create
-	edit products
+
+	consultar products e stock numa location
+
+	3 forms por product type
+	1 stock table
 
 	criar / editar produtos : form 
 	- upload images
@@ -37,7 +38,6 @@ Forms>
 
 
 MUST:
-update stock of product in location? see api location to add stock
 Gridt item : add product -> make sale
 // adicionar datas de vendas no modelo, na tabela e na view
 sales table: mostrar nomes em vez de ids...

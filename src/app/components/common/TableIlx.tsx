@@ -14,11 +14,13 @@ export interface TableData {
   getSortableRowValues: (repo: any) => (string | number)[]; // T
   buildTableHeaders: () => any;
   buildTableBody: (data, rowIndex, history) => any;
-  getItems: () => Promise<any[]>;
+  getItems?: () => Promise<any[]>;
+  tableEntityID?: string;
+  getItemsWithId?: (id: string) => Promise<any[]>;
 }
 
 export const TableIlx: React.FunctionComponent<TableData> = (
-  { getSortableRowValues, buildTableHeaders, buildTableBody, getItems }: TableData) => {
+  { getSortableRowValues, buildTableHeaders, buildTableBody, getItems, tableEntityID, getItemsWithId }: TableData) => {
 
   const history = useHistory();
 
@@ -82,15 +84,28 @@ export const TableIlx: React.FunctionComponent<TableData> = (
 
 
   const reloadItems = async () => {
-    getItems().then(items => {
-      setRowsData(items);
-      setSortedRowsData(items);
-      setLoading(false);
-    })
-      .catch(() => {
-        setHasError(true);
-        setLoading(false)
-      });
+    if (getItems !== undefined) {
+      getItems().then(items => {
+        setRowsData(items);
+        setSortedRowsData(items);
+        setLoading(false);
+      })
+        .catch(() => {
+          setHasError(true);
+          setLoading(false)
+        });
+    }
+    else{
+      getItemsWithId!(tableEntityID!).then(items => {
+        setRowsData(items);
+        setSortedRowsData(items);
+        setLoading(false);
+      })
+        .catch(() => {
+          setHasError(true);
+          setLoading(false)
+        });
+    }
   };
 
   const fillBody = () => {
@@ -119,19 +134,15 @@ export const TableIlx: React.FunctionComponent<TableData> = (
   }, []);
 
   useEffect(() => {
-    console.log("useeffect loading")
     if (rowsData.length > 0) {
-      console.log("set sorted")
-      if(activeSortIndex !== null){
+      if (activeSortIndex !== null) {
         setSortedRowsData(sortRowData());
       }
-      
-      console.log(sortedRowsData)
+
     }
   }, [loading, hasError]);
 
   useEffect(() => {
-    console.log("useeffect rows data")
   }, [rowsData]);
 
   return (

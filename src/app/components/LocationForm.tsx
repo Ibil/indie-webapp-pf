@@ -83,7 +83,7 @@ export const LocationForm: React.FC = () => {
           </FormGroup>
           <ActionGroup>
             <Button variant="primary" onClick={submitForm}>Submit</Button>
-            <Button variant="link" onClick={() => history.goBack()} >Cancel</Button>
+            <Button variant="link" onClick={() => history.goBack()} >Back</Button>
           </ActionGroup>
         </Form>
       );

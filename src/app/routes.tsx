@@ -23,6 +23,8 @@ import { TableUsers } from './components/tables/TableUsers';
 import { TableLocations } from './components/tables/TableLocations';
 import { LocationForm } from './components/LocationForm';
 import { UserForm } from './components/UserForm';
+import { ProductFormDropDown } from './components/ProductFormDropDown';
+import { TableLocationStock } from './components/tables/TableLocationStock';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -149,11 +151,11 @@ const protectedRoutes: AppRouteConfig[] = [
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
-    component: ProductForm,
+    component: ProductFormDropDown,
     exact: true,
-    label: 'Produto',
+    label: 'Edit Product',
     path: '/listProducts/:id',
-    title: 'Product',
+    title: 'Edit Product',
     sidebarHide: true,
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
@@ -163,7 +165,15 @@ const protectedRoutes: AppRouteConfig[] = [
     label: 'Locations table',
     path: '/listLocations/',
     title: 'Locations',
-    allowedRoles: [UserRole.manager, UserRole.admin],
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: TableLocationStock,
+    label: 'Location Stock',
+    path: '/listLocations/viewStock/:id',
+    title: 'Location Stock',
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+    sidebarHide: true
   },
   {
     component: LocationForm,
@@ -171,15 +181,6 @@ const protectedRoutes: AppRouteConfig[] = [
     label: 'Create Location',
     path: '/listLocations/create',
     title: 'Create Location',
-    sidebarHide: true,
-    allowedRoles: [UserRole.manager, UserRole.admin],
-  },
-  {
-    component: LocationForm,
-    /* exact: true, */
-    label: 'Edit Location',
-    path: '/listLocations/:id',
-    title: 'Edit Location',
     sidebarHide: true,
     allowedRoles: [UserRole.manager, UserRole.admin],
   },

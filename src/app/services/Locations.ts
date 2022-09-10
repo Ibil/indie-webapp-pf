@@ -29,7 +29,7 @@ export const getLocationByID = async (id: string, skipRetry?: boolean) => {
     });
     if (response.status >= 200 && response.status < 300) {
         const result = await response.json();
-        return result.data;
+        return result.data.stock;
     }
     else if(response.status === 401 && !skipRetry){
         await refresh();
