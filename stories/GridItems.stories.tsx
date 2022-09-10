@@ -1,12 +1,12 @@
-import React, { ComponentProps } from 'react';
 import { GridItems } from '@app/components/common/GridItems';
-import { Story } from '@storybook/react';
 import { GridItemModel } from "@app/model/GridItemModel";
-import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
-import withMock from 'storybook-addon-mock';
 import { ProductCategory } from '@app/model/Product';
 import { WEB_API_HOST } from '@app/services/common';
 import { PRODUCTS_ENDPOINT } from '@app/services/Products';
+import { Story } from '@storybook/react';
+import React, { ComponentProps } from 'react';
+import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
+import withMock from 'storybook-addon-mock';
 
 //👇 This default export determines where your story goes in the story list
 export default {

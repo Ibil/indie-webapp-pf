@@ -1,22 +1,24 @@
 import "@patternfly/react-core/dist/styles/base.css";
 
-import React, { useEffect, useState } from 'react';
-import { TableComposable, TableText, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
-import { Bullseye, Button, EmptyState, EmptyStateBody, EmptyStateIcon, EmptyStateVariant, Title } from "@patternfly/react-core";
+import { Bullseye, EmptyState, EmptyStateIcon, EmptyStateVariant, Title } from "@patternfly/react-core";
 import { SearchIcon } from "@patternfly/react-icons";
+import { TableComposable, Tbody, Td, Thead, ThProps, Tr } from '@patternfly/react-table';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { LoadingSpinner } from "./LoadingSpinner";
 import { ErrorFetchingData } from "./ErrorFetchingData";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 
 
 export interface TableData {
-  columnNames: any;
   getSortableRowValues: (repo: any) => (string | number)[]; // T
+  buildTableHeaders: () => any;
+  buildTableBody: (data, rowIndex, history) => any;
   getItems: () => Promise<any[]>;
 }
 
-export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, getSortableRowValues, getItems }: TableData) => {
+export const TableIlx: React.FunctionComponent<TableData> = (
+  { getSortableRowValues, buildTableHeaders, buildTableBody, getItems }: TableData) => {
 
   const history = useHistory();
 
@@ -78,29 +80,6 @@ export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, getS
       </Td>
     </Tr>;
 
-  // TODO generate headers dynamically
-  const buildTableHeaders = () =>
-    <Tr>
-      <Th modifier="wrap" >{columnNames.name}</Th>
-      <Th modifier="wrap" >{columnNames.category}</Th>
-      <Th modifier="wrap" >{columnNames.status}</Th>
-      <Th modifier="wrap" >{columnNames.price}</Th>
-      <Th modifier="wrap">{"Actions"}</Th>
-    </Tr>;
-
-  // TODO generate dynamically still todo
-  const buildTableBody = (data, rowIndex) =>
-    <Tr key={rowIndex}>
-      <Td dataLabel={columnNames.name}>{data.name}</Td>
-      <Td dataLabel={columnNames.category}>{data.category}</Td>
-      <Td dataLabel={columnNames.status}>{data.status}</Td>
-      <Td dataLabel={columnNames.price}>{data.price}</Td>
-      <Td dataLabel={"Actions"}>
-        <TableText>
-          <Button variant="secondary" onClick={() => history.push(`${data.name}`)}>edit</Button>
-        </TableText>
-      </Td>
-    </Tr>;
 
   const reloadItems = async () => {
     getItems().then(items => {
@@ -123,7 +102,7 @@ export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, getS
       console.log(sortedRowsData);
       console.log(" force sort");
       /* console.log(sortRowData()); */
-      return sortedRowsData.map((data, rowIndex) => buildTableBody(data, rowIndex));
+      return sortedRowsData.map((data, rowIndex) => buildTableBody(data, rowIndex, history));
     }
     else {
       console.log("empty");

@@ -81,3 +81,22 @@ export const logout = async () => {
     if (response.status >= 200 && response.status < 300) {
     }
 }
+
+
+export const getUsers = async (skipRetry?: boolean) => {
+    const response = await fetch(WEB_API_HOST + "users",
+    {
+        credentials: "include",
+    });
+    if (response.status >= 200 && response.status < 300) {
+        const result = await response.json();
+        return result.data;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return getUsers(true);
+    }
+    else{
+        throw Error;
+    }
+}

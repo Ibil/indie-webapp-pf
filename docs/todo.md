@@ -2,40 +2,18 @@
 
 serviços / comunicacao be fe : 
 - serviços, loading e error msg
-. notification for sucess or error on submit
 
 storyboard
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-preços em centimos?
-preços na grid?
-
-Tables
-	produtos : table
-	- delete
-	. notification for sucess or error on submit
-	- crud, navigation
-
-	users: table
-	- crud, navigation,
-	- user?type
-
-	Pontos de venda : table
-	- CRUD, navigation
-
-	Vendas: table 
-	- list, navigation
-	- gerir período de venda
-	- view (itemlist and buyer form )
-	- gerar fatura pdf
-
 Forms>
-
+	preços em centimos?
 	notification for sucess or error on submit
 
-	user form
+	user form:
+	- user?type
 
 	locations form
 
@@ -57,11 +35,14 @@ Forms>
 	- make sell
 
 
+sales table: mostrar nomes em vez de ids...
 
 MUST:
 Gridt item : add product -> make sale
+// adicionar datas de vendas no modelo, na tabela e na view
 
 Should:
+- gerir período de venda (desactivado)
 https
 cookie persistent && best practices
 grid items : vertical align each item

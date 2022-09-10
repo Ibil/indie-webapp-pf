@@ -19,6 +19,8 @@ import { TableProduct } from './components/tables/TableProduct';
 import { TableSales } from './components/tables/TableSales';
 import { useAuth } from './hooks/useAuth';
 import { UserRole } from './model/User';
+import { TableUsers } from './components/tables/TableUsers';
+import { TableLocations } from './components/tables/TableLocations';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -140,7 +142,7 @@ const protectedRoutes: AppRouteConfig[] = [
     component: TableProduct,
     exact: true,
     label: 'Products table',
-    path: '/editProduct/',
+    path: '/listProducts/',
     title: 'Products',
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
@@ -148,11 +150,28 @@ const protectedRoutes: AppRouteConfig[] = [
     component: ProductForm,
     exact: true,
     label: 'Produto',
-    path: '/editProduct/:id',
+    path: '/listProducts/:id',
     title: 'Product',
     sidebarHide: true,
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
+  {
+    component: TableLocations,
+    exact: true,
+    label: 'Locations table',
+    path: '/listLocations/',
+    title: 'Locations',
+    allowedRoles: [UserRole.manager, UserRole.admin],
+  },
+  {
+    component: TableUsers,
+    exact: true,
+    label: 'Users table',
+    path: '/listUsers/',
+    title: 'Users',
+    allowedRoles: [UserRole.admin],
+  },
+  
   {
     component: TableSales,
     exact: true,

@@ -1,10 +1,10 @@
 import { WEB_API_HOST } from "./common";
 import { refresh } from "./Users";
 
-export const LOCATIONS_ENDPOINT = WEB_API_HOST + `locations`;
+export const SALES_ENDPOINT = WEB_API_HOST + `sales`;
 
-export const getLocations = async (skipRetry?: boolean) => {
-    const response = await fetch(LOCATIONS_ENDPOINT,
+export const getSales = async (skipRetry?: boolean) => {
+    const response = await fetch(SALES_ENDPOINT,
     {
         credentials: "include",
     });
@@ -14,7 +14,7 @@ export const getLocations = async (skipRetry?: boolean) => {
     }
     else if(response.status === 401 && !skipRetry){
         await refresh();
-        return getLocations(true);
+        return getSales(true);
     }
     else{
         throw Error;

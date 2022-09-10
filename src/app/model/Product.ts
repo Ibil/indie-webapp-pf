@@ -33,7 +33,7 @@ export enum ProductCategory{
 }
 
 export enum ProductStatus{
-  TSHIRT = "in stock",
+  IN_STOCK = "in stock",
   LAST_UNITS = "last units",
   SOLD_OUT = "sold out",
   NO_INFO = "no info"

@@ -34,7 +34,7 @@ export const GridItems = (props: props) => {
   const fillGrid = () => {
     if(items !== undefined) {
       return items.map((item) =>
-      <GridItem name={item.name} photo={PANTS_BASE64} price={item.price} /> // fixme photo missing
+      <GridItem name={item.name} photo={PANTS_BASE64} price={(item.price) / 100} /> // fixme photo missing
     )}
     else{
        return <ErrorFetchingData/>;
