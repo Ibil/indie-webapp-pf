@@ -20,8 +20,7 @@ export const GridItems = (props: props) => {
   const [hasError, setHasError] = useState<boolean>(false);
   const [items, setItems] = useState<GridItemModel[]>();
 
-  const reloadProducts = async () => {
-    const content = await 
+  const reloadProducts = async () => { // remove await ! and result saved
     getProducts(props.category).then(items => {
       setItems(items);
       setLoading(false);
@@ -30,7 +29,6 @@ export const GridItems = (props: props) => {
       setHasError(true);
       setLoading(false)
     });
-    
   };
 
   const fillGrid = () => {

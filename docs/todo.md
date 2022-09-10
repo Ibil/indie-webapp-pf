@@ -1,25 +1,21 @@
 
-grids
-
 
 serviços / comunicacao be fe : 
-	addd routes for each product type
 - serviços, loading e error msg
-- (/) enviar o token nos requests
-- (x) refresh token on error x ou logout e redirect
 . notification for sucess or error on submit
 
 storyboard
 
 
-
-
-
 ++++++++++++++++++++++++++++++++++++++++++++++++++
+
+preços em centimos?
+preços na grid?
 
 Tables
 	produtos : table
-	delete
+	- delete
+	. notification for sucess or error on submit
 	- crud, navigation
 
 	users: table
@@ -36,24 +32,29 @@ Tables
 	- gerar fatura pdf
 
 Forms>
-	view read-only products  form :
-	- alternar entre variantes
-	- ver dados
-	- consulta stock
-	- add product -> make sale
+
+	notification for sucess or error on submit
 
 	user form
+
+	locations form
 
 	criar / editar produtos : form 
 	- upload images
 	- adicionar stock
 	- associar produto a ponto de venda (dropdown)
 
-		shooping cart: 
-		- itemlist view(sales view) with add remove
-		- user form
-		- gerar fatura pdf
-		- make sell
+	view read-only products  form :
+	- alternar entre variantes
+	- ver dados
+	- consulta stock
+	- add product -> make sale
+
+	sale/shooping cart: 
+	- itemlist view(sales view) with add remove
+	- user form
+	- gerar fatura pdf
+	- make sell
 
 
 
@@ -65,6 +66,7 @@ https
 cookie persistent && best practices
 grid items : vertical align each item
 pdf nao funca em mobile
+sort table fix
 search
 topbar
 new Date(Date.UTC(...))

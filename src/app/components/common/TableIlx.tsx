@@ -1,28 +1,29 @@
 import "@patternfly/react-core/dist/styles/base.css";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TableComposable, TableText, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
 import { Bullseye, Button, EmptyState, EmptyStateBody, EmptyStateIcon, EmptyStateVariant, Title } from "@patternfly/react-core";
 import { SearchIcon } from "@patternfly/react-icons";
 import { useHistory } from "react-router-dom";
+import { LoadingSpinner } from "./LoadingSpinner";
+import { ErrorFetchingData } from "./ErrorFetchingData";
 
-export interface Repository {
-  name: string;
-  branches: string;
-  prs: string;
-  workspaces: string;
-  price: string;
-}
+
 
 export interface TableData {
   columnNames: any;
-  rowData: any[]; // T
-  getSortableRowValues: (repo: Repository) => (string | number)[]; // T
+  getSortableRowValues: (repo: any) => (string | number)[]; // T
+  getItems: () => Promise<any[]>;
 }
 
-export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, rowData, getSortableRowValues }: TableData) => {
+export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, getSortableRowValues, getItems }: TableData) => {
 
   const history = useHistory();
+
+  const [rowsData, setRowsData] = useState<any[]>([]);
+  const [sortedRowsData, setSortedRowsData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   // Note: if you intend to make columns reorderable, you may instead want to use a non-numeric key
   // as the identifier of the sorted column. See the "Compound expandable" example.
@@ -30,10 +31,10 @@ export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, rowD
 
   const [activeSortDirection, setActiveSortDirection] = React.useState<'asc' | 'desc' | null>(null);
 
-  const sortRowData = (activeSortIndex: number) => {
-    return rowData.sort((a, b) => {
-      const aValue = getSortableRowValues(a)[activeSortIndex];
-      const bValue = getSortableRowValues(b)[activeSortIndex];
+  const sortRowData = () => {
+    return rowsData.sort((a, b) => {
+      const aValue = getSortableRowValues(a)[activeSortIndex as number];
+      const bValue = getSortableRowValues(b)[activeSortIndex as number];
       if (typeof aValue === 'number') {
         // Numeric sort
         if (activeSortDirection === 'asc') {
@@ -63,65 +64,114 @@ export const TableIlx: React.FunctionComponent<TableData> = ({ columnNames, rowD
     columnIndex
   });
 
+  const buildEmptyTableBody = () =>
+    <Tr key={0}>
+      <Td colSpan={8}>
+        <Bullseye>
+          <EmptyState variant={EmptyStateVariant.small}>
+            <EmptyStateIcon icon={SearchIcon} />
+            <Title headingLevel="h2" size="lg">
+              No Data
+            </Title>
+          </EmptyState>
+        </Bullseye>
+      </Td>
+    </Tr>;
 
   // TODO generate headers dynamically
   const buildTableHeaders = () =>
     <Tr>
-      <Th sort={getSortParams(0)}>{columnNames.name}</Th>
-      <Th modifier="wrap">{columnNames.branches}</Th>
-      <Th modifier="wrap" sort={getSortParams(2)} info={{ tooltip: 'More information ' }}>
-        {columnNames.prs}
-      </Th>
-      <Th modifier="wrap">{columnNames.workspaces}</Th>
-      <Th modifier="wrap">{columnNames.price}</Th>
+      <Th modifier="wrap" >{columnNames.name}</Th>
+      <Th modifier="wrap" >{columnNames.category}</Th>
+      <Th modifier="wrap" >{columnNames.status}</Th>
+      <Th modifier="wrap" >{columnNames.price}</Th>
+      <Th modifier="wrap">{"Actions"}</Th>
     </Tr>;
 
-
-  // TODO generate dynamically
+  // TODO generate dynamically still todo
   const buildTableBody = (data, rowIndex) =>
     <Tr key={rowIndex}>
       <Td dataLabel={columnNames.name}>{data.name}</Td>
-      <Td dataLabel={columnNames.branches}>{data.branches}</Td>
-      <Td dataLabel={columnNames.prs}>{data.prs}</Td>
-      <Td dataLabel={columnNames.workspaces}>
+      <Td dataLabel={columnNames.category}>{data.category}</Td>
+      <Td dataLabel={columnNames.status}>{data.status}</Td>
+      <Td dataLabel={columnNames.price}>{data.price}</Td>
+      <Td dataLabel={"Actions"}>
         <TableText>
           <Button variant="secondary" onClick={() => history.push(`${data.name}`)}>edit</Button>
         </TableText>
       </Td>
-      <Td dataLabel={columnNames.price}>{data.price}</Td>
     </Tr>;
 
-  const buildEmptyTableBody = () =>
-    <Td colSpan={8}>
-      <Bullseye>
-        <EmptyState variant={EmptyStateVariant.small}>
-          <EmptyStateIcon icon={SearchIcon} />
-          <Title headingLevel="h2" size="lg">
-            No results found
-          </Title>
-          <EmptyStateBody>Clear all filters and try again.</EmptyStateBody>
-          <Button variant="link">Clear all filters</Button>
-        </EmptyState>
-      </Bullseye>
-    </Td>;
+  const reloadItems = async () => {
+    getItems().then(items => {
+      console.log("items");
+      console.log(items);
+      setRowsData(items);
+      console.log("set sorted items");
+      setSortedRowsData(items);
+      setLoading(false);
+    })
+      .catch(() => {
+        setHasError(true);
+        setLoading(false)
+      });
+  };
 
-
-  // Note that we perform the sort as part of the component's render logic and not in onSort.
-  // We shouldn't store the list of data in state because we don't want to have to sync that with props.
-  let sortedRowData = rowData;
-  if (activeSortIndex !== null) {
-    sortedRowData = sortRowData(activeSortIndex);
+  const fillBody = () => {
+    if (sortedRowsData.length !== 0) {
+      console.log("sortedRowData at fillBody");
+      console.log(sortedRowsData);
+      console.log(" force sort");
+      /* console.log(sortRowData()); */
+      return sortedRowsData.map((data, rowIndex) => buildTableBody(data, rowIndex));
+    }
+    else {
+      console.log("empty");
+      return buildEmptyTableBody();
+    }
   }
 
+  const drawBody = () => {
+    if (loading) {
+      console.log("Spinner");
+      return <LoadingSpinner />;
+    }
+    else if (hasError) {
+      console.log("error");
+      return <ErrorFetchingData />
+    }
+    else {
+      return fillBody();
+    }
+  }
 
-  // In this example, we wrap all but the 1st column and make the 1st and 3rd columns sortable just to demonstrate.
+  useEffect(() => {
+    reloadItems();
+  }, []);
+
+  useEffect(() => {
+    console.log("useeffect loading")
+    if (rowsData.length > 0) {
+      console.log("set sorted")
+      if(activeSortIndex !== null){
+        setSortedRowsData(sortRowData());
+      }
+      
+      console.log(sortedRowsData)
+    }
+  }, [loading, hasError]);
+
+  useEffect(() => {
+    console.log("useeffect rows data")
+  }, [rowsData]);
+
   return (
     <TableComposable aria-label="Sortable table">
       <Thead>
         {buildTableHeaders()}
       </Thead>
       <Tbody>
-        {sortedRowData.length == 0 ? buildEmptyTableBody() : sortedRowData.map((data, rowIndex) => buildTableBody(data, rowIndex))}
+        {drawBody()}
       </Tbody>
     </TableComposable>
   );

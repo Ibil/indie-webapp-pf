@@ -5,7 +5,7 @@ import { refresh } from "./Users";
 const LIMIT = 100;
 export const PRODUCTS_ENDPOINT = WEB_API_HOST + `products?limit=100&page=0&stock=false`;
 
-export const getProducts = async (category: ProductCategory | undefined, skipRetry?: boolean) => {
+export const getProducts = async (category?: ProductCategory, skipRetry?: boolean) => {
     const response = await fetch(`${PRODUCTS_ENDPOINT}${category ? `&category=${category}` : ``}`);
     if (response.status >= 200 && response.status < 300) {
         const result = await response.json();

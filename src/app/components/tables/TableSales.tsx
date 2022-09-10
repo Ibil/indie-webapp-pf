@@ -1,5 +1,7 @@
+import { getLocations } from "@app/services/Locations";
 import React from "react"
-import { Repository, TableIlx } from "./common/TableIlx"
+import { DateTimeRangePickerIlx } from "../common/DateTimeRangePickerIlx";
+import { Repository, TableIlx } from "../common/TableIlx"
 
 
 const rowData: Repository[] = [
@@ -24,10 +26,13 @@ const getSortableRowValues =
         (string | number)[] =>
         [name, branches, prs, workspaces, price];
 
-export const TableProduct: React.FunctionComponent = () => {
-    return <TableIlx
-        columnNames={columnNames}
-        rowData={rowData}
-        getSortableRowValues={getSortableRowValues}
-    />
+export const TableSales: React.FunctionComponent = () => {
+    getLocations()
+    return <>
+        {/* <DateTimeRangePickerIlx /> */}
+        <TableIlx
+            columnNames={columnNames}
+            rowData={rowData}
+            getSortableRowValues={getSortableRowValues} />
+    </>
 }

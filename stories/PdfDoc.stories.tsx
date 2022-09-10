@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { PdfDoc } from '@app/components/PdfDoc';
+import { PdfDoc } from '@app/components/common/PdfDoc';
 import { Story } from '@storybook/react';
 
 //👇 This default export determines where your story goes in the story list

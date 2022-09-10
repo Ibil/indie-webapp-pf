@@ -2,7 +2,7 @@ import { useAuth } from "@app/hooks/useAuth";
 import { logout } from "@app/services/Users";
 import React, { useState, useEffect } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import { LoadingSpinner } from "./common/LoadingSpinner";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 export const LogoutIlx: React.FunctionComponent = () => {
 

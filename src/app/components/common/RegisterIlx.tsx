@@ -1,3 +1,4 @@
+
 import {
   ListItem,
   ListVariant, LoginFooterItem,
@@ -8,33 +9,30 @@ import {
 } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import React, { useEffect, useState } from 'react';
-const brandImg2 = "https://www.patternfly.org/v4/v4/images/brandImgColor2.e2aeff4b068c7bc6bdef555bbda8effb.svg";
-
 
 import logo from '@app/bgimages/indie-logo-r.svg';
 import { useAuth } from '@app/hooks/useAuth';
-import { login } from '@app/services/Users';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
-import { LoadingSpinner } from './common/LoadingSpinner';
+import { registerUser } from '@app/services/Users';
+import { LoadingSpinner } from './LoadingSpinner';
+import { Redirect } from 'react-router-dom';
+import { UserRole } from '@app/model/User';
 
-export const LoginIlx: React.FunctionComponent = () => {
-  const history = useHistory();
+export const RegisterIlx: React.FunctionComponent = () => {
 
   const { setAuth } = useAuth();
-
-  const { state } = useLocation()
 
   const [
     redirectToReferrer,
     setRedirectToReferrer
   ] = React.useState(false)
-  
+
   const [loading, setLoading] = useState<boolean>(false);
   const [showHelperText, setShowHelperText] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [isValidUsername, setIsValidUsername] = React.useState(true);
   const [password, setPassword] = React.useState('');
   const [isValidPassword, setIsValidPassword] = React.useState(true);
+  const [isRememberMeChecked, setIsRememberMeChecked] = React.useState(false);
 
   const handleUsernameChange = (value: string) => {
     setUsername(value);
@@ -44,23 +42,23 @@ export const LoginIlx: React.FunctionComponent = () => {
     setPassword(value);
   };
 
-  const onLoginButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onRegisterButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     setIsValidUsername(!!username);
     setIsValidPassword(!!password);
     setShowHelperText(!username || !password);
     setLoading(true);
-    login(username, password).then(role => {
+    registerUser(username, password).then(() => {
       setLoading(false);
-      setAuth({username, role});
+      setAuth({ username, role: UserRole.basic });
       setRedirectToReferrer(true)
     })
-    .catch(() =>{;
+    .catch(() => {
       setShowHelperText(true)
       setIsValidUsername(false);
       setIsValidPassword(false);
       setLoading(false);
-    } );
+    });
   };
 
   const socialMediaLoginContent = (
@@ -95,7 +93,7 @@ export const LoginIlx: React.FunctionComponent = () => {
 
   const signUpForAccountMessage = (
     <LoginMainFooterBandItem>
-      Need an account? <a onClick={() => history.push("/register")}>Sign up.</a>
+      Need an account? <a href="#">Sign up.</a>
     </LoginMainFooterBandItem>
   );
 
@@ -122,7 +120,7 @@ export const LoginIlx: React.FunctionComponent = () => {
   const loginForm = (
     <LoginForm
       showHelperText={showHelperText}
-      helperText="Invalid login credentials."
+      helperText="Username must have have 4-19 character and begin with a letter. Password must have between 8 and 19 characters"
       helperTextIcon={<ExclamationCircleIcon />}
       usernameLabel="Username"
       usernameValue={username}
@@ -135,8 +133,8 @@ export const LoginIlx: React.FunctionComponent = () => {
       /* rememberMeLabel="Keep me logged in for 30 days."
       isRememberMeChecked={isRememberMeChecked}
       onChangeRememberMe={onRememberMeClick} */
-      onLoginButtonClick={onLoginButtonClick}
-      loginButtonLabel="Log in"
+      onLoginButtonClick={onRegisterButtonClick}
+      loginButtonLabel="Create Account"
     />
   );
 
@@ -152,7 +150,7 @@ export const LoginIlx: React.FunctionComponent = () => {
   }, [loading]);
 
   if (redirectToReferrer === true) {
-    return <Redirect to={state?.from || '/'} />
+    return  <Redirect to={'/'} />
   }
 
   return (
@@ -164,10 +162,10 @@ export const LoginIlx: React.FunctionComponent = () => {
         backgroundImgSrc={images}
         /* footerListItems={listItem} */
         /* textContent="This is placeholder text only. Use this area to place any information or introductory message about your application that may be relevant to users." */
-        loginTitle="Log in to your account"
-        /* loginSubtitle="Enter your single sign-on LDAP credentials." */
-        socialMediaLoginContent={socialMediaLoginContent}
-        signUpForAccountMessage={signUpForAccountMessage}
+        loginTitle="Register a new account"
+      /* loginSubtitle="Enter your single sign-on LDAP credentials." */
+      /* socialMediaLoginContent={socialMediaLoginContent} */
+      /* signUpForAccountMessage={signUpForAccountMessage} */
       /* forgotCredentials={forgotCredentials} */
       >
         {loginForm}

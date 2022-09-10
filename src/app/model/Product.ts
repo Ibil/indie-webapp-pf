@@ -9,6 +9,23 @@ export interface Product {
   tags?: string;
 }
 
+export interface EditProduct {
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  status: ProductStatus;
+  category: ProductCategory;
+  tags?: string;
+  stock: Stock;
+  totalStock: number;
+}
+
+export interface Stock {
+  locationId: string,
+  quantity: number
+}
+
 export enum ProductCategory{
   T_SHIRT = "tshirt",
   BAG = "bag",
