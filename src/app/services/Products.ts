@@ -19,3 +19,20 @@ export const getProducts = async (category?: ProductCategory, skipRetry?: boolea
         throw Error;
     }
 }
+
+export const getProductByIdProtected = async (id: string, skipRetry?: boolean) => {
+    const response = await fetch(`${WEB_API_HOST}products/${id}/protected`,{
+        credentials: "include",
+    });
+    if (response.status >= 200 && response.status < 300) {
+        const result = await response.json();
+        return result.data;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return getProductByIdProtected(id, true);
+    }
+    else{
+        throw Error;
+    }
+}

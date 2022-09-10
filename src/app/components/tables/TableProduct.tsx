@@ -3,6 +3,7 @@ import { getProducts } from "@app/services/Products";
 import { Button } from "@patternfly/react-core";
 import { TableText, Td, Th, Tr } from '@patternfly/react-table';
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { TableIlx } from "../common/TableIlx";
 
 
@@ -29,6 +30,7 @@ export const buildTableHeaders = () =>
         <Th modifier="wrap">{"Actions"}</Th>
     </Tr>;
 
+// see protected route for the push  onClick={() => history.push(`${data.productId}`, { creating: false })}>edit</Button>
 export const buildTableBody = (data, rowIndex, history) =>
     <Tr key={rowIndex}>
         <Td dataLabel={columnNames.name}>{data.name}</Td>
@@ -37,16 +39,20 @@ export const buildTableBody = (data, rowIndex, history) =>
         <Td dataLabel={columnNames.price}>{(data.price) / 100}</Td>
         <Td dataLabel={"Actions"}>
             <TableText>
-                <Button variant="secondary" onClick={() => history.push(`${data.name}`)}>edit</Button>
+                <Button variant="secondary" onClick={() => history.push(`/listProducts/${data.productId}`)}>edit</Button>
             </TableText>
         </Td>
     </Tr>;
 
 export const TableProduct: React.FunctionComponent = () => {
-    return <TableIlx
+    const history = useHistory();
+    return <>
+    <Button variant="primary" onClick={() => history.push(`/listProducts/create`)}>Create Product</Button>
+    <TableIlx
         getSortableRowValues={getSortableRowValues}
         buildTableHeaders={buildTableHeaders}
         buildTableBody={buildTableBody}
         getItems={getProducts}
     />
+    </>
 }

@@ -17,7 +17,7 @@ export interface EditProduct {
   status: ProductStatus;
   category: ProductCategory;
   tags?: string;
-  stock: Stock;
+  stock: Stock[];
   totalStock: number;
 }
 

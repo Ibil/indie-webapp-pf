@@ -13,12 +13,9 @@ Forms>
 	notification for sucess or error on submit
 
 
-	consultar products e stock numa location
-
+	criar / editar produtos : form 
 	3 forms por product type
 	1 stock table
-
-	criar / editar produtos : form 
 	- upload images
 	- adicionar stock
 	- associar produto a ponto de venda (dropdown)

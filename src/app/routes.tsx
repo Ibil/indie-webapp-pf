@@ -23,7 +23,7 @@ import { TableUsers } from './components/tables/TableUsers';
 import { TableLocations } from './components/tables/TableLocations';
 import { LocationForm } from './components/LocationForm';
 import { UserForm } from './components/UserForm';
-import { ProductFormDropDown } from './components/ProductFormDropDown';
+import { ProductFormWithTable } from './components/ProductFormWithTable';
 import { TableLocationStock } from './components/tables/TableLocationStock';
 
 let routeFocusTimer: number;
@@ -151,7 +151,16 @@ const protectedRoutes: AppRouteConfig[] = [
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
-    component: ProductFormDropDown,
+    component: ProductFormWithTable,
+    exact: true,
+    label: 'Create Product',
+    path: '/listProducts/create',
+    title: 'Create Product',
+    sidebarHide: true,
+    allowedRoles: [UserRole.manager, UserRole.admin],
+  },
+  {
+    component: ProductFormWithTable,
     exact: true,
     label: 'Edit Product',
     path: '/listProducts/:id',
@@ -296,7 +305,6 @@ const AppRoutes = (): React.ReactElement => {
   const { auth } = useAuth();
   return (
   <LastLocationProvider>
-
     <Switch>
       {mapRoutes(flattenedRoutes)}
       {mapProtectedRoutes(flattenedProtectedRoutes, auth.role)}
