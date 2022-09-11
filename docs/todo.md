@@ -1,5 +1,4 @@
 
-
 serviços / comunicacao be fe : 
 - serviços, loading e error msg
 
@@ -7,6 +6,8 @@ storyboard
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
+
+guardar shopping cart no contexto ou no redux
 
 Forms>
 	preços em centimos?
@@ -28,7 +29,7 @@ Forms>
 	- gerar fatura pdf
 	- make sell
 
-
+tags ver ficheiro remote
 MUST:
 
 
@@ -55,3 +56,9 @@ date picker in modal and set hour validations if same date
 listar produtos por ponto de venda
 consultar stock por ponto de venda
 reserva
+
+
+Conclusao:
+
+
+Trabalho futuro:

@@ -11,7 +11,7 @@ Whenever deemed appropriate, the component will be added to the main application
 
 
 ## Quick-start
-
+If you have the environment variable "PORT" defined, then define "PORT_WHEN_RUNING_LOCAL_API" = 9000
 
 Must Install [NPM](https://www.npmjs.com/) version "8.1.0" which is guaranteed to be compatible with the version of Patternfly used. We have noticed that other versions have issues when installing the dependencies.
 
@@ -33,7 +33,18 @@ Run the storybook
 npm run storybook
 ```
 
-## Deploy: currently [deployed with Heroku here](https://indielx-pf.herokuapp.com/) 
+## Running with local Back-end
+Environment variables:
+INDIE_WEBAPI_URL = http://localhost:8080/v1/
+PORT = 8080 // used by the api
+ORIGINS = http://localhost:9000
+PORT_WHEN_RUNING_LOCAL_API = 9000 // used by the app
+
+
+npm run start:dev
+
+
+## Deploy: (currently [deployed with Heroku here](https://indielx-pf.herokuapp.com/))
 
 Heroku uses package.json to decide which node and npm version to install.
 For this reason, package.json should have 
@@ -45,7 +56,9 @@ For this reason, package.json should have
 ```
 To make sure that the correct versions are run.
 
+
 ### Steps to deploy at heroku for the first time:
+
 Create an [Heroku](https://www.heroku.com/) account
 ```bash
 npm run build

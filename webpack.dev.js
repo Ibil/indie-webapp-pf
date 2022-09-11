@@ -3,8 +3,7 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const { stylePaths } = require("./stylePaths");
 const HOST = process.env.HOST || "localhost";
-const PORT = process.env.PORT || "9000";
-
+const PORT = process.env.PORT_WHEN_RUNING_LOCAL_API ||  process.env.PORT || "9000";
 module.exports = merge(common('development'), {
   mode: "development",
   devtool: "eval-source-map",
