@@ -12,8 +12,10 @@ Whenever deemed appropriate, the component will be added to the main application
 
 ## Quick-start
 
-Install [Node.JS](https://nodejs.org/en/) version 16.13.0 which is guaranteed to be compatible with the version of Patternfly used.
-Install [NPM](https://www.npmjs.com/)version "8.1.0" for the same reasons as stated above
+
+Must Install [NPM](https://www.npmjs.com/) version "8.1.0" which is guaranteed to be compatible with the version of Patternfly used. We have noticed that other versions have issues when installing the dependencies.
+
+It is recommended to Install [Node.JS](https://nodejs.org/en/) version 16.13.0 which is compatible.
 
 
 Install all dependencies by running
@@ -32,6 +34,16 @@ npm run storybook
 ```
 
 ## Deploy: currently [deployed with Heroku here](https://indielx-pf.herokuapp.com/) 
+
+Heroku uses package.json to decide which node and npm version to install.
+For this reason, package.json should have 
+```
+"engines": {
+    "node": "16.13.0",
+    "npm": "8.1.0"
+  },
+```
+To make sure that the correct versions are run.
 
 ### Steps to deploy at heroku for the first time:
 Create an [Heroku](https://www.heroku.com/) account
