@@ -97,6 +97,13 @@ export const ProductFormWithTable: React.FC = () => {
     console.log(itemEditing.stock);
   }, [loading, hasError, itemEditing]);
 
+  
+  const mapStockWithProductID = () =>
+    itemEditing.stock.map(stock => {
+      return { ...stock, productId: itemEditing.productId }
+    });
+
+
 
   const drawForm = () => {
     if (loading) {
@@ -108,33 +115,33 @@ export const ProductFormWithTable: React.FC = () => {
     else {
       return (
         <>
-        <Form>
-          <FormGroup label="name" isRequired fieldId="simple-form-name-01">
-            <TextInput
-              isRequired
-              type="text"
-              id="simple-form-name-01"
-              name="simple-form-name-01"
-              value={itemEditing.name}
-              onChange={handledressChange}
-            />
-          </FormGroup>
-          <FormGroup  label="name" isRequired fieldId="simple-form-name-01">
-            <TextInput
-              isRequired
-              type="text"
-              id="simple-form-name-01"
-              name="simple-form-name-01"
-              value={itemEditing.name}
-              onChange={handledressChange}
-            />
-          </FormGroup>
-          <ActionGroup>
-            <Button variant="primary" onClick={submitForm}>Submit</Button>
-            <Button variant="link" onClick={() => history.goBack()} >Go back</Button>
-          </ActionGroup>
-        </Form>
-        <TableProductStockByLocation stocks={itemEditing.stock} />
+          <Form>
+            <FormGroup label="name" isRequired fieldId="simple-form-name-01">
+              <TextInput
+                isRequired
+                type="text"
+                id="simple-form-name-01"
+                name="simple-form-name-01"
+                value={itemEditing.name}
+                onChange={handledressChange}
+              />
+            </FormGroup>
+            <FormGroup label="name" isRequired fieldId="simple-form-name-01">
+              <TextInput
+                isRequired
+                type="text"
+                id="simple-form-name-01"
+                name="simple-form-name-01"
+                value={itemEditing.name}
+                onChange={handledressChange}
+              />
+            </FormGroup>
+            <ActionGroup>
+              <Button variant="primary" onClick={submitForm}>Submit</Button>
+              <Button variant="link" onClick={() => history.goBack()} >Go back</Button>
+            </ActionGroup>
+          </Form>
+          <TableProductStockByLocation stocks={mapStockWithProductID()} />
         </>
       );
     }

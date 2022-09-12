@@ -1,4 +1,4 @@
-import { ProductCategory } from "@app/model/Product";
+import { ProductCategory, StockWithProductID } from "@app/model/Product";
 import { WEB_API_HOST } from "./common";
 import { refresh } from "./Users";
 
@@ -48,6 +48,39 @@ export const getProductByIdProtected = async (id: string, skipRetry?: boolean) =
     else if(response.status === 401 && !skipRetry){
         await refresh();
         return getProductByIdProtected(id, true);
+    }
+    else{
+        throw Error;
+    }
+}
+
+
+export const updateProductStock = async (stock: StockWithProductID, skipRetry?: boolean) => {
+
+    const myHeaders = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    })
+    const response = await fetch(`${WEB_API_HOST}products/${stock.productId}/stock`,
+    {
+        method: 'PATCH', 
+        headers: myHeaders,
+        credentials: "include",
+        body: JSON.stringify({
+            list: [
+                {
+                    locationId: stock.locationId,
+                    quantity: stock.quantity
+                }
+            ]
+        })
+    });
+    if (response.status >= 200 && response.status < 300) {
+        return;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return updateProductStock(stock, true);
     }
     else{
         throw Error;

@@ -26,6 +26,12 @@ export interface Stock {
   quantity: number
 }
 
+export interface StockWithProductID {
+  productId: string,
+  locationId: string,
+  quantity: number
+}
+
 export enum ProductCategory{
   T_SHIRT = "tshirt",
   BAG = "bag",

@@ -4,10 +4,22 @@ serviços / comunicacao be fe :
 
 storyboard
 
+history.push(url, obj)
+
+location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 guardar shopping cart no contexto ou no redux
+
+edit stock quantitys
+por o product edit a mostrar os atributos de cada category
+sell : butao buy depende de role
+melhorar ecran de sell
+sles table mostrad dados em vez de id
+
+credenciais
+
 
 Forms>
 	preços em centimos?
@@ -16,6 +28,7 @@ Forms>
 
 	criar / editar produtos : form 
 	3 forms por product type : falta por generico
+		falta editar os fields
 	1 stock table : falta editar o stock
 	- upload images
 	- adicionar stock

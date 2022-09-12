@@ -16,3 +16,13 @@ export const isSameDate = (date1: Date, date2: Date) =>
     const parts = path.split('/');
     return parts[parts.length -1];
   }
+
+  export const getProductIDFromPath = (path: string) => {
+    const parts = path.split('/');
+    return parts[parts.length -2];
+  }
+
+  export const getLocationIDFromPath = (path: string) => {
+    const parts = path.split('/');
+    return parts[parts.length -1];
+  }

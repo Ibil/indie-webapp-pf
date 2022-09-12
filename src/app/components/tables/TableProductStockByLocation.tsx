@@ -1,11 +1,7 @@
 import { Stock } from "@app/model/Product";
-import { ProductForLocation, SellLocation } from "@app/model/SellLocation";
-import { getLocationByID, getLocations } from "@app/services/Locations";
-import { getIdFromPath } from "@app/utils/utils";
 import { Button } from "@patternfly/react-core";
 import { TableText, Td, Th, Tr } from '@patternfly/react-table';
 import React from "react";
-import { useHistory, useLocation } from "react-router-dom";
 import { TableIlx } from "../common/TableIlx";
 
 
@@ -28,16 +24,19 @@ export const buildTableHeaders = () =>
         {/* <Th modifier="wrap">{"Actions"}</Th> */}
     </Tr>;
 
-export const buildTableBody = (data, rowIndex, history) =>
-    <Tr key={rowIndex}>
+
+
+export const buildTableBody = (data, rowIndex, history) => {
+    return <Tr key={rowIndex}>
         <Td dataLabel={columnNames.locationId}>{data.locationId}</Td>
         <Td dataLabel={columnNames.quantity}>{data.quantity}</Td>
-        {/* <Td dataLabel={"Actions"}>
+        <Td dataLabel={"Actions"}>
             <TableText>
-                <Button variant="secondary" onClick={() => history.push(`${data.locationId}`)}>View Stock</Button>
+                <Button variant="secondary" onClick={() => history.push(`/listProducts/${data.productId}/${data.locationId}`, { quantity: data.quantity })}>Edit Stock</Button>
             </TableText>
-        </Td> */}
-    </Tr>;
+        </Td> 
+    </Tr>
+};
 
 export interface StocksData {
     stocks: Stock[];

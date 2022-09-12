@@ -26,6 +26,7 @@ import { UserForm } from './components/UserForm';
 import { ProductFormWithTable } from './components/ProductFormWithTable';
 import { TableLocationStock } from './components/tables/TableLocationStock';
 import { ViewProduct } from './components/ViewProduct';
+import { StockForm } from './components/StockForm';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -166,6 +167,15 @@ const protectedRoutes: AppRouteConfig[] = [
     label: 'Edit Product',
     path: '/listProducts/:id',
     title: 'Edit Product',
+    sidebarHide: true,
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: StockForm,
+    exact: true,
+    label: 'Edit Stock',
+    path: '/listProducts/:productID/:locationID',
+    title: 'Edit Stock',
     sidebarHide: true,
     allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
