@@ -41,6 +41,6 @@ export const TableUsers: React.FunctionComponent = () => {
         getSortableRowValues={getSortableRowValues}
         buildTableHeaders={buildTableHeaders}
         buildTableBody={buildTableBody}
-        getItems={getUsers} // TODO
+        getItems={getUsers}
     />
 }

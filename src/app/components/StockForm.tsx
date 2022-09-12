@@ -1,7 +1,7 @@
 
-import { EditProduct, ProductCategory, ProductStatus, StockWithProductID } from '@app/model/Product';
-import { getProductByIdProtected, updateProductStock } from '@app/services/Products';
-import { getIdFromPath, getLocationIDFromPath, getProductIDFromPath } from '@app/utils/utils';
+import { StockWithProductID } from '@app/model/Product';
+import { updateProductStock } from '@app/services/Products';
+import { getLocationIDFromPath, getProductIDFromPath } from '@app/utils/utils';
 import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -29,8 +29,6 @@ export const StockForm: React.FC = () => {
     const handledressChange = quantity => {
         setItemEditing({ ...itemEditing, quantity });
     };
-
-    const isCreating = getIdFromPath(location.pathname) == 'create';
 
     const submitForm = e => {
         e.preventDefault();

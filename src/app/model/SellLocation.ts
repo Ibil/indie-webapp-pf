@@ -13,3 +13,8 @@ export interface ProductForLocation {
     category: ProductCategory;
     quantity: number;
 }
+
+export interface LocationWithoutStock {
+    locationId: string,
+    address: string,
+}

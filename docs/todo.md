@@ -10,15 +10,20 @@ location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-guardar shopping cart no contexto ou no redux
 
-edit stock quantitys
+create products broken
 por o product edit a mostrar os atributos de cada category
+
 sell : butao buy depende de role
+guardar shopping cart no contexto ou no redux
 melhorar ecran de sell
-sles table mostrad dados em vez de id
 
 credenciais
+
+botao back para mobile em todo o lado
+sles table mostrad dados em vez de id
+
+
 
 
 Forms>

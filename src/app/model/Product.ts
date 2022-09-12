@@ -22,6 +22,7 @@ export interface EditProduct {
 }
 
 export interface Stock {
+  productId?: string,
   locationId: string,
   quantity: number
 }

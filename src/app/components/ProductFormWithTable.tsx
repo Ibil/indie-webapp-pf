@@ -1,7 +1,7 @@
 
-import { EditProduct, ProductCategory, ProductStatus } from '@app/model/Product';
-import { SellLocation } from '@app/model/SellLocation';
-import { createLocation, getLocationByID } from '@app/services/Locations';
+import { EditProduct, ProductCategory, ProductStatus, Stock } from '@app/model/Product';
+import { LocationWithoutStock } from '@app/model/SellLocation';
+import { getLocations } from '@app/services/Locations';
 import { getProductByIdProtected } from '@app/services/Products';
 import { getIdFromPath } from '@app/utils/utils';
 import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from './common/ErrorFetchingData';
 import { LoadingSpinner } from './common/LoadingSpinner';
-import { DropDown } from './tables/DropDown';
 import { TableProductStockByLocation } from './tables/TableProductStockByLocation';
 
 
@@ -73,17 +72,38 @@ export const ProductFormWithTable: React.FC = () => {
       } */
   }
 
+  const addLocationToProductStock = (productData: EditProduct, locations: LocationWithoutStock[]) => {
+    console.log("stock")
+    console.log(productData.stock)
+    console.log("locations")
+    console.log(locations)
+    const stockWithAllLocations: Stock[] = locations.map(location => {
+      const stockFound = productData.stock.find(stockEl => stockEl.locationId == location.locationId);
+
+      if (stockFound) {
+        return stockFound;
+      }
+      else {
+        return {
+          locationId: location.locationId,
+          quantity: 0
+        }
+      }
+    });
+    setItemEditing({ ...productData, stock: stockWithAllLocations })
+  }
+
+  const getNecessaryEditData = async () => {
+    const productData: EditProduct = await getProductByIdProtected(getIdFromPath(location.pathname));
+    const locations = await getLocations();
+    addLocationToProductStock(productData, locations);
+  }
+
   useEffect(() => {
     if (!isCreating) {
-      getProductByIdProtected(getIdFromPath(location.pathname))
-        .then(data => {
-          console.log("data");
-          console.log(data);
-          setItemEditing(data);
+      getNecessaryEditData()
+        .then(() => {
           setLoading(false);
-          console.log("stock");
-          console.log(itemEditing.stock);
-          // TODO get products and merge all with stock
         })
         .catch(() => {
           setHasError(true);
@@ -97,11 +117,16 @@ export const ProductFormWithTable: React.FC = () => {
     console.log(itemEditing.stock);
   }, [loading, hasError, itemEditing]);
 
-  
-  const mapStockWithProductID = () =>
-    itemEditing.stock.map(stock => {
+
+  const mapStockWithProductID = () => {
+    console.log("stocks when mapping to table");
+    const result = itemEditing.stock.map(stock => {
       return { ...stock, productId: itemEditing.productId }
     });
+    console.log(result);
+    return result;
+  }
+   
 
 
 
