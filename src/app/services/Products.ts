@@ -37,6 +37,7 @@ export const getProductById = async (id: string, skipRetry?: boolean) => {
     }
 }
 
+
 export const getProductByIdProtected = async (id: string, skipRetry?: boolean) => {
     const response = await fetch(`${WEB_API_HOST}products/${id}/protected`,{
         credentials: "include",
@@ -48,6 +49,56 @@ export const getProductByIdProtected = async (id: string, skipRetry?: boolean) =
     else if(response.status === 401 && !skipRetry){
         await refresh();
         return getProductByIdProtected(id, true);
+    }
+    else{
+        throw Error;
+    }
+}
+
+export const createProduct = async (product, skipRetry?: boolean) => {
+
+    const myHeaders = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    })
+    const response = await fetch(`${WEB_API_HOST}products/${product.category}`,
+    {
+        method: 'POST', 
+        headers: myHeaders,
+        credentials: "include",
+        body: JSON.stringify(product)
+    });
+    if (response.status >= 200 && response.status < 300) {
+        return;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return createProduct(product, true);
+    }
+    else{
+        throw Error;
+    }
+}
+
+export const updateProduct = async (product, skipRetry?: boolean) => {
+
+    const myHeaders = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    })
+    const response = await fetch(`${WEB_API_HOST}products/${product.productId}/protected`,
+    {
+        method: 'PATCH', 
+        headers: myHeaders,
+        credentials: "include",
+        body: JSON.stringify(product)
+    });
+    if (response.status >= 200 && response.status < 300) {
+        return;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return updateProduct(product, true);
     }
     else{
         throw Error;

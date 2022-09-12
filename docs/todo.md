@@ -10,10 +10,8 @@ location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-location form -> redirect otuside if ok
 
-por o product edit a mostrar os atributos de cada category
-create products broken
+product form diferente por categoria.
 
 
 sell : butao buy depende de role
@@ -21,6 +19,7 @@ guardar shopping cart no contexto ou no redux
 melhorar ecran de sell
 
 view products nao mostram info especifica por categoria
+tags ver ficheiro remote
 credenciais
 
 botao back para mobile em todo o lado
@@ -48,7 +47,7 @@ Forms>
 	- gerar fatura pdf
 	- make sell
 
-tags ver ficheiro remote
+
 MUST:
 
 

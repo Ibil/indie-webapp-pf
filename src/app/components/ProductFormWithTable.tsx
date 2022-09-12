@@ -2,12 +2,12 @@
 import { EditProduct, ProductCategory, ProductStatus, Stock } from '@app/model/Product';
 import { LocationWithoutStock } from '@app/model/SellLocation';
 import { getLocations } from '@app/services/Locations';
-import { getProductByIdProtected } from '@app/services/Products';
+import { createProduct, getProductByIdProtected, updateProduct } from '@app/services/Products';
 import { getIdFromPath } from '@app/utils/utils';
 import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from './common/ErrorFetchingData';
 import { LoadingSpinner } from './common/LoadingSpinner';
 import { TableProductStockByLocation } from './tables/TableProductStockByLocation';
@@ -17,13 +17,15 @@ import { TableProductStockByLocation } from './tables/TableProductStockByLocatio
 export const ProductFormWithTable: React.FC = () => {
 
   const history = useHistory();
-
-  /*   const [isCreating, setIsCreating] = useState<boolean>(creating == true); */
-
-  const [loading, setLoading] = useState<boolean>(true);
-  const [hasError, setHasError] = useState<boolean>(false);
-
   const location = useLocation();
+
+  const [isCreating, setIsCreating] = useState<boolean>((getIdFromPath(location.pathname) == 'create'));
+
+  const [loading, setLoading] = useState<boolean>(!isCreating);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
+
+
 
   const [itemEditing, setItemEditing] = useState<EditProduct>({
     productId: "",
@@ -41,26 +43,13 @@ export const ProductFormWithTable: React.FC = () => {
     setItemEditing({ ...itemEditing, address });
   };
 
-  // TODO concat stock locations with all locations
-
-  const isCreating = getIdFromPath(location.pathname) == 'create';
-
+  /*   const isCreating = getIdFromPath(location.pathname) == 'create';
+   */
   const submitForm = e => {
     e.preventDefault();
     setLoading(true)
     if (isCreating) {
-      /*      createLocation(itemEditing)
-            .then(() => {
-              setHasError(false);
-              setLoading(false);
-            })
-            .catch(() => {
-              setHasError(true);
-              setLoading(false)
-            }) */
-    }
-    /*   else{   TODO this will be another button
-        editLocation(itemEditing)
+      createProduct(itemEditing)
         .then(() => {
           setHasError(false);
           setLoading(false);
@@ -69,7 +58,18 @@ export const ProductFormWithTable: React.FC = () => {
           setHasError(true);
           setLoading(false)
         })
-      } */
+    }
+    else {
+      updateProduct(itemEditing)
+        .then(() => {
+          setHasError(false);
+          setLoading(false);
+        })
+        .catch(() => {
+          setHasError(true);
+          setLoading(false)
+        })
+    }
   }
 
   const addLocationToProductStock = (productData: EditProduct, locations: LocationWithoutStock[]) => {
@@ -126,16 +126,16 @@ export const ProductFormWithTable: React.FC = () => {
     console.log(result);
     return result;
   }
-   
-
-
 
   const drawForm = () => {
-    if (loading) {
+    if (loading && !hasSubmitted) {
       return <LoadingSpinner />;
     }
     else if (hasError) {
       return <ErrorFetchingData />
+    }
+    else if (hasSubmitted) {
+      return <Redirect to={'/listProducts/'} />
     }
     else {
       return (
@@ -166,11 +166,12 @@ export const ProductFormWithTable: React.FC = () => {
               <Button variant="link" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
           </Form>
-          <TableProductStockByLocation stocks={mapStockWithProductID()} />
+          {
+            isCreating ? undefined : <TableProductStockByLocation stocks={mapStockWithProductID()} />
+          }
         </>
       );
     }
   }
-
   return drawForm();
 }
