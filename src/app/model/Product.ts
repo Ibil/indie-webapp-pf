@@ -15,6 +15,51 @@ export interface EditProduct {
   description: string;
   price: number;
   status: ProductStatus;
+  category?: ProductCategory;
+  tags?: string;
+  stock: Stock[];
+  totalStock: number;
+}
+
+export interface EditProductTshirt {
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  colour: string;
+  size: string;
+  design: string;
+  status: ProductStatus;
+  category: ProductCategory;
+  tags?: any;
+  stock: Stock[];
+  totalStock: number;
+}
+
+export interface EditProductBook {
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  title: string;
+  author: string;
+  publisher: string;
+  year: string;
+  status: ProductStatus;
+  category: ProductCategory;
+  tags?: string;
+  stock: Stock[];
+  totalStock: number;
+}
+
+export interface EditProductBag {
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  colour: BagColour;
+  design: string;
+  status: ProductStatus;
   category: ProductCategory;
   tags?: string;
   stock: Stock[];
@@ -44,4 +89,29 @@ export enum ProductStatus{
   LAST_UNITS = "last units",
   SOLD_OUT = "sold out",
   NO_INFO = "no info"
+}
+
+export enum Size{
+  kid= 'kid',
+  xs = 'xs',
+  s='s',
+  m='m',
+  l='l',
+  xl='xl'
+}
+export enum TshirtColour{
+  red='red',
+  green='green',
+  blue='blue',
+  yellow='yellow',
+  orange='orange',
+  purple='purple'
+}
+
+export enum BagColour{
+  red='red',
+  green='green',
+  blue='blue',
+  white='white',
+  black='black'
 }

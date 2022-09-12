@@ -1,20 +1,18 @@
 import { Product, ProductCategory, ProductStatus } from '@app/model/Product';
 import { getProductById } from '@app/services/Products';
 import { getIdFromPath } from '@app/utils/utils';
-import { Button, DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm, Flex, FlexItem } from '@patternfly/react-core';
+import { DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm, Flex, FlexItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
-import gridItemStyle from './griditemview.module.css';
-import imageStyles from './griditemview.module.css';
+import { PANTS_BASE64 } from 'src/mockData';
+import { default as gridItemStyle, default as imageStyles } from './griditemview.module.css';
 
 
 
 export const ViewProduct: React.FC = () => {
 
-  const history = useHistory();
   const location = useLocation();
 
   const [loading, setLoading] = useState<boolean>(true);

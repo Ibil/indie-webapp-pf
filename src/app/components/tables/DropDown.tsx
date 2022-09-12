@@ -5,6 +5,7 @@ export interface DropDownInterface {
     startingValue: any;
     values: DropDownData[];
     getDropdownValue: (value) => void;
+    disabled?: boolean;
 }
 
 export interface DropDownData {
@@ -13,7 +14,7 @@ export interface DropDownData {
 }
 
 export const DropDown: React.FC<DropDownInterface> = (
-    { startingValue, values, getDropdownValue}: DropDownInterface) => {
+    { startingValue, values, getDropdownValue, disabled}: DropDownInterface) => {
     const [options, setOptions] = useState<any>(values);
     const [dropDownState, setState] = useState<any>({
         isOpen: false,
@@ -54,7 +55,6 @@ export const DropDown: React.FC<DropDownInterface> = (
     return (
         <div>
             <span id={'select-descriptions-title'}>
-                Title
             </span>
             <Select
                 variant={SelectVariant.single}
@@ -65,7 +65,7 @@ export const DropDown: React.FC<DropDownInterface> = (
                 selections={dropDownState.selected}
                 isOpen={dropDownState.isOpen}
                 aria-labelledby={'select-descriptions-title'}
-                isDisabled={false}
+                isDisabled={disabled}
             >
                 {options.map((option, index) => {
                     return (

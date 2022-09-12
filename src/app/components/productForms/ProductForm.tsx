@@ -4,7 +4,7 @@ import { HelpIcon } from '@patternfly/react-icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { saveProduct } from '@app/services/ProductForm';
-import { ImageUpload } from './common/ImageUpload';
+import { ImageUpload } from '../common/ImageUpload';
 
 
 export interface Product {

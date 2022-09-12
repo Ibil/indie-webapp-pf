@@ -5,21 +5,22 @@ serviços / comunicacao be fe :
 storyboard
 
 history.push(url, obj)
-
 location.state
+// see protected route for the push  onClick={() => history.push(`${data.productId}`, { creating: false })}>edit</Button>
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-product form diferente por categoria.
+api bug: book creates bag
 
 
 sell : butao buy depende de role
 guardar shopping cart no contexto ou no redux
 melhorar ecran de sell
 
-view products nao mostram info especifica por categoria
-tags ver ficheiro remote
+<tags for form(create/edit) and view>
+view products nao mostram info especifica por categoria <same reason below>
+missing disabled fields need to be mapped to tags 
+product form e view : tags unique : tags ver ficheiro remote
 credenciais
 
 botao back para mobile em todo o lado

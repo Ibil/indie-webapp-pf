@@ -61,7 +61,7 @@ export const createProduct = async (product, skipRetry?: boolean) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
     })
-    const response = await fetch(`${WEB_API_HOST}products/${product.category}`,
+    const response = await fetch(`${WEB_API_HOST}products/${product.category}s`,
     {
         method: 'POST', 
         headers: myHeaders,

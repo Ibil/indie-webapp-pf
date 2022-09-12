@@ -12,7 +12,7 @@ import { GridTshirt } from './components/grids/GridTShirt';
 import { LoginIlx } from './components/common/LoginIlx';
 import { LogoutIlx } from './components/common/LogoutIlx';
 import { PdfDoc } from './components/common/PdfDoc';
-import { ProductForm } from './components/ProductForm';
+import { ProductForm } from './components/productForms/ProductForm';
 import { RegisterIlx } from './components/common/RegisterIlx';
 import { SaleList } from './components/SaleList';
 import { TableProduct } from './components/tables/TableProduct';
@@ -23,10 +23,12 @@ import { TableUsers } from './components/tables/TableUsers';
 import { TableLocations } from './components/tables/TableLocations';
 import { LocationForm } from './components/LocationForm';
 import { UserForm } from './components/UserForm';
-import { ProductFormWithTable } from './components/ProductFormWithTable';
+import { TshirtProductForm } from './components/productForms/TshirtProductForm';
 import { TableLocationStock } from './components/tables/TableLocationStock';
 import { ViewProduct } from './components/ViewProduct';
 import { StockForm } from './components/StockForm';
+import { BookProductForm } from './components/productForms/BookProductForm';
+import { BagProductForm } from './components/productForms/BagProductForm';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -153,20 +155,56 @@ const protectedRoutes: AppRouteConfig[] = [
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
-    component: ProductFormWithTable,
+    component: TshirtProductForm,
     exact: true,
-    label: 'Create Product',
-    path: '/listProducts/create',
-    title: 'Create Product',
+    label: 'Create T-shirt',
+    path: '/listProducts/tshirt/create',
+    title: 'Create T-shirt',
     sidebarHide: true,
     allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
-    component: ProductFormWithTable,
+    component: BookProductForm,
     exact: true,
-    label: 'Edit Product',
-    path: '/listProducts/:id',
-    title: 'Edit Product',
+    label: 'Create Book',
+    path: '/listProducts/book/create',
+    title: 'Edit Book',
+    sidebarHide: true,
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: BagProductForm,
+    exact: true,
+    label: 'Edit Bag',
+    path: '/listProducts/bag/create',
+    title: 'Edit Bag',
+    sidebarHide: true,
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: TshirtProductForm,
+    exact: true,
+    label: 'Edit Tshirt',
+    path: '/listProducts/tshirt/:id',
+    title: 'Edit Tshirt',
+    sidebarHide: true,
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: BookProductForm,
+    exact: true,
+    label: 'Edit Book',
+    path: '/listProducts/book/:id',
+    title: 'Edit Book',
+    sidebarHide: true,
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
+    component: BagProductForm,
+    exact: true,
+    label: 'Edit Bag',
+    path: '/listProducts/bag/:id',
+    title: 'Edit Bag',
     sidebarHide: true,
     allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },

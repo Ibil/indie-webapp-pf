@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
-import { ProductForm } from '@app/components/ProductForm';
+import { ProductForm } from '@app/components/productForms/ProductForm';
 
 //👇 This default export determines where your story goes in the story list
 export default {

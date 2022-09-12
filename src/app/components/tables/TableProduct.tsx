@@ -1,6 +1,6 @@
 import { Product } from "@app/model/Product";
 import { getProducts } from "@app/services/Products";
-import { Button } from "@patternfly/react-core";
+import { ActionGroup, Button, Form } from "@patternfly/react-core";
 import { TableText, Td, Th, Tr } from '@patternfly/react-table';
 import React from "react";
 import { useHistory } from "react-router-dom";
@@ -30,7 +30,7 @@ export const buildTableHeaders = () =>
         <Th modifier="wrap">{"Actions"}</Th>
     </Tr>;
 
-// see protected route for the push  onClick={() => history.push(`${data.productId}`, { creating: false })}>edit</Button>
+
 export const buildTableBody = (data, rowIndex, history) =>
     <Tr key={rowIndex}>
         <Td dataLabel={columnNames.name}>{data.name}</Td>
@@ -39,7 +39,7 @@ export const buildTableBody = (data, rowIndex, history) =>
         <Td dataLabel={columnNames.price}>{(data.price) / 100}</Td>
         <Td dataLabel={"Actions"}>
             <TableText>
-                <Button variant="secondary" onClick={() => history.push(`/listProducts/${data.productId}`)}>edit</Button>
+                <Button variant="secondary" onClick={() => history.push(`/listProducts/${data.category}/${data.productId}`)}>edit</Button>
             </TableText>
         </Td>
     </Tr>;
@@ -47,12 +47,18 @@ export const buildTableBody = (data, rowIndex, history) =>
 export const TableProduct: React.FunctionComponent = () => {
     const history = useHistory();
     return <>
-    <Button variant="primary" onClick={() => history.push(`/listProducts/create`)}>Create Product</Button>
-    <TableIlx
-        getSortableRowValues={getSortableRowValues}
-        buildTableHeaders={buildTableHeaders}
-        buildTableBody={buildTableBody}
-        getItems={getProducts}
-    />
+        <Form>
+            <ActionGroup>
+                <Button variant="primary" onClick={() => history.push(`/listProducts/tshirt/create`)}>Create T-Shirt</Button>
+                <Button variant="primary" onClick={() => history.push(`/listProducts/bag/create`)}>Create Bag</Button>
+                <Button variant="primary" onClick={() => history.push(`/listProducts/book/create`)}>Create Book</Button>
+            </ActionGroup>
+        </Form>
+        <TableIlx
+            getSortableRowValues={getSortableRowValues}
+            buildTableHeaders={buildTableHeaders}
+            buildTableBody={buildTableBody}
+            getItems={getProducts}
+        />
     </>
 }
