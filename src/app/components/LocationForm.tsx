@@ -1,11 +1,10 @@
 
 import { SellLocation } from '@app/model/SellLocation';
 import { createLocation } from '@app/services/Locations';
-import { getIdFromPath } from '@app/utils/utils';
 import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from './common/ErrorFetchingData';
 import { LoadingSpinner } from './common/LoadingSpinner';
 
@@ -15,6 +14,7 @@ export const LocationForm: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
   const location = useLocation();
 
@@ -36,6 +36,7 @@ export const LocationForm: React.FC = () => {
       .then(() => {
         setHasError(false);
         setLoading(false);
+        setHasSubmitted(true);
       })
       .catch(() => {
         setHasError(true);
@@ -62,11 +63,14 @@ export const LocationForm: React.FC = () => {
 
 
   const drawForm = () => {
-    if (loading) {
+    if (loading && !hasSubmitted) {
       return <LoadingSpinner />;
     }
     else if (hasError) {
       return <ErrorFetchingData />
+    }
+    else if (hasSubmitted) {
+      return <Redirect to={'/listLocations'} />
     }
     else {
       return (

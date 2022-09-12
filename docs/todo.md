@@ -10,20 +10,21 @@ location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
+location form -> redirect otuside if ok
 
-create products broken
 por o product edit a mostrar os atributos de cada category
+create products broken
+
 
 sell : butao buy depende de role
 guardar shopping cart no contexto ou no redux
 melhorar ecran de sell
 
+view products nao mostram info especifica por categoria
 credenciais
 
 botao back para mobile em todo o lado
 sles table mostrad dados em vez de id
-
-
 
 
 Forms>
