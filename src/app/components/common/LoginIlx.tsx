@@ -150,7 +150,7 @@ export const LoginIlx: React.FunctionComponent = () => {
   }, [loading]);
 
   if (redirectToReferrer === true) {
-    return <Redirect to={state?.from || '/products'} />
+    return <Redirect to={state?.from || '/'} />
   }
 
   return (

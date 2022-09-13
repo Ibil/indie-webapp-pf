@@ -29,7 +29,24 @@ export const getLastPathString = (path: string) => {
   return parts[parts.length - 1];
 }
 
-export const removeIdFromPath = (path: string) => {
+export const getPushPathForGrid = (path: string) => {
+  const parts = path.split('/');
+  console.log(path);
+  console.log(parts);
+  if (path == undefined || path == '/') {
+    return "/products";
+  }
+  else {
+    return parts[parts.length - 1];
+  }
+
+}
+
+export const removeIdFromPathForGrid = (path: string) => {
+  console.log(path);
+  if(path.includes("product")){
+    return ""
+  }
   return path.split('/').slice(0, -1).join('/');
 }
 

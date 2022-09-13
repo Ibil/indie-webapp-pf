@@ -4,7 +4,7 @@ import { LocationWithoutStock } from '@app/model/SellLocation';
 import { UserRole } from '@app/model/User';
 import { getLocations } from '@app/services/Locations';
 import { getProductById, getProductByIdProtected } from '@app/services/Products';
-import { centsToCurrency, getIdFromPath, removeIdFromPath } from '@app/utils/utils';
+import { centsToCurrency, getIdFromPath, removeIdFromPathForGrid } from '@app/utils/utils';
 import { ActionGroup, Button, DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm, Flex, FlexItem, Form, FormGroup, FormHelperText, TextInput } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import * as React from 'react';
@@ -215,7 +215,7 @@ export const ViewProduct: React.FC = () => {
 
   return (
     <>
-      {hasSubmitted ? <Redirect to={removeIdFromPath(location.pathname)} /> : undefined}
+      {hasSubmitted ? <Redirect to={removeIdFromPathForGrid(location.pathname)} /> : undefined}
       <ActionGroup>
         <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
       </ActionGroup>

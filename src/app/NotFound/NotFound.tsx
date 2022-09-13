@@ -14,7 +14,7 @@ const NotFound: React.FunctionComponent = () => {
   function GoHomeBtn() {
     const history = useHistory();
     function handleClick() {
-      history.push('/products');
+      history.push('/');
     }
     return (
       <Button onClick={handleClick}>Take me home</Button>

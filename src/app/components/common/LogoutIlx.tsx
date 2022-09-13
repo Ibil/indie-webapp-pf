@@ -18,5 +18,5 @@ export const LogoutIlx: React.FunctionComponent = () => {
     });
   }, []);
 
-  return <>{ loading ? <LoadingSpinner /> : <Redirect to={ '/products'} />} </>
+  return <>{ loading ? <LoadingSpinner /> : <Redirect to={ '/'} />} </>
 };

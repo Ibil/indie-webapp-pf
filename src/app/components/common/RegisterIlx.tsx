@@ -149,7 +149,7 @@ export const RegisterIlx: React.FunctionComponent = () => {
   }, [loading]);
 
   if (redirectToReferrer === true) {
-    return  <Redirect to={'/products'} />
+    return  <Redirect to={'/'} />
   }
 
   return (

@@ -40,7 +40,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   function LogoImg() {
     const history = useHistory();
     function handleClick() {
-      history.push('/products');
+      history.push('/');
     }
     return (
       <img src={logo} onClick={handleClick} alt="PatternFly Logo" />

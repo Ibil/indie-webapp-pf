@@ -59,7 +59,7 @@ const routes: AppRouteConfig[] = [
     component: GridItems,
     exact: true,
     label: 'Products',
-    path: '/products',
+    path: '/',
     title: 'Products',
   },
   {
