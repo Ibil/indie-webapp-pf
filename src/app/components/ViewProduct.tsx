@@ -188,7 +188,7 @@ export const ViewProduct: React.FC = () => {
           />
         </FormGroup>
         <FormGroup>
-          <Button variant="primary" onClick={addToCart}>Submit</Button>
+          <Button variant="primary" onClick={addToCart}>Add products</Button>
         </FormGroup>
       </Form >
     }
