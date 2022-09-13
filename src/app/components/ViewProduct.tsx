@@ -1,8 +1,9 @@
 import { useAuth } from '@app/hooks/useAuth';
-import { EditProduct, Product, ProductCategory, ProductStatus } from '@app/model/Product';
+import { EditProduct, ProductStatus } from '@app/model/Product';
+import { LocationWithoutStock } from '@app/model/SellLocation';
 import { UserRole } from '@app/model/User';
+import { getLocations } from '@app/services/Locations';
 import { getProductById, getProductByIdProtected } from '@app/services/Products';
-import { createSale } from '@app/services/Sales';
 import { centsToCurrency, getIdFromPath, removeIdFromPath } from '@app/utils/utils';
 import { ActionGroup, Button, DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm, Flex, FlexItem, Form, FormGroup, FormHelperText, TextInput } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
@@ -43,36 +44,38 @@ export const ViewProduct: React.FC = () => {
   const [cartLocation, setCartLocation] = useState<string>(auth?.cart?.locationId);
   const [buyQuantity, setBuyQuantity] = useState<string>("1");
 
+  const [sellLocations, setSellLocations] = useState<LocationWithoutStock[]>([]);
 
 
-
-  React.useEffect(() => {
+  const loadData = async () => {
+    const sellLocationsResponseData = await getLocations();
+    setSellLocations(sellLocationsResponseData);
+    let data;
     if (auth.role == UserRole.basic) {
-      getProductById(getIdFromPath(location.pathname))
-        .then(data => {
-          setItemEditing(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setHasError(true);
-          setLoading(false)
-        });
+      data = await getProductById(getIdFromPath(location.pathname));
     }
     else {
-      getProductByIdProtected(getIdFromPath(location.pathname))
-        .then(data => {
-          setItemEditing(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setHasError(true);
-          setLoading(false)
-        });
+      data = await getProductByIdProtected(getIdFromPath(location.pathname));
     }
+    setItemEditing(data);
+    return undefined;
+  }
+
+  useEffect(() => {
+    loadData()
+      .then(() => {
+        setLoading(false)
+      })
+      .catch(() => {
+        setHasError(true);
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
   }, [loading, hasError, itemEditing]);
+
+
 
 
 
@@ -81,12 +84,16 @@ export const ViewProduct: React.FC = () => {
       stock.quantity > 0 && (
         cartLocation == undefined || cartLocation == stock.locationId
       ))
-      .map(stock => { return { value: stock.locationId, }; }); // TODO use name instead and then map when calling getDropdownValue
+      .map(stock => {
+        const locationWithAdress = sellLocations.find(location => location.locationId == stock.locationId);
+        return { value: stock.locationId, label: locationWithAdress?.address };
+      });
     /*     console.log("mapEnumValuesToDropDown");
         console.log(res) */
     return res;
   }
   const getDropdownValue = (loc) => {
+    console.log("dropdownvalue= " + loc)
     setCartLocation(loc);
   };
 

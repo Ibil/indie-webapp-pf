@@ -10,11 +10,12 @@ export interface DropDownInterface {
 
 export interface DropDownData {
     value: any,
+    label?: string
     /* description?: string */
 }
 
 export const DropDown: React.FC<DropDownInterface> = (
-    { startingValue, values, getDropdownValue, disabled}: DropDownInterface) => {
+    { startingValue, values, getDropdownValue, disabled }: DropDownInterface) => {
     const [options, setOptions] = useState<any>(values);
     const [dropDownState, setState] = useState<any>({
         isOpen: false,
@@ -69,15 +70,18 @@ export const DropDown: React.FC<DropDownInterface> = (
             >
                 {options.map((option, index) => {
                     return (
-                    <SelectOption
-                        isSelected={isSelected(option)}
-                        isDisabled={false}
-                        key={index}
-                        value={option.value}
-                        isPlaceholder={option.isPlaceholder}
-                        /* description={option.description} */
-                    />
-                )})}
+                        <SelectOption
+                            isSelected={isSelected(option)}
+                            isDisabled={false}
+                            key={index}
+                            value={option.value}
+                            isPlaceholder={option.isPlaceholder}
+                            /* description={option.value} */
+                        >
+                            {option.label}
+                        </SelectOption>
+                    )
+                })}
             </Select>
         </div>
     );

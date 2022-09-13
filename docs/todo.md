@@ -6,15 +6,14 @@ location.state
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-
-	add product to cart
-
-	manage cart
-
 	view sales
+	manage cart
 	make sale
 
 add credenciais to readme
+
+	- upload images
+	- api bug: book creates bag
 
 <tags for form(create/edit) and view>
 view products nao mostram info especifica por categoria <same reason below>
@@ -22,8 +21,7 @@ missing disabled fields need to be mapped to tags
 product form e view : tags unique : tags ver ficheiro remote
 
 MUST:
-	- upload images
-	- api bug: book creates bag
+
 // adicionar datas de vendas no modelo, na tabela e na view
 sales table: mostrar nomes em vez de ids...
 botao back para mobile em todo o lado
