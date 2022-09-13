@@ -7,8 +7,6 @@ location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	pdf get data
-
 	list products : table stock show location instead of id
 	
 		- upload images
