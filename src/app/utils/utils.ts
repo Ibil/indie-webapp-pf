@@ -22,9 +22,15 @@ export const getProductIDFromPath = (path: string) => {
   return parts[parts.length - 2];
 }
 
-export const getLocationIDFromPath = (path: string) => {
+export const getLocationIDFromPath = (path: string) => getLastPathString(path);
+
+export const getLastPathString = (path: string) => {
   const parts = path.split('/');
   return parts[parts.length - 1];
+}
+
+export const removeIdFromPath = (path: string) => {
+  return path.split('/').slice(0, -1).join('/');
 }
 
 export const convertToCentsForAPI = (number) => Math.floor(number * 100);
@@ -33,11 +39,20 @@ export const centsToCurrency = (number) => number / 100;
 
 export const validateYear = (yearString) => {
   const parsed = parseInt(yearString, 10);
-  if(isNaN(parsed)){
+  if (isNaN(parsed)) {
     return false;
   }
-  else{
+  else {
     return parsed > 0 && parsed < 3000;
   }
-  
+}
+
+export const addToCart = (yearString) => {
+
+}
+
+export const removeFromCart = (yearString) => {
+}
+
+export const clearBasket = (yearString) => {
 }

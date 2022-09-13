@@ -20,3 +20,28 @@ export const getSales = async (skipRetry?: boolean) => {
         throw Error;
     }
 }
+
+export const createSale = async (locationStock, skipRetry?: boolean) => {
+
+    const myHeaders = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    })
+    const response = await fetch(`${WEB_API_HOST}sales`,
+    {
+        method: 'POST', 
+        headers: myHeaders,
+        credentials: "include",
+        body: JSON.stringify(locationStock)
+    });
+    if (response.status >= 200 && response.status < 300) {
+        return;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return createSale(locationStock, true);
+    }
+    else{
+        throw Error;
+    }
+}

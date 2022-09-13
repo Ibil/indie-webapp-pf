@@ -1,7 +1,7 @@
 
 import { StockWithProductID } from '@app/model/Product';
 import { updateProductStock } from '@app/services/Products';
-import { getLocationIDFromPath, getProductIDFromPath } from '@app/utils/utils';
+import { getLastPathString, getProductIDFromPath } from '@app/utils/utils';
 import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -22,7 +22,7 @@ export const StockForm: React.FC = () => {
 
     const [itemEditing, setItemEditing] = useState<StockWithProductID>({
         productId: getProductIDFromPath(location.pathname),
-        locationId: getLocationIDFromPath(location.pathname),
+        locationId: getLastPathString(location.pathname),
         quantity: location.state.quantity
     });
 
@@ -59,7 +59,7 @@ export const StockForm: React.FC = () => {
         else {
             return (
                 <>
-                    <Form>
+                    <Form onSubmit={e => { e.preventDefault(); }}>
                         <FormGroup label="Stock" isRequired fieldId="simple-form-name-01">
                             <TextInput
                                 isRequired

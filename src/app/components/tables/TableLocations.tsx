@@ -38,7 +38,7 @@ export const TableLocations: React.FunctionComponent = () => {
     const history = useHistory();
 
     return <>
-    <Button variant="primary" onClick={() => history.push('create')}>Create new Location</Button>
+    <Button variant="primary" onClick={() => history.push('/listlocations/create')}>Create new Location</Button>
     <TableIlx
         getSortableRowValues={getSortableRowValues}
         buildTableHeaders={buildTableHeaders}

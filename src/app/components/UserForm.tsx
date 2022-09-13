@@ -77,7 +77,7 @@ export const UserForm: React.FC = () => {
     }
     else {
       return (
-        <Form>
+        <Form onSubmit={e => { e.preventDefault(); }}>
           <FormGroup label="name" isRequired fieldId="simple-form-name-01">
             <TextInput
               isRequired

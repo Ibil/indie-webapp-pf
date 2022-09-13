@@ -47,7 +47,7 @@ export const buildTableBody = (data, rowIndex, history) =>
 export const TableProduct: React.FunctionComponent = () => {
     const history = useHistory();
     return <>
-        <Form>
+        <Form onSubmit={e => { e.preventDefault(); }}>
             <ActionGroup>
                 <Button variant="primary" onClick={() => history.push(`/listProducts/tshirt/create`)}>Create T-Shirt</Button>
                 <Button variant="primary" onClick={() => history.push(`/listProducts/bag/create`)}>Create Bag</Button>

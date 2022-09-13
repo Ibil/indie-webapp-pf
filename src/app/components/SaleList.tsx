@@ -7,6 +7,24 @@ import '@app/app.css';
 import '@patternfly/react-core/dist/styles/base.css';
 import { useHistory } from 'react-router-dom';
 
+    // todo change
+/*     createSale(
+      {
+        locationId: buyLocation,
+        list: [{
+          productId: itemEditing.productId,
+          quantity: buyQuantity
+        }]
+      })
+      .then(() => {
+        setHasError(false);
+        setLoading(false);
+      })
+      .catch(() => {
+        setHasError(true);
+        setLoading(false)
+      }); */
+
 export const SaleList: React.FC = () => {
   const history = useHistory();
   return <>

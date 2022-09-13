@@ -178,7 +178,7 @@ export const BookProductForm: React.FC = () => {
     else {
       return (
         <>
-          <Form>
+          <Form onSubmit={e => { e.preventDefault(); }}>
             <ActionGroup>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>

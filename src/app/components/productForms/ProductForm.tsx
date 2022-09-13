@@ -45,7 +45,7 @@ export const ProductForm: React.FC<Product> = product => {
   }
 
   return (
-    <Form>
+    <Form onSubmit={e => { e.preventDefault(); }}>
       <ImageUpload/>
       <FormGroup
         label="Full name"

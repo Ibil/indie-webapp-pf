@@ -8,7 +8,6 @@ import {
 } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import React, { useEffect, useState } from 'react';
-const brandImg2 = "https://www.patternfly.org/v4/v4/images/brandImgColor2.e2aeff4b068c7bc6bdef555bbda8effb.svg";
 
 
 import logo from '@app/bgimages/indie-logo-r.svg';
@@ -141,7 +140,6 @@ export const LoginIlx: React.FunctionComponent = () => {
   );
 
   const images = {
-    lg: '/assets/images/pfbg_1200.jpg',
     sm: '/assets/images/pfbg_768.jpg',
     sm2x: '/assets/images/pfbg_768@2x.jpg',
     xs: '/assets/images/pfbg_576.jpg',
@@ -152,7 +150,7 @@ export const LoginIlx: React.FunctionComponent = () => {
   }, [loading]);
 
   if (redirectToReferrer === true) {
-    return <Redirect to={state?.from || '/'} />
+    return <Redirect to={state?.from || '/products'} />
   }
 
   return (
