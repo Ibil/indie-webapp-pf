@@ -76,10 +76,6 @@ export const ViewProduct: React.FC = () => {
   useEffect(() => {
   }, [loading, hasError, itemEditing]);
 
-
-
-
-
   const mapEnumValuesToDropDown = () => {
     const res = itemEditing.stock.filter(stock =>
       stock.quantity > 0 && (
@@ -87,7 +83,7 @@ export const ViewProduct: React.FC = () => {
       ))
       .map(stock => {
         const locationWithAdress = sellLocations.find(location => location.locationId == stock.locationId);
-        return { value: stock.locationId, label: locationWithAdress?.address };
+        return { value: stock.locationId, label: locationWithAdress?.address, description: `${stock.quantity} units remaining`};
       });
     return res;
   }

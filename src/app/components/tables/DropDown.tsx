@@ -11,7 +11,7 @@ export interface DropDownInterface {
 export interface DropDownData {
     value: any,
     label?: string
-    /* description?: string */
+    description?: string
 }
 
 export const DropDown: React.FC<DropDownInterface> = (
@@ -76,7 +76,7 @@ export const DropDown: React.FC<DropDownInterface> = (
                             key={index}
                             value={option.value}
                             isPlaceholder={option.isPlaceholder}
-                            /* description={option.value} */
+                            description={option.description}
                         >
                             {option.label}
                         </SelectOption>
