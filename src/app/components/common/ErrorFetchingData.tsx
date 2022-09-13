@@ -8,6 +8,6 @@ export const ErrorFetchingData: React.FC<{ message?: string}> = ({ message}) => 
       <Title size="lg" headingLevel="h4">
         Error.
       </Title>
-      <EmptyStateBody>{message ?? "Something went wrong. Consider trying again</EmptyStateBody"}</EmptyStateBody>
+      <EmptyStateBody>{message ?? "Something went wrong. Consider trying again"}</EmptyStateBody>
     </EmptyState>
   );

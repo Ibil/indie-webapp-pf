@@ -14,7 +14,7 @@ import { LogoutIlx } from './components/common/LogoutIlx';
 import { PdfDoc } from './components/common/PdfDoc';
 import { ProductForm } from './components/productForms/ProductForm';
 import { RegisterIlx } from './components/common/RegisterIlx';
-import { SaleList } from './components/SaleList';
+import { CartView } from './components/CartView';
 import { TableProduct } from './components/tables/TableProduct';
 import { TableSales } from './components/tables/TableSales';
 import { useAuth } from './hooks/useAuth';
@@ -29,6 +29,7 @@ import { ViewProduct } from './components/ViewProduct';
 import { StockForm } from './components/StockForm';
 import { BookProductForm } from './components/productForms/BookProductForm';
 import { BagProductForm } from './components/productForms/BagProductForm';
+import { SaleView } from './components/SaleView';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -173,7 +174,7 @@ const protectedRoutes: AppRouteConfig[] = [
   {
     component: TableProduct,
     exact: true,
-    label: 'Products table',
+    label: 'Edit Products',
     path: '/listProducts/',
     title: 'Products',
     allowedRoles: [UserRole.manager, UserRole.admin],
@@ -244,7 +245,7 @@ const protectedRoutes: AppRouteConfig[] = [
   {
     component: TableLocations,
     exact: true,
-    label: 'Locations table',
+    label: 'Locations',
     path: '/listLocations/',
     title: 'Locations',
     allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
@@ -269,7 +270,7 @@ const protectedRoutes: AppRouteConfig[] = [
   {
     component: TableUsers,
     exact: true,
-    label: 'Users table',
+    label: 'Users',
     path: '/listUsers/',
     title: 'Users',
     allowedRoles: [UserRole.admin],
@@ -283,7 +284,7 @@ const protectedRoutes: AppRouteConfig[] = [
     allowedRoles: [UserRole.admin],
   },
   {
-    component: SaleList,
+    component: CartView,
     exact: true,
     label: 'Cart',
     path: '/cart',
@@ -293,12 +294,19 @@ const protectedRoutes: AppRouteConfig[] = [
   {
     component: TableSales,
     exact: true,
-    label: 'Sales table',
-    path: '/viewSales/',
+    label: 'Sales',
+    path: '/viewSales',
     title: 'Sales',
     allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
-
+  {
+    component: SaleView,
+    label: 'Sale',
+    path: '/viewSales/:id',
+    title: 'Sale',
+    sidebarHide: true,
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
   {
     component: PdfDoc,
     exact: true,

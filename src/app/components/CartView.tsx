@@ -1,20 +1,18 @@
-import { ActionGroup, Bullseye, Button, EmptyState, EmptyStateIcon, EmptyStateVariant, Flex, FlexItem, Form, FormGroup, TextInput, Title } from '@patternfly/react-core';
+import { ActionGroup, Bullseye, Button, EmptyState, EmptyStateIcon, EmptyStateVariant, Form, FormGroup, TextInput, Title } from '@patternfly/react-core';
 import * as React from 'react';
-import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
-import saleListStyles from './SaleView.module.css';
 
 import '@app/app.css';
-import '@patternfly/react-core/dist/styles/base.css';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '@app/hooks/useAuth';
-import { centsToCurrency } from '@app/utils/utils';
 import { createSale } from '@app/services/Sales';
-import { TableIlx } from './common/TableIlx';
-import { LoadingSpinner } from './common/LoadingSpinner';
-import { Table, Td, Th, Tr } from '@patternfly/react-table';
+import { centsToCurrency } from '@app/utils/utils';
+import '@patternfly/react-core/dist/styles/base.css';
 import { SearchIcon } from '@patternfly/react-icons';
+import { Table, Td, Th, Tr } from '@patternfly/react-table';
 import { useState } from 'react';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from './common/ErrorFetchingData';
+import { LoadingSpinner } from './common/LoadingSpinner';
+import { TableIlx } from './common/TableIlx';
 
 
 const columnNames = {
@@ -44,7 +42,7 @@ export const buildTableBody = (data, rowIndex, history) =>
     <Td dataLabel={columnNames.price}>{`${centsToCurrency(data.price)} €`}</Td>
   </Tr>;
 
-export const SaleList: React.FC = () => {
+export const CartView: React.FC = () => {
   const history = useHistory();
   const { auth, setAuth } = useAuth();
   const location = useLocation();
@@ -68,6 +66,7 @@ export const SaleList: React.FC = () => {
       .then(() => {
         setHasError(false);
         setLoading(false);
+        clearBasket();
         setHasSubmitted(true);
       })
       .catch(() => {
@@ -101,7 +100,7 @@ export const SaleList: React.FC = () => {
           />
         </FormGroup>
         <ActionGroup>
-          <Button variant="tertiary" onClick={() => history.push(`/printSale`)}>print to pdf</Button>
+          {/* <Button variant="tertiary" onClick={() => history.push(`/printSale`)}>print to pdf</Button> */}
           <Button variant="danger" onClick={clearBasket}>ClearBasket</Button>
           <Button variant="primary" onClick={makeSale}>Make Sale</Button>
         </ActionGroup>

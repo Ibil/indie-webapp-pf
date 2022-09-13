@@ -41,8 +41,8 @@ export const ViewProduct: React.FC = () => {
     totalStock: 0
   });
 
-  const [cartLocation, setCartLocation] = useState<string>(auth?.cart?.locationId);
-  const [cartLocationName, setCartLocationName] = useState<string>(auth?.cart?.locationName);
+  const [cartLocation, setCartLocation] = useState<string>(""); // auth?.cart?.locationId
+  const [cartLocationName, setCartLocationName] = useState<string>(); // auth?.cart?.locationName
   const [buyQuantity, setBuyQuantity] = useState<string>("1");
 
   const [sellLocations, setSellLocations] = useState<LocationWithoutStock[]>([]);
@@ -83,7 +83,7 @@ export const ViewProduct: React.FC = () => {
   const mapEnumValuesToDropDown = () => {
     const res = itemEditing.stock.filter(stock =>
       stock.quantity > 0 && (
-        cartLocation == undefined || cartLocation == stock.locationId
+        auth?.cart?.locationId == undefined || auth?.cart?.locationId == stock.locationId
       ))
       .map(stock => {
         const locationWithAdress = sellLocations.find(location => location.locationId == stock.locationId);
@@ -92,6 +92,8 @@ export const ViewProduct: React.FC = () => {
     return res;
   }
   const getDropdownValue = (loc) => {
+    console.log("getDropdownValue - location");
+    console.log(loc);
     setCartLocation(loc);
     const locationWithAdress = sellLocations.find(location => location.locationId == loc);
     setCartLocationName(locationWithAdress!.address);
@@ -105,6 +107,8 @@ export const ViewProduct: React.FC = () => {
   }
 
   const addToCart = () => {
+    console.log("addToCart - cartLocation");
+    console.log(cartLocation);
     if (cartLocation == undefined || cartLocation.length == 0 || parseInt(buyQuantity) <= 0) {
       setIsFormValid(false);
       return;

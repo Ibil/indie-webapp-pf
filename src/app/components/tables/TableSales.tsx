@@ -41,7 +41,7 @@ export const buildTableBody = (data, rowIndex, history) =>
         <Td dataLabel={columnNames.createdAt}>{data.createdAt}</Td>
         <Td dataLabel={"Actions"}>
             <TableText>
-                <Button variant="secondary" onClick={() => history.push(`${data.name}`)}>View</Button>
+                <Button variant="secondary" onClick={() => history.push(`/viewSales/${data.saleId}`)}>View</Button>
             </TableText>
         </Td>
     </Tr>;

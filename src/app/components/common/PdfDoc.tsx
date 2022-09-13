@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer';
+import { useLocation } from 'react-router-dom';
+import { centsToCurrency } from '@app/utils/utils';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -37,9 +39,12 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
     col1: {
-        width: '27%',
+        width: '40%',
     },
     col2: {
+        width: '30%',
+    },
+    col3: {
         width: '15%',
     },
     row3: {
@@ -63,50 +68,42 @@ const styles = StyleSheet.create({
 });
 
 
-const generateMockItems = (size: number): any[] => {
-    const array: any[] = [];
-    while (size-- > 0) {
-        const imageIndex = size % 3;
-        array.push({
-            name: `product #${size}`,
-            ref: `#123${size}`,
-            price: '35€',
-            quantity: size
-        });
-    }
-    return array;
-}
-
 const tableHeaders = () => (
     <View style={[styles.row, styles.bold, styles.header]}>
-        <Text style={styles.description}>{"ref"}</Text>
-        <Text style={styles.description}>{"name"}</Text>
-        <Text style={styles.description}>{"price"}</Text>
-        <Text style={styles.description}>{"quantity"}</Text>
+        <Text style={styles.col1}>{"Product Id"}</Text>
+        <Text style={styles.col2}>{"Product Name"}</Text>
+        <Text style={styles.col3}>{"Price"}</Text>
+        <Text style={styles.col3}>{"Quantity"}</Text>
     </View>
 );
 
-const tableRows = () => {
-    const rows = generateMockItems(40).map(item => (
-        <View style={styles.row} key={1}>
-            <Text style={styles.description}>{item.ref}</Text>
-            <Text style={styles.description}>{item.name}</Text>
-            <Text style={styles.description}>{item.price}</Text>
-            <Text style={styles.description}>{item.quantity}</Text>
-        </View>
-    ));
-    return <Fragment>{rows}</Fragment>;
-}
+
 
 // Create Document Component
-export const PdfDoc: React.FC = () => (
+export const PdfDoc: React.FC = () => {
+    const location = useLocation();
+
+    const tableRows = () => {
+        const rows = location.state.items.map(item => (
+            <View style={styles.row} key={1}>
+                <Text style={styles.col1}>{item.productId}</Text>
+                <Text style={styles.col2}>{item.productName}</Text>
+                <Text style={styles.col3}>{`${centsToCurrency(item.price)} €`}</Text>
+                <Text style={styles.col3}>{item.quantity}</Text>
+            </View>
+        ));
+        return <Fragment>{rows}</Fragment>;
+    }
+
+    return(
     <PDFViewer style={styles.viewer}>
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.summary}>
-                    <Text style={styles.description}>{"nif 1234"}</Text>
-                    <Text style={styles.description}>{"date 22/10/2022"}</Text>
-                    <Text style={styles.description}>{"total : 515€"}</Text>
+                    <Text style={styles.description}>{`Sale ID ${location.state.saleId}`}</Text>
+                    <Text style={styles.description}>{`Seller ${location.state.sellerName}`}</Text>
+                    <Text style={styles.description}>{`date ${location.state.createdAt}`}</Text>
+                    <Text style={styles.description}>{`Total Price ${centsToCurrency(location.state.totalPrice)}€`}</Text>
                 </View>
                 <View style={styles.tableContainer}>
                     {tableHeaders()}
@@ -116,4 +113,4 @@ export const PdfDoc: React.FC = () => (
             </Page>
         </Document>
     </PDFViewer>
-);
+)};

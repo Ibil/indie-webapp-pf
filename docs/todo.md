@@ -1,16 +1,20 @@
 
 history.push(url, obj)
-location.state
 // see protected route for the push  onClick={() => history.push(`${data.productId}`, { creating: false })}>edit</Button>
+access:
+location.state
+
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	// view sales data created
 	pdf get data
 
+	list products : table stock show location instead of id
+	
 		- upload images
 add credenciais to readme
 
+validar user permissions to route
 preços em centimos?
 
 

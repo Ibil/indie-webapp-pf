@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { SaleList } from '@app/components/SaleList';
+import { CartView } from '@app/components/CartView';
 import { Story } from '@storybook/react';
 import { GridItemModel } from "@app/model/GridItemModel";
 import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
@@ -7,7 +7,7 @@ import { INDIDE_LOGO_GRID_ITEM_BASE64 } from 'src/mockData';
 //👇 This default export determines where your story goes in the story list
 export default {
   title: 'Components/SaleList',
-  component: SaleList,
+  component: CartView,
 };
 
 const generateMockItems = (size: number) => {
@@ -23,7 +23,7 @@ const generateMockItems = (size: number) => {
 }
 
 //👇 We create a “template” of how args map to rendering
-const Template: Story<ComponentProps<typeof SaleList>> = (args) => <SaleList {...args} />;
+const Template: Story<ComponentProps<typeof CartView>> = (args) => <CartView {...args} />;
 
 
 export const FirstStory = Template.bind({});
