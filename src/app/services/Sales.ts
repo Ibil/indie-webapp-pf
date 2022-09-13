@@ -22,10 +22,7 @@ export const getSales = async (skipRetry?: boolean) => {
 }
 
 export const getSaleById = async (saleId: string, skipRetry?: boolean) => {
-    const correctUrl = SALES_ENDPOINT + '/' + saleId;
-    const testUrl = SALES_ENDPOINT + '/{saleId}?saleId=' + saleId;
-    
-    const response = await fetch(testUrl,
+    const response = await fetch(SALES_ENDPOINT + '/' + saleId,
     {
         credentials: "include",
     });

@@ -6,8 +6,6 @@ location.state
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	list products : table stock show location instead of id
 	
 		- upload images
 add credenciais to readme
