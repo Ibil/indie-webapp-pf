@@ -12,7 +12,7 @@ export const LocationForm: React.FC = () => {
 
   const history = useHistory();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
@@ -43,19 +43,6 @@ export const LocationForm: React.FC = () => {
         setLoading(false)
       })
   }
-
-  useEffect(() => {
-    setLoading(false);
-    /* getLocationByID(getIdFromPath(location.pathname))
-      .then(data => {
-        setItemEditing(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setHasError(true);
-        setLoading(false)
-      }); */
-  }, []);
 
   useEffect(() => {
   }, [loading, hasError, itemEditing]);

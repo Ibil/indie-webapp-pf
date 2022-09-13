@@ -164,7 +164,7 @@ export const LoginIlx: React.FunctionComponent = () => {
         /* textContent="This is placeholder text only. Use this area to place any information or introductory message about your application that may be relevant to users." */
         loginTitle="Log in to your account"
         /* loginSubtitle="Enter your single sign-on LDAP credentials." */
-        socialMediaLoginContent={socialMediaLoginContent}
+        /* socialMediaLoginContent={socialMediaLoginContent} */
         signUpForAccountMessage={signUpForAccountMessage}
       /* forgotCredentials={forgotCredentials} */
       >

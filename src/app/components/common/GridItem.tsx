@@ -1,5 +1,5 @@
 import { GridItemModel } from '@app/model/GridItemModel';
-import { getPushPathForGrid } from '@app/utils/utils';
+import { centsToCurrency, getPushPathForGrid } from '@app/utils/utils';
 import { FlexItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -15,7 +15,7 @@ export const GridItem: React.FC<GridItemModel> = ({ productId, name, photo, pric
       <a onClick={() => history.push(`${getPushPathForGrid(location.pathname)}/${productId}`)}>
         <p>{name}</p>
         <img className={imageStyles.thumbnailGrid} src={photo} alt="Product"/>
-        <p>{price}</p>
+        <p>{`${centsToCurrency(price)} €`}</p>
       </a>
    {/*    <Button variant="primary" onClick={() => alert("ola")}>Adicionar</Button> */}
     </FlexItem >

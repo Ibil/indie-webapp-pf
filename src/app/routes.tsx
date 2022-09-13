@@ -283,6 +283,14 @@ const protectedRoutes: AppRouteConfig[] = [
     allowedRoles: [UserRole.admin],
   },
   {
+    component: SaleList,
+    exact: true,
+    label: 'Cart',
+    path: '/cart',
+    title: 'Shopping Cart',
+    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+  },
+  {
     component: TableSales,
     exact: true,
     label: 'Sales table',
@@ -290,14 +298,7 @@ const protectedRoutes: AppRouteConfig[] = [
     title: 'Sales',
     allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
   },
-  {
-    component: SaleList,
-    exact: true,
-    label: 'Sale list',
-    path: '/viewSales/:id',
-    title: 'Sale',
-    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
-  },
+
   {
     component: PdfDoc,
     exact: true,

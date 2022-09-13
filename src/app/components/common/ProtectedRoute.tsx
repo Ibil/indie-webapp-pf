@@ -15,11 +15,6 @@ export const isRouteAllowedForUser = (userRoleAsString?: string, allowedRoles?: 
             userRoleAsString !== undefined &&
             (
                 undefined != allowedRoles.find(roleEnum => {
-/*                     console.log("inside isRouteAllowedForUser");
-                    console.log(roleEnum);
-                    console.log(UserRole[userRoleAsString as keyof typeof UserRole]);
-                    console.log("result = ");
-                    console.log(roleEnum == UserRole[userRoleAsString as keyof typeof UserRole]);; */
                     return roleEnum == UserRole[userRoleAsString as keyof typeof UserRole];
                 })
             )

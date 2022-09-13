@@ -31,8 +31,6 @@ export const getLastPathString = (path: string) => {
 
 export const getPushPathForGrid = (path: string) => {
   const parts = path.split('/');
-  console.log(path);
-  console.log(parts);
   if (path == undefined || path == '/') {
     return "/products";
   }
@@ -43,7 +41,6 @@ export const getPushPathForGrid = (path: string) => {
 }
 
 export const removeIdFromPathForGrid = (path: string) => {
-  console.log(path);
   if(path.includes("product")){
     return ""
   }

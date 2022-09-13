@@ -77,8 +77,6 @@ export const BookProductForm: React.FC = () => {
   };
 
   const submitForm = e => {
-    console.log("Product data =" + itemEditing.category )
-    /* e.preventDefault(); */
     if (!validateForm()) {
       setIsFormValid(false);
       return;
@@ -148,17 +146,13 @@ export const BookProductForm: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect empty");
-    console.log(itemEditing.stock);
   }, [loading, hasError, itemEditing]);
 
 
   const mapStockWithProductID = () => {
-    console.log("stocks when mapping to table");
     const result = itemEditing.stock.map(stock => {
       return { ...stock, productId: itemEditing.productId }
     });
-    console.log(result);
     return result;
   }
 

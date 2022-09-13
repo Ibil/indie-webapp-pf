@@ -42,6 +42,7 @@ export const ViewProduct: React.FC = () => {
   });
 
   const [cartLocation, setCartLocation] = useState<string>(auth?.cart?.locationId);
+  const [cartLocationName, setCartLocationName] = useState<string>(auth?.cart?.locationName);
   const [buyQuantity, setBuyQuantity] = useState<string>("1");
 
   const [sellLocations, setSellLocations] = useState<LocationWithoutStock[]>([]);
@@ -88,13 +89,12 @@ export const ViewProduct: React.FC = () => {
         const locationWithAdress = sellLocations.find(location => location.locationId == stock.locationId);
         return { value: stock.locationId, label: locationWithAdress?.address };
       });
-    /*     console.log("mapEnumValuesToDropDown");
-        console.log(res) */
     return res;
   }
   const getDropdownValue = (loc) => {
-    console.log("dropdownvalue= " + loc)
     setCartLocation(loc);
+    const locationWithAdress = sellLocations.find(location => location.locationId == loc);
+    setCartLocationName(locationWithAdress!.address);
   };
 
   const handleBuyQuantityChange = (qty) =>
@@ -111,72 +111,53 @@ export const ViewProduct: React.FC = () => {
     }
     setIsFormValid(true);
     setLoading(true);
-    console.log("cart now");
-    console.log(auth);
 
     if (!isCartCreated(auth)) {
-      console.log("cart empty");
       setAuth({
         ...auth, cart: {
           locationId: cartLocation,
+          locationName: cartLocationName,
           list: [{
             productId: itemEditing.productId,
+            productName: itemEditing.name,
+            price: itemEditing.price,
             quantity: parseInt(buyQuantity)
           }]
         }
       });
-      console.log(auth);
     }
     else {
-      console.log("cart not empty")
       const productIndex = auth.cart.list.findIndex(productQuantity => {
         return productQuantity.productId == itemEditing.productId
       });
 
       const listCopy = [...(auth.cart.list)];
-      console.log("listCopy");
-      console.log(listCopy);
 
       if (productIndex >= 0) {
-        console.log("index=" + productIndex + " cart has product with qty" + listCopy[productIndex].quantity);
         listCopy[productIndex] = {
           productId: itemEditing.productId,
+          productName: itemEditing.name,
+          price: itemEditing.price,
           quantity: parseInt(buyQuantity) + parseInt(listCopy[productIndex].quantity)
         }
-        console.log("listCopy alterado com mais qty");
-        console.log(listCopy);
       }
       else {
-        console.log("cart : new product");
         listCopy.push({
           productId: itemEditing.productId,
+          productName: itemEditing.name,
+          price: itemEditing.price,
           quantity: parseInt(buyQuantity)
         })
-        console.log("listCopy alterado com mais 1 product");
-        console.log(listCopy);
       }
       const newAuth = {
         role: auth.role,
         username: auth.username,
         cart: {
           locationId: cartLocation,
+          locationName: cartLocationName,
           list: listCopy
         }
       };
-
-      /*     role: auth.role,
-          username: auth.username,
-          cart: {
-            locationId: cartLocation,
-            list: listCopy
-          } */
-
-      /*       ...auth, cart: {
-              locationId: cartLocation,
-              list: listCopy
-            } */
-      console.log("newAuth");
-      console.log(newAuth);
       setAuth(newAuth);
     }
     setLoading(false);

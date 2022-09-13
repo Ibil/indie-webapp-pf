@@ -5,15 +5,14 @@ location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
+	// view sales data created
+	pdf get data
 
-	view sales
-	manage cart
-	make sale
-
+		- upload images
 add credenciais to readme
 
-	- upload images
-	- api bug: book creates bag
+preços em centimos?
+
 
 <tags for form(create/edit) and view>
 view products nao mostram info especifica por categoria <same reason below>
@@ -21,11 +20,7 @@ missing disabled fields need to be mapped to tags
 product form e view : tags unique : tags ver ficheiro remote
 
 MUST:
-
-// adicionar datas de vendas no modelo, na tabela e na view
-sales table: mostrar nomes em vez de ids...
 botao back para mobile em todo o lado
-sles table mostrad dados em vez de id
 storyboard
 preços em centimos?
 

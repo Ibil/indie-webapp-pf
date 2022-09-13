@@ -50,7 +50,6 @@ Heroku uses package.json to decide which node and npm version to install.
 For this reason, package.json should have 
 ```
 "engines": {
-    "node": "16.13.0",
     "npm": "8.1.0"
   },
 ```

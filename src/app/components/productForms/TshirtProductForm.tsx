@@ -104,10 +104,6 @@ export const TshirtProductForm: React.FC = () => {
   }
 
   const addLocationToProductStock = (productData, locations: LocationWithoutStock[]) => {
-    console.log("stock")
-    console.log(productData.stock)
-    console.log("locations")
-    console.log(locations)
     const stockWithAllLocations: Stock[] = locations.map(location => {
       const stockFound = productData.stock.find(stockEl => stockEl.locationId == location.locationId);
 
@@ -145,17 +141,13 @@ export const TshirtProductForm: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect empty");
-    console.log(itemEditing.stock);
   }, [loading, hasError, itemEditing]);
 
 
   const mapStockWithProductID = () => {
-    console.log("stocks when mapping to table");
     const result = itemEditing.stock.map(stock => {
       return { ...stock, productId: itemEditing.productId }
     });
-    console.log(result);
     return result;
   }
 

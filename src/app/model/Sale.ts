@@ -4,6 +4,7 @@ export interface Sale {
     sellerId: string,
     locationId: string,
     status: SaleStatus,
+    createdAt?: Date
     items: SaleProduct[]
 }
 
