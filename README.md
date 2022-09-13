@@ -16,6 +16,7 @@ If you have the environment variable "PORT" defined, then define "PORT_WHEN_RUNI
 Must Install [NPM](https://www.npmjs.com/) version "8.1.0" which is guaranteed to be compatible with the version of Patternfly used. We have noticed that other versions have issues when installing the dependencies.
 
 It is recommended to Install [Node.JS](https://nodejs.org/en/) version 16.13.0 which is compatible.
+Currently Heroku is only updating the app fully if we force it to use this version so the app will only build with it.
 
 
 Install all dependencies by running
@@ -50,7 +51,8 @@ Heroku uses package.json to decide which node and npm version to install.
 For this reason, package.json should have 
 ```
 "engines": {
-    "npm": "8.1.0"
+    "npm": "8.1.0",
+    "node": "16.13.0"
   },
 ```
 To make sure that the correct versions are run.
