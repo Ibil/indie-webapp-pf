@@ -8,20 +8,14 @@ location.state
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-storyboard
 
 
 apresentacao ( ver pasta)
-validar user permissions to route
-
-<tags for form(create/edit) and view>
-view products nao mostram info especifica por categoria <same reason below>
-missing disabled fields need to be mapped to tags 
-product form e view : tags unique : tags ver ficheiro remote
-
 
 imagens aws
 logout confirm
+storyboard broken
+alternar entre variantes ao ver um produto
 
 Should:
 notification for sucess or error on submit

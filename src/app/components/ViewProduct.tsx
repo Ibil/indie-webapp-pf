@@ -196,11 +196,7 @@ export const ViewProduct: React.FC = () => {
   }
 
   const generateTags = () => {
-    console.log("tags");
-    console.log(itemEditing.tags);
-    const tags: any[] = [];
     if (itemEditing.tags != undefined) {
-
       return Object.entries(itemEditing.tags).map(([k, v]) =>{
         return <DescriptionListGroup>
         <DescriptionListTerm>{k}</DescriptionListTerm>
@@ -209,16 +205,6 @@ export const ViewProduct: React.FC = () => {
         </DescriptionListDescription>
       </DescriptionListGroup>
       } );
-
-/*       for (const property in itemEditing.tags) {
-        console.log(`${property}: ${itemEditing.tags[property]}`);
-        tags.push(<DescriptionListGroup>
-          <DescriptionListTerm>{property}</DescriptionListTerm>
-          <DescriptionListDescription>
-            {itemEditing.tags[property]}
-          </DescriptionListDescription>
-        </DescriptionListGroup>)
-      } */
     }
     else{
       return undefined;
