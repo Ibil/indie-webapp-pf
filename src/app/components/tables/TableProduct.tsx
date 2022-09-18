@@ -13,7 +13,7 @@ const columnNames = {
     name: 'Product Name',
     category: 'Category',
     status: 'Status',
-    price: 'Price'
+    price: 'Price',
 };
 
 // Since OnSort specifies sorted columns by index, we need sortable values for our object by column index.
@@ -63,5 +63,5 @@ export const TableProduct: React.FunctionComponent = () => {
             buildTableBody={buildTableBody}
             getItems={getProducts}
         />
-    </PageSection>
+    </PageSection>;
 }

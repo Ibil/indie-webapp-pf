@@ -50,7 +50,7 @@ export const createSale = async (locationStock, skipRetry?: boolean) => {
         method: 'POST', 
         headers: myHeaders,
         credentials: "include",
-        body: JSON.stringify(locationStock)
+        body: JSON.stringify(locationStock),
     });
     if (response.status >= 200 && response.status < 300) {
         return;

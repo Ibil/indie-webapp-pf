@@ -3,7 +3,6 @@ import { ActionGroup, Button, Checkbox, Form, FormGroup, Popover, TextInput } fr
 import { HelpIcon } from '@patternfly/react-icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { saveProduct } from '@app/services/ProductForm';
 import { ImageUpload } from '../common/ImageUpload';
 
 
@@ -18,6 +17,7 @@ interface ProductEdititing {
   value2?: string;
   value3?: string;
   isDisabled?: boolean;
+  image?: string
 }
 
 export const ProductForm: React.FC<Product> = product => {
@@ -40,13 +40,17 @@ export const ProductForm: React.FC<Product> = product => {
   const history = useHistory();
 
   const submitProduct = () => {
-    saveProduct();
+    /* saveProduct(); */
     history.goBack();
   }
 
+  const updateImage = image => {
+    setProductEditing({ ...productEditing, image });
+  };
+
   return (
     <Form onSubmit={e => { e.preventDefault(); }}>
-      <ImageUpload/>
+      <ImageUpload updateItemEditing={updateImage}/>
       <FormGroup
         label="Full name"
         labelIcon={
