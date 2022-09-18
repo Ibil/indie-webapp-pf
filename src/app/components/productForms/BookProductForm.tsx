@@ -49,10 +49,10 @@ export const BookProductForm: React.FC = () => {
   const validateForm = () =>
     itemEditing.name && itemEditing.name.length > 0 &&
     itemEditing.description && itemEditing.description.length > 0 &&
-    itemEditing.title && itemEditing.title.length > 0 &&
+/*     itemEditing.title && itemEditing.title.length > 0 &&
     itemEditing.author && itemEditing.author.length > 0 &&
-    itemEditing.publisher && itemEditing.publisher.length > 0 &&
-    validateYear(itemEditing.year)
+    itemEditing.publisher && itemEditing.publisher.length > 0 && */
+    itemEditing.year == undefined || validateYear(itemEditing.year)
   itemEditing.price > 0;
 
   const changeName = name => {
@@ -83,6 +83,7 @@ export const BookProductForm: React.FC = () => {
   };
 
   const submitForm = e => {
+    console.log(itemEditing);
     if (!validateForm()) {
       setIsFormValid(false);
       return;
@@ -235,9 +236,8 @@ export const BookProductForm: React.FC = () => {
                   onChange={changeTitle}
                 />
               </FormGroup>
-              <FormGroup label="Author" isRequired fieldId="simple-form-author-01">
+              <FormGroup label="Author" fieldId="simple-form-author-01">
                 <TextInput
-                  isRequired
                   isDisabled={!isCreating}
                   type="text"
                   id="simple-form-author-01"
@@ -246,9 +246,8 @@ export const BookProductForm: React.FC = () => {
                   onChange={changeAuthor}
                 />
               </FormGroup>
-              <FormGroup label="Publisher" isRequired fieldId="simple-form-publisher-01">
+              <FormGroup label="Publisher" fieldId="simple-form-publisher-01">
                 <TextInput
-                  isRequired
                   isDisabled={!isCreating}
                   type="text"
                   id="simple-form-publisher-01"
@@ -257,9 +256,8 @@ export const BookProductForm: React.FC = () => {
                   onChange={changePublisher}
                 />
               </FormGroup>
-              <FormGroup label="Year" isRequired fieldId="simple-form-year-01">
+              <FormGroup label="Year" fieldId="simple-form-year-01">
                 <TextInput
-                  isRequired
                   isDisabled={!isCreating}
                   type="text"
                   id="simple-form-year-01"
