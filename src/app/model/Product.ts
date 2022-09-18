@@ -118,6 +118,9 @@ export enum BagColour{
   red='red',
   green='green',
   blue='blue',
+  yellow='yellow',
+  orange='orange',
+  purple='purple',
   white='white',
   black='black'
 }

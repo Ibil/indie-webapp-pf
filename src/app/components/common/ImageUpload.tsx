@@ -94,7 +94,7 @@ export const ImageUpload: React.FunctionComponent<FileData> = fileData => {
                     label="Product Photo"
                     fieldId="text-file-with-restrictions"
                     isRequired
-                    helperTextInvalid="Must be a png or jpg, jpeg file no larger than 80 KB"
+                    helperTextInvalid="Must be a png or jpg, jpeg file no larger than 73 KB"
                     validated={isRejected ? 'error' : 'default'}
                 >
                     <FileUpload
@@ -108,7 +108,7 @@ export const ImageUpload: React.FunctionComponent<FileData> = fileData => {
                         isLoading={isLoading}
                         dropzoneProps={{
                             accept: '.jpeg,.png,.jpg',
-                            maxSize: 80000,
+                            maxSize: 73000,
                             onDropRejected: handleFileRejected,
                             onDropAccepted: handleFileAccepted
                         }}
