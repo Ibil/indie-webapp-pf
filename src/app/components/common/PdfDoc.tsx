@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react';
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { centsToCurrency } from '@app/utils/utils';
+import { ActionGroup, Button, Form, PageSection } from '@patternfly/react-core';
+
+import tablePaddingStyles from '../ProductTable.module.css';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -82,6 +85,7 @@ const tableHeaders = () => (
 // Create Document Component
 export const PdfDoc: React.FC = () => {
     const location = useLocation();
+    const history = useHistory();
 
     const tableRows = () => {
         const rows = location.state.items.map(item => (
@@ -95,22 +99,31 @@ export const PdfDoc: React.FC = () => {
         return <Fragment>{rows}</Fragment>;
     }
 
-    return(
-    <PDFViewer style={styles.viewer}>
-        <Document>
-            <Page size="A4" style={styles.page}>
-                <View style={styles.summary}>
-                    <Text style={styles.description}>{`Sale ID ${location.state.saleId}`}</Text>
-                    <Text style={styles.description}>{`Seller ${location.state.sellerName}`}</Text>
-                    <Text style={styles.description}>{`date ${location.state.createdAt}`}</Text>
-                    <Text style={styles.description}>{`Total Price ${centsToCurrency(location.state.totalPrice)}€`}</Text>
-                </View>
-                <View style={styles.tableContainer}>
-                    {tableHeaders()}
-                    {tableRows()}
-                    {/*<TableFooter items={data.items} />*/}
-                </View>
-            </Page>
-        </Document>
-    </PDFViewer>
-)};
+    return (
+        <>
+            <PageSection>
+                <Form onSubmit={e => { e.preventDefault(); }}>
+                    <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+                        <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
+                    </ActionGroup>
+                </Form>
+            </PageSection>
+            <PDFViewer style={styles.viewer}>
+                <Document>
+                    <Page size="A4" style={styles.page}>
+                        <View style={styles.summary}>
+                            <Text style={styles.description}>{`Sale ID ${location.state.saleId}`}</Text>
+                            <Text style={styles.description}>{`Seller ${location.state.sellerName}`}</Text>
+                            <Text style={styles.description}>{`date ${location.state.createdAt}`}</Text>
+                            <Text style={styles.description}>{`Total Price ${centsToCurrency(location.state.totalPrice)}€`}</Text>
+                        </View>
+                        <View style={styles.tableContainer}>
+                            {tableHeaders()}
+                            {tableRows()}
+                            {/*<TableFooter items={data.items} />*/}
+                        </View>
+                    </Page>
+                </Document>
+            </PDFViewer>
+        </>)
+};

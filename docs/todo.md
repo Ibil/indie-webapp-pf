@@ -7,9 +7,7 @@ location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-preços em centimos?
-padding
-botao back para mobile em todo o lado
+
 storyboard
 
 

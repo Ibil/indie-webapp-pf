@@ -5,7 +5,7 @@ import { UserRole } from '@app/model/User';
 import { getLocations } from '@app/services/Locations';
 import { getProductById, getProductByIdProtected } from '@app/services/Products';
 import { centsToCurrency, getIdFromPath, removeIdFromPathForGrid } from '@app/utils/utils';
-import { ActionGroup, Button, DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm, Flex, FlexItem, Form, FormGroup, FormHelperText, TextInput } from '@patternfly/react-core';
+import { ActionGroup, Button, DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm, Flex, FlexItem, Form, FormGroup, FormHelperText, PageSection, TextInput } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -49,13 +49,13 @@ export const ViewProduct: React.FC = () => {
 
 
   const loadData = async () => {
-    const sellLocationsResponseData = await getLocations();
-    setSellLocations(sellLocationsResponseData);
     let data;
-    if (auth.role == UserRole.basic) {
+    if (auth.role == undefined || auth.role == UserRole.basic) {
       data = await getProductById(getIdFromPath(location.pathname));
     }
     else {
+      const sellLocationsResponseData = await getLocations();
+      setSellLocations(sellLocationsResponseData);
       data = await getProductByIdProtected(getIdFromPath(location.pathname));
     }
     setItemEditing(data);
@@ -83,7 +83,7 @@ export const ViewProduct: React.FC = () => {
       ))
       .map(stock => {
         const locationWithAdress = sellLocations.find(location => location.locationId == stock.locationId);
-        return { value: stock.locationId, label: locationWithAdress?.address, description: `${stock.quantity} units remaining`};
+        return { value: stock.locationId, label: locationWithAdress?.address, description: `${stock.quantity} units remaining` };
       });
     return res;
   }
@@ -195,7 +195,7 @@ export const ViewProduct: React.FC = () => {
   }
 
   return (
-    <>
+    <PageSection>
       {hasSubmitted ? <Redirect to={removeIdFromPathForGrid(location.pathname)} /> : undefined}
       <ActionGroup>
         <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
@@ -238,6 +238,6 @@ export const ViewProduct: React.FC = () => {
           {drawBuyArea()}
         </FlexItem>
       </Flex>
-    </>
+    </PageSection>
   );
 }

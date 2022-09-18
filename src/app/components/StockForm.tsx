@@ -2,7 +2,7 @@
 import { StockWithProductID } from '@app/model/Product';
 import { updateProductStock } from '@app/services/Products';
 import { getLastPathString, getProductIDFromPath } from '@app/utils/utils';
-import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
+import { ActionGroup, Button, Form, FormGroup, PageSection, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -58,7 +58,7 @@ export const StockForm: React.FC = () => {
         }
         else {
             return (
-                <>
+                <PageSection>
                     <Form onSubmit={e => { e.preventDefault(); }}>
                         <FormGroup label="Stock" isRequired fieldId="simple-form-name-01">
                             <TextInput
@@ -75,7 +75,7 @@ export const StockForm: React.FC = () => {
                             <Button variant="link" onClick={() => history.goBack()} >Go back</Button>
                         </ActionGroup>
                     </Form>
-                </>
+                </PageSection>
             );
         }
     }

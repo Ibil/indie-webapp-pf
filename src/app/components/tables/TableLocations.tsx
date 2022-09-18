@@ -1,10 +1,12 @@
 import { SellLocation } from "@app/model/SellLocation";
 import { getLocations } from "@app/services/Locations";
-import { Button } from "@patternfly/react-core";
+import { ActionGroup, Button, Form, PageSection } from "@patternfly/react-core";
 import { TableText, Td, Th, Tr } from '@patternfly/react-table';
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { TableIlx } from "../common/TableIlx";
+
+import tablePaddingStyles from '../ProductTable.module.css';
 
 
 const columnNames = {
@@ -37,13 +39,18 @@ export const buildTableBody = (data, rowIndex, history) =>
 export const TableLocations: React.FunctionComponent = () => {
     const history = useHistory();
 
-    return <>
-    <Button variant="primary" onClick={() => history.push('/listlocations/create')}>Create new Location</Button>
+    return <PageSection>
+        <Form onSubmit={e => { e.preventDefault(); }}>
+            <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+            <Button variant="primary" onClick={() => history.push('/listlocations/create')}>Create new Location</Button>
+            </ActionGroup>
+        </Form>
+    
     <TableIlx
         getSortableRowValues={getSortableRowValues}
         buildTableHeaders={buildTableHeaders}
         buildTableBody={buildTableBody}
         getItems={getLocations}
     />
-    </>
+    </PageSection>
 }

@@ -1,9 +1,12 @@
 import { User } from "@app/model/User";
 import { getUsers } from "@app/services/Users";
-import { Button } from "@patternfly/react-core";
+import { ActionGroup, Button, Form, PageSection } from "@patternfly/react-core";
 import { TableText, Td, Th, Tr } from '@patternfly/react-table';
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { TableIlx } from "../common/TableIlx";
+
+import tablePaddingStyles from '../ProductTable.module.css';
 
 
 const columnNames = {
@@ -37,10 +40,18 @@ export const buildTableBody = (data, rowIndex, history) =>
     </Tr>;
 
 export const TableUsers: React.FunctionComponent = () => {
-    return <TableIlx
-        getSortableRowValues={getSortableRowValues}
-        buildTableHeaders={buildTableHeaders}
-        buildTableBody={buildTableBody}
-        getItems={getUsers}
-    />
+    const history = useHistory();
+    return <PageSection>
+        <Form onSubmit={e => { e.preventDefault(); }}>
+            <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+                <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
+            </ActionGroup>
+        </Form>
+        <TableIlx
+            getSortableRowValues={getSortableRowValues}
+            buildTableHeaders={buildTableHeaders}
+            buildTableBody={buildTableBody}
+            getItems={getUsers}
+        />
+    </PageSection>
 }

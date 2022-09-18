@@ -109,7 +109,9 @@ export enum TshirtColour{
   blue='blue',
   yellow='yellow',
   orange='orange',
-  purple='purple'
+  purple='purple',
+  black='black',
+  white='white'
 }
 
 export enum BagColour{

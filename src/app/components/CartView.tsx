@@ -1,4 +1,4 @@
-import { ActionGroup, Bullseye, Button, EmptyState, EmptyStateIcon, EmptyStateVariant, Form, FormGroup, TextInput, Title } from '@patternfly/react-core';
+import { ActionGroup, Bullseye, Button, EmptyState, EmptyStateIcon, EmptyStateVariant, Form, FormGroup, PageSection, TextInput, Title } from '@patternfly/react-core';
 import * as React from 'react';
 
 import '@app/app.css';
@@ -13,6 +13,8 @@ import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from './common/ErrorFetchingData';
 import { LoadingSpinner } from './common/LoadingSpinner';
 import { TableIlx } from './common/TableIlx';
+
+import tablePaddingStyles from './ProductTable.module.css';
 
 
 const columnNames = {
@@ -99,8 +101,7 @@ export const CartView: React.FC = () => {
             value={`${centsToCurrency(auth.cart.list.reduce((acc, current) => acc += (current.price * current.quantity), 0))}€`}
           />
         </FormGroup>
-        <ActionGroup>
-          {/* <Button variant="tertiary" onClick={() => history.push(`/printSale`)}>print to pdf</Button> */}
+        <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
           <Button variant="danger" onClick={clearBasket}>ClearBasket</Button>
           <Button variant="primary" onClick={makeSale}>Make Sale</Button>
         </ActionGroup>
@@ -156,27 +157,12 @@ export const CartView: React.FC = () => {
 
 
 
-  return <>
+  return <PageSection>
+    <Form onSubmit={e => { e.preventDefault(); }}>
+      <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+        <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
+      </ActionGroup>
+    </Form>
     {drawData()}
-    {/*     <Flex className={saleListStyles.itemalign} direction={{ default: 'column', lg: 'row' }}>
-      <FlexItem><img className={saleListStyles.thumbnail} src={INDIDE_LOGO_GRID_ITEM_BASE64} alt="Product" /></FlexItem>
-      <FlexItem> product x</FlexItem>
-      <FlexItem>
-        <Button variant="secondary" onClick={() => alert("-")}>-</Button>
-        15
-        <Button variant="secondary" onClick={() => alert("+")}>+</Button>
-        <Button variant="danger" onClick={() => alert("x")}>x</Button>
-      </FlexItem>
-    </Flex>
-    <Flex className={saleListStyles.itemalign} direction={{ default: 'column', lg: 'row' }}>
-      <FlexItem><img className={saleListStyles.thumbnail} src={INDIDE_LOGO_GRID_ITEM_BASE64} alt="Product" /></FlexItem>
-      <FlexItem> product x</FlexItem>
-      <FlexItem> qty remove add decrease</FlexItem>
-    </Flex>
-    <Flex className={saleListStyles.itemalign} direction={{ default: 'column', lg: 'row' }}>
-      <FlexItem><img className={saleListStyles.thumbnail} src={INDIDE_LOGO_GRID_ITEM_BASE64} alt="Product" /></FlexItem>
-      <FlexItem> product x</FlexItem>
-      <FlexItem> qty remove add decrease</FlexItem>
-    </Flex> */}
-  </>;
+  </PageSection>;
 };

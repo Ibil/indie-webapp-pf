@@ -1,7 +1,7 @@
 
 import { SellLocation } from '@app/model/SellLocation';
 import { createLocation } from '@app/services/Locations';
-import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
+import { ActionGroup, Button, Form, FormGroup, PageSection, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
@@ -61,22 +61,24 @@ export const LocationForm: React.FC = () => {
     }
     else {
       return (
-        <Form onSubmit={e => { e.preventDefault(); }}>
-          <FormGroup label="name" isRequired fieldId="simple-form-name-01">
-            <TextInput
-              isRequired
-              type="text"
-              id="simple-form-name-01"
-              name="simple-form-name-01"
-              value={itemEditing.address}
-              onChange={handledressChange}
-            />
-          </FormGroup>
-          <ActionGroup>
-            <Button variant="primary" onClick={submitForm}>Submit</Button>
-            <Button variant="link" onClick={() => history.goBack()} >Back</Button>
-          </ActionGroup>
-        </Form>
+        <PageSection>
+          <Form onSubmit={e => { e.preventDefault(); }}>
+            <FormGroup label="name" isRequired fieldId="simple-form-name-01">
+              <TextInput
+                isRequired
+                type="text"
+                id="simple-form-name-01"
+                name="simple-form-name-01"
+                value={itemEditing.address}
+                onChange={handledressChange}
+              />
+            </FormGroup>
+            <ActionGroup>
+              <Button variant="primary" onClick={submitForm}>Submit</Button>
+              <Button variant="link" onClick={() => history.goBack()} >Back</Button>
+            </ActionGroup>
+          </Form>
+        </PageSection>
       );
     }
   }

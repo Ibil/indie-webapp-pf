@@ -4,7 +4,7 @@ import { LocationWithoutStock } from '@app/model/SellLocation';
 import { getLocations } from '@app/services/Locations';
 import { createProduct, getProductByIdProtected, updateProduct } from '@app/services/Products';
 import { centsToCurrency, convertToCentsForAPI, getIdFromPath } from '@app/utils/utils';
-import { ActionGroup, Button, Form, FormGroup, FormHelperText, TextInput, ValidatedOptions } from '@patternfly/react-core';
+import { ActionGroup, Button, Form, FormGroup, FormHelperText, PageSection, TextInput, ValidatedOptions } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -14,6 +14,7 @@ import { ImageUpload } from '../common/ImageUpload';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { DropDown } from '../tables/DropDown';
 import { TableProductStockByLocation } from '../tables/TableProductStockByLocation';
+import tablePaddingStyles from '../ProductTable.module.css';
 
 
 
@@ -178,9 +179,9 @@ export const TshirtProductForm: React.FC = () => {
     }
     else {
       return (
-        <>
+        <PageSection>
           <Form onSubmit={e => { e.preventDefault(); }}>
-            <ActionGroup>
+          <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
           </Form>
@@ -241,14 +242,14 @@ export const TshirtProductForm: React.FC = () => {
                 onChange={changeDesign}
               />
             </FormGroup>
-            <ActionGroup>
+            <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="primary" onClick={submitForm}>Submit</Button>
             </ActionGroup>
           </Form>
           {
             isCreating ? undefined : <TableProductStockByLocation stocks={mapStockWithProductID()} />
           }
-        </>
+        </PageSection>
       );
     }
   }

@@ -1,13 +1,15 @@
 import { User, UserRole } from '@app/model/User';
 import { getUserByID, updateUserByID } from '@app/services/Users';
 import { getIdFromPath } from '@app/utils/utils';
-import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
+import { ActionGroup, Button, Form, FormGroup, PageSection, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from './common/ErrorFetchingData';
 import { LoadingSpinner } from './common/LoadingSpinner';
 import { DropDown } from './tables/DropDown';
+
+import tablePaddingStyles from './ProductTable.module.css';
 
 export const UserForm: React.FC = () => {
 
@@ -77,6 +79,12 @@ export const UserForm: React.FC = () => {
     }
     else {
       return (
+        <PageSection>
+        <Form onSubmit={e => { e.preventDefault(); }}>
+            <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+                <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
+            </ActionGroup>
+        </Form>
         <Form onSubmit={e => { e.preventDefault(); }}>
           <FormGroup label="name" isRequired fieldId="simple-form-name-01">
             <TextInput
@@ -96,6 +104,7 @@ export const UserForm: React.FC = () => {
             <Button variant="link" onClick={() => history.goBack()} >Cancel</Button>
           </ActionGroup>
         </Form>
+        </PageSection>
       );
     }
   }

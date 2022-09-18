@@ -1,4 +1,4 @@
-import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
+import { ActionGroup, Button, Form, FormGroup, PageSection, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 
 import '@app/app.css';
@@ -19,6 +19,7 @@ import { ErrorFetchingData } from './common/ErrorFetchingData';
 import { LoadingSpinner } from './common/LoadingSpinner';
 import { TableIlx } from './common/TableIlx';
 
+import tablePaddingStyles from './ProductTable.module.css';
 
 const columnNames = {
   productName: 'Product Name',
@@ -89,8 +90,8 @@ export const SaleView: React.FC = () => {
             value={`${centsToCurrency(itemEditing.totalPrice)}€`}
           />
         </FormGroup>
-        <ActionGroup>
-          <Button variant="tertiary" onClick={() => history.push(`/printSale`, {...itemEditing})}>print to pdf</Button>
+        <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+          <Button variant="tertiary" onClick={() => history.push(`/printSale`, { ...itemEditing })}>print to pdf</Button>
         </ActionGroup>
       </Form>
     </>
@@ -110,10 +111,15 @@ export const SaleView: React.FC = () => {
       return <ErrorFetchingData />
     }
     else {
-      return <>
+      return <PageSection>
+        <Form onSubmit={e => { e.preventDefault(); }}>
+          <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+            <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
+          </ActionGroup>
+        </Form>
         {drawMetadata()}
         {drawItems()}
-      </>
+      </PageSection>
     }
   }
 
