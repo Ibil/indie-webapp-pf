@@ -75,10 +75,7 @@ export const TshirtProductForm: React.FC = () => {
     setItemEditing({ ...itemEditing, image });
   };
 
-  /*   const isCreating = getIdFromPath(location.pathname) == 'create';
-   */
   const submitForm = e => {
-    /* e.preventDefault(); */
     if (!validateForm()) {
       setIsFormValid(false);
       return;
@@ -151,6 +148,50 @@ export const TshirtProductForm: React.FC = () => {
   }, [loading, hasError, itemEditing]);
 
 
+  const drawTags = () => {
+
+    return isCreating ?
+      <>
+        <FormGroup label="Colour" isRequired fieldId="simple-form-color-01">
+          <DropDown disabled={!isCreating} startingValue={itemEditing.colour} values={mapColourEnumValuesToDropDown()} getDropdownValue={changeColour} />
+        </FormGroup>
+        <FormGroup label="Size" isRequired fieldId="simple-form-size-01">
+          <DropDown disabled={!isCreating} startingValue={itemEditing.size} values={mapSizeEnumValuesToDropDown()} getDropdownValue={changeSize} />
+        </FormGroup>
+        <FormGroup label="Design" fieldId="simple-form-design-01">
+          <TextInput
+            isRequired
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-design-01"
+            name="simple-form-design-01"
+            value={itemEditing.design}
+            onChange={changeDesign}
+          />
+        </FormGroup>
+      </>
+      :
+      <>
+        <FormGroup label="Colour" fieldId="simple-form-color-01">
+          <DropDown disabled={!isCreating} startingValue={itemEditing.tags?.colour} values={mapColourEnumValuesToDropDown()} getDropdownValue={changeColour} />
+        </FormGroup>
+        <FormGroup label="Size" fieldId="simple-form-size-01">
+          <DropDown disabled={!isCreating} startingValue={itemEditing.tags?.size} values={mapSizeEnumValuesToDropDown()} getDropdownValue={changeSize} />
+        </FormGroup>
+        <FormGroup label="Design" fieldId="simple-form-design-01">
+          <TextInput
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-design-01"
+            name="simple-form-design-01"
+            value={itemEditing.tags?.design}
+            onChange={changeDesign}
+          />
+        </FormGroup>
+      </>
+  }
+
+
   const mapStockWithProductID = () => {
     const result = itemEditing.stock.map(stock => {
       return { ...stock, productId: itemEditing.productId }
@@ -181,7 +222,7 @@ export const TshirtProductForm: React.FC = () => {
       return (
         <PageSection>
           <Form onSubmit={e => { e.preventDefault(); }}>
-          <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+            <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
           </Form>
@@ -225,23 +266,7 @@ export const TshirtProductForm: React.FC = () => {
                 onChange={changePrice}
               />
             </FormGroup>
-            <FormGroup label="Colour" isRequired fieldId="simple-form-color-01">
-              <DropDown disabled={!isCreating} startingValue={itemEditing.colour} values={mapColourEnumValuesToDropDown()} getDropdownValue={changeColour} />
-            </FormGroup>
-            <FormGroup label="Size" isRequired fieldId="simple-form-size-01">
-              <DropDown disabled={!isCreating} startingValue={itemEditing.size} values={mapSizeEnumValuesToDropDown()} getDropdownValue={changeSize} />
-            </FormGroup>
-            <FormGroup label="Design" isRequired fieldId="simple-form-design-01">
-              <TextInput
-                isRequired
-                isDisabled={!isCreating}
-                type="text"
-                id="simple-form-design-01"
-                name="simple-form-design-01"
-                value={itemEditing.design}
-                onChange={changeDesign}
-              />
-            </FormGroup>
+            {drawTags()}
             <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="primary" onClick={submitForm}>Submit</Button>
             </ActionGroup>

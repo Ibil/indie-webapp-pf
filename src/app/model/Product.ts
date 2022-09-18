@@ -33,10 +33,18 @@ export interface EditProductTshirt {
   design: string;
   status: ProductStatus;
   category: ProductCategory;
-  tags?: any;
+  tags?: TshirtTags;
   stock: Stock[];
   totalStock: number;
 }
+
+export interface TshirtTags {
+  colour: string;
+  size: string;
+  design: string;
+}
+
+
 
 export interface EditProductBook {
   productId: string;
@@ -50,10 +58,18 @@ export interface EditProductBook {
   year: string;
   status: ProductStatus;
   category: ProductCategory;
-  tags?: string;
+  tags?: BookTags;
   stock: Stock[];
   totalStock: number;
 }
+
+export interface BookTags {
+  title: string;
+  author: string;
+  publisher: string;
+  year: string;
+}
+
 
 export interface EditProductBag {
   productId: string;
@@ -65,9 +81,14 @@ export interface EditProductBag {
   design: string;
   status: ProductStatus;
   category: ProductCategory;
-  tags?: string;
+  tags?: BookTags;
   stock: Stock[];
   totalStock: number;
+}
+
+export interface BookTags {
+  colour: BagColour;
+  design: string;
 }
 
 export interface Stock {

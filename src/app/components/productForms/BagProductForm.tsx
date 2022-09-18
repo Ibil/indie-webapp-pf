@@ -127,6 +127,40 @@ export const BagProductForm: React.FC = () => {
     addLocationToProductStock(productData, locations);
   }
 
+  const drawTags = () => {
+    return isCreating ?
+      <>
+        <FormGroup label="Colour" fieldId="simple-form-color-01">
+          <DropDown startingValue={itemEditing.colour} values={mapColourEnumValuesToDropDown()} getDropdownValue={changeColour} />
+        </FormGroup>
+        <FormGroup label="Design"  fieldId="simple-form-design-01">
+          <TextInput
+            type="text"
+            id="simple-form-design-01"
+            name="simple-form-design-01"
+            value={itemEditing.design}
+            onChange={changeDesign}
+          />
+        </FormGroup>
+      </>
+      :
+      <>
+        <FormGroup label="Colour" fieldId="simple-form-color-01">
+          <DropDown disabled={true} startingValue={itemEditing.tags?.colour} values={mapColourEnumValuesToDropDown()} getDropdownValue={changeColour} />
+        </FormGroup>
+        <FormGroup label="Design" fieldId="simple-form-design-01">
+          <TextInput
+            type="text"
+            isDisabled={true}
+            id="simple-form-design-01"
+            name="simple-form-design-01"
+            value={itemEditing.tags?.design}
+            onChange={changeDesign}
+          />
+        </FormGroup>
+      </>
+  }
+
   useEffect(() => {
     if (!isCreating) {
       getNecessaryEditData()
@@ -172,7 +206,7 @@ export const BagProductForm: React.FC = () => {
       return (
         <PageSection>
           <Form onSubmit={e => { e.preventDefault(); }}>
-          <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+            <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
           </Form>
@@ -216,23 +250,7 @@ export const BagProductForm: React.FC = () => {
                 onChange={changePrice}
               />
             </FormGroup>
-            {!isCreating ? undefined :
-              <>
-                <FormGroup label="Colour" isRequired fieldId="simple-form-color-01">
-                  <DropDown startingValue={itemEditing.colour} values={mapColourEnumValuesToDropDown()} getDropdownValue={changeColour} />
-                </FormGroup>
-                <FormGroup label="Design" isRequired fieldId="simple-form-design-01">
-                  <TextInput
-                    isRequired
-                    type="text"
-                    id="simple-form-design-01"
-                    name="simple-form-design-01"
-                    value={itemEditing.design}
-                    onChange={changeDesign}
-                  />
-                </FormGroup>
-              </>
-            }
+            {drawTags()}
             <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="primary" onClick={submitForm}>Submit</Button>
             </ActionGroup>

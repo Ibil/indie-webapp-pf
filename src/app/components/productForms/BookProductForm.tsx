@@ -49,10 +49,10 @@ export const BookProductForm: React.FC = () => {
   const validateForm = () =>
     itemEditing.name && itemEditing.name.length > 0 &&
     itemEditing.description && itemEditing.description.length > 0 &&
-/*     itemEditing.title && itemEditing.title.length > 0 &&
-    itemEditing.author && itemEditing.author.length > 0 &&
-    itemEditing.publisher && itemEditing.publisher.length > 0 && */
-    itemEditing.year == undefined || validateYear(itemEditing.year)
+    /*     itemEditing.title && itemEditing.title.length > 0 &&
+        itemEditing.author && itemEditing.author.length > 0 &&
+        itemEditing.publisher && itemEditing.publisher.length > 0 && */
+    itemEditing.year == undefined || itemEditing.year.length == 0 || validateYear(itemEditing.year)
   itemEditing.price > 0;
 
   const changeName = name => {
@@ -163,6 +163,97 @@ export const BookProductForm: React.FC = () => {
     return result;
   }
 
+  const drawTags = () => {
+    return isCreating ?
+      <>
+        <FormGroup label="Title" isRequired fieldId="simple-form-title-01">
+          <TextInput
+            isRequired
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-title-01"
+            name="simple-form-title-01"
+            value={itemEditing.title}
+            onChange={changeTitle}
+          />
+        </FormGroup>
+        <FormGroup label="Author" fieldId="simple-form-author-01">
+          <TextInput
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-author-01"
+            name="simple-form-author-01"
+            value={itemEditing.author}
+            onChange={changeAuthor}
+          />
+        </FormGroup>
+        <FormGroup label="Publisher" fieldId="simple-form-publisher-01">
+          <TextInput
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-publisher-01"
+            name="simple-form-publisher-01"
+            value={itemEditing.publisher}
+            onChange={changePublisher}
+          />
+        </FormGroup>
+        <FormGroup label="Year" fieldId="simple-form-year-01">
+          <TextInput
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-year-01"
+            name="simple-form-year-01"
+            value={itemEditing.year}
+            onChange={changeYear}
+          />
+        </FormGroup>
+      </>
+      :
+      <>
+        <FormGroup label="Title" fieldId="simple-form-title-01">
+          <TextInput
+            isRequired
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-title-01"
+            name="simple-form-title-01"
+            value={itemEditing.tags?.title}
+            onChange={changeTitle}
+          />
+        </FormGroup>
+        <FormGroup label="Author" fieldId="simple-form-author-01">
+          <TextInput
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-author-01"
+            name="simple-form-author-01"
+            value={itemEditing.tags?.author}
+            onChange={changeAuthor}
+          />
+        </FormGroup>
+        <FormGroup label="Publisher" fieldId="simple-form-publisher-01">
+          <TextInput
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-publisher-01"
+            name="simple-form-publisher-01"
+            value={itemEditing.tags?.publisher}
+            onChange={changePublisher}
+          />
+        </FormGroup>
+        <FormGroup label="Year" fieldId="simple-form-year-01">
+          <TextInput
+            isDisabled={!isCreating}
+            type="text"
+            id="simple-form-year-01"
+            name="simple-form-year-01"
+            value={itemEditing.tags?.year}
+            onChange={changeYear}
+          />
+        </FormGroup>
+      </>
+  }
+
   const drawForm = () => {
     if (loading && !hasSubmitted) {
       return <LoadingSpinner />;
@@ -180,7 +271,7 @@ export const BookProductForm: React.FC = () => {
       return (
         <PageSection>
           <Form onSubmit={e => { e.preventDefault(); }}>
-          <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
+            <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
           </Form>
@@ -224,49 +315,7 @@ export const BookProductForm: React.FC = () => {
                 onChange={changePrice}
               />
             </FormGroup>
-            <>
-              <FormGroup label="Title" isRequired fieldId="simple-form-title-01">
-                <TextInput
-                  isRequired
-                  isDisabled={!isCreating}
-                  type="text"
-                  id="simple-form-title-01"
-                  name="simple-form-title-01"
-                  value={itemEditing.title}
-                  onChange={changeTitle}
-                />
-              </FormGroup>
-              <FormGroup label="Author" fieldId="simple-form-author-01">
-                <TextInput
-                  isDisabled={!isCreating}
-                  type="text"
-                  id="simple-form-author-01"
-                  name="simple-form-author-01"
-                  value={itemEditing.author}
-                  onChange={changeAuthor}
-                />
-              </FormGroup>
-              <FormGroup label="Publisher" fieldId="simple-form-publisher-01">
-                <TextInput
-                  isDisabled={!isCreating}
-                  type="text"
-                  id="simple-form-publisher-01"
-                  name="simple-form-publisher-01"
-                  value={itemEditing.publisher}
-                  onChange={changePublisher}
-                />
-              </FormGroup>
-              <FormGroup label="Year" fieldId="simple-form-year-01">
-                <TextInput
-                  isDisabled={!isCreating}
-                  type="text"
-                  id="simple-form-year-01"
-                  name="simple-form-year-01"
-                  value={itemEditing.year}
-                  onChange={changeYear}
-                />
-              </FormGroup>
-            </>
+            {drawTags()}
             <ActionGroup className={tablePaddingStyles.topActionGroupPadding}>
               <Button variant="primary" onClick={submitForm}>Submit</Button>
             </ActionGroup>
