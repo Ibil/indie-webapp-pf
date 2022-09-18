@@ -1,5 +1,5 @@
 
-import {  ProductCategory, ProductStatus, Stock, EditProductBag, BagColour } from '@app/model/Product';
+import { ProductCategory, ProductStatus, Stock, EditProductBag, BagColour } from '@app/model/Product';
 import { LocationWithoutStock } from '@app/model/SellLocation';
 import { getLocations } from '@app/services/Locations';
 import { createProduct, getProductByIdProtected, updateProduct } from '@app/services/Products';
@@ -10,6 +10,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from '../common/ErrorFetchingData';
+import { ImageUpload } from '../common/ImageUpload';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { DropDown } from '../tables/DropDown';
 import { TableProductStockByLocation } from '../tables/TableProductStockByLocation';
@@ -64,6 +65,10 @@ export const BagProductForm: React.FC = () => {
     setItemEditing({ ...itemEditing, design });
   };
 
+  const updateImage = image => {
+    setItemEditing({ ...itemEditing, image });
+  };
+
   const submitForm = e => {
     /* e.preventDefault(); */
     if (!validateForm()) {
@@ -73,7 +78,7 @@ export const BagProductForm: React.FC = () => {
     setIsFormValid(true);
     setLoading(true)
     if (isCreating) {
-      createProduct({...itemEditing, price: convertToCentsForAPI(itemEditing.price)})
+      createProduct({ ...itemEditing, price: convertToCentsForAPI(itemEditing.price) })
         .then(() => {
           setHasError(false);
           setLoading(false);
@@ -85,7 +90,7 @@ export const BagProductForm: React.FC = () => {
         })
     }
     else {
-      updateProduct({...itemEditing, price: convertToCentsForAPI(itemEditing.price)})
+      updateProduct({ ...itemEditing, price: convertToCentsForAPI(itemEditing.price) })
         .then(() => {
           setHasError(false);
           setLoading(false);
@@ -134,7 +139,8 @@ export const BagProductForm: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {;
+  useEffect(() => {
+    ;
   }, [loading, hasError, itemEditing]);
 
 
@@ -168,6 +174,12 @@ export const BagProductForm: React.FC = () => {
             <ActionGroup>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
+          </Form>
+          {
+            isCreating ? undefined :
+              <ImageUpload fileName='' data={itemEditing.image} productId={itemEditing.productId} updateItemEditing={updateImage} />
+          }
+          <Form onSubmit={e => { e.preventDefault(); }}>
             <FormHelperText isError={!formValid} isHidden={formValid} icon={<ExclamationCircleIcon />}>
               {"All fields must be filled in"}
             </FormHelperText>

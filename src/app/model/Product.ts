@@ -12,6 +12,7 @@ export interface Product {
 export interface EditProduct {
   productId: string;
   name: string;
+  image?: string;
   description: string;
   price: number;
   status: ProductStatus;
@@ -26,6 +27,7 @@ export interface EditProductTshirt {
   name: string;
   description: string;
   price: number;
+  image?: string;
   colour: string;
   size: string;
   design: string;
@@ -41,6 +43,7 @@ export interface EditProductBook {
   name: string;
   description: string;
   price: number;
+  image?: string;
   title: string;
   author: string;
   publisher: string;
@@ -57,6 +60,7 @@ export interface EditProductBag {
   name: string;
   description: string;
   price: number;
+  image?: string;
   colour: BagColour;
   design: string;
   status: ProductStatus;

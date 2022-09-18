@@ -2,6 +2,6 @@
 export interface GridItemModel {
   productId: string;
   name: string;
-  photo: string;
+  image: string;
   price: number;
 }

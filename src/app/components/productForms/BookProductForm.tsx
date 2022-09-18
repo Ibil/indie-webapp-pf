@@ -10,6 +10,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from '../common/ErrorFetchingData';
+import { ImageUpload } from '../common/ImageUpload';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { TableProductStockByLocation } from '../tables/TableProductStockByLocation';
 
@@ -74,6 +75,10 @@ export const BookProductForm: React.FC = () => {
 
   const changeYear = year => {
     setItemEditing({ ...itemEditing, year });
+  };
+
+  const updateImage = image => {
+    setItemEditing({ ...itemEditing, image });
   };
 
   const submitForm = e => {
@@ -176,6 +181,12 @@ export const BookProductForm: React.FC = () => {
             <ActionGroup>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
+          </Form>
+          {
+            isCreating ? undefined :
+              <ImageUpload fileName='' data={itemEditing.image} productId={itemEditing.productId} updateItemEditing={updateImage} />
+          }
+          <Form onSubmit={e => { e.preventDefault(); }}>
             <FormHelperText isError={!formValid} isHidden={formValid} icon={<ExclamationCircleIcon />}>
               {"All fields must be filled in. year must be between 0 and 3000"}
             </FormHelperText>

@@ -16,7 +16,7 @@ const Template: Story<ComponentProps<typeof GridItem>> = (args) => <GridItem {..
 export const FirstStory = Template.bind({});
 FirstStory.args = {
   name: `product`,
-  photo: INDIDE_LOGO_GRID_ITEM_BASE64,
+  image: INDIDE_LOGO_GRID_ITEM_BASE64,
   price: '35€'
 };
 

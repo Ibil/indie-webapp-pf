@@ -10,6 +10,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { ErrorFetchingData } from '../common/ErrorFetchingData';
+import { ImageUpload } from '../common/ImageUpload';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { DropDown } from '../tables/DropDown';
 import { TableProductStockByLocation } from '../tables/TableProductStockByLocation';
@@ -34,6 +35,7 @@ export const TshirtProductForm: React.FC = () => {
     productId: "",
     name: "",
     description: "",
+    image: undefined,
     price: 1,
     colour: TshirtColour.red,
     size: Size.s,
@@ -66,6 +68,10 @@ export const TshirtProductForm: React.FC = () => {
   };
   const changeDesign = design => {
     setItemEditing({ ...itemEditing, design });
+  };
+
+  const updateImage = image => {
+    setItemEditing({ ...itemEditing, image });
   };
 
   /*   const isCreating = getIdFromPath(location.pathname) == 'create';
@@ -177,6 +183,12 @@ export const TshirtProductForm: React.FC = () => {
             <ActionGroup>
               <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
             </ActionGroup>
+          </Form>
+          {
+            isCreating ? undefined :
+              <ImageUpload fileName='' data={itemEditing.image} productId={itemEditing.productId} updateItemEditing={updateImage} />
+          }
+          <Form onSubmit={e => { e.preventDefault(); }}>
             <FormHelperText isError={!formValid} isHidden={formValid} icon={<ExclamationCircleIcon />}>
               {"All fields must be filled in"}
             </FormHelperText>

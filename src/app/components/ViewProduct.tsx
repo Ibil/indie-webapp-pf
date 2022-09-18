@@ -11,7 +11,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
-import { PANTS_BASE64 } from 'src/mockData';
+import { SKATE_BASE64 } from 'src/mockData';
 import { default as gridItemStyle, default as imageStyles } from './griditemview.module.css';
 import { DropDown } from './tables/DropDown';
 
@@ -202,7 +202,7 @@ export const ViewProduct: React.FC = () => {
       </ActionGroup>
       <Flex>
         <FlexItem className={gridItemStyle.align}>
-          {<img className={imageStyles.thumbnailGrid} src={PANTS_BASE64} alt="Product" />}
+          {<img className={imageStyles.thumbnailGrid} src={itemEditing.image ?? SKATE_BASE64} alt="Product" />}
         </FlexItem >
         <FlexItem className={gridItemStyle.align}>
           <DescriptionList columnModifier={{

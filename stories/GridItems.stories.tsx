@@ -21,7 +21,7 @@ const generateMockItems = (size: number) => {
   while (size-- > 0) {
     array.push({
       name: `product #${size}`,
-      photo: INDIDE_LOGO_GRID_ITEM_BASE64,
+      image: INDIDE_LOGO_GRID_ITEM_BASE64,
       price: '35€'
     });
   }

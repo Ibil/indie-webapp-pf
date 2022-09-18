@@ -7,12 +7,18 @@ location.state
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-		- upload images
-add credenciais to readme
+upload images
 
-validar user permissions to route
+
+
+
+padding
+botao back para mobile em todo o lado
+storyboard
 preços em centimos?
 
+apresentacao ( ver pasta)
+validar user permissions to route
 
 <tags for form(create/edit) and view>
 view products nao mostram info especifica por categoria <same reason below>
@@ -20,9 +26,7 @@ missing disabled fields need to be mapped to tags
 product form e view : tags unique : tags ver ficheiro remote
 
 MUST:
-botao back para mobile em todo o lado
-storyboard
-preços em centimos?
+
 
 Should:
 	notification for sucess or error on submit
@@ -36,6 +40,7 @@ search
 
 
 Could:
+sale view : get only necessary products
 sort table fix
 grid items and table pagination
 table : actions in dots dropdown instead of button

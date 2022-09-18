@@ -137,3 +137,30 @@ export const updateProductStock = async (stock: StockWithProductID, skipRetry?: 
         throw Error;
     }
 }
+
+export const updateImage = async (productId, image, skipRetry?: boolean) => {
+
+    const myHeaders = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    })
+    const response = await fetch(`${WEB_API_HOST}products/${productId}/image`,
+    {
+        method: 'PUT', 
+        headers: myHeaders,
+        credentials: "include",
+        body: JSON.stringify({
+            image
+        })
+    });
+    if (response.status >= 200 && response.status < 300) {
+        return;
+    }
+    else if(response.status === 401 && !skipRetry){
+        await refresh();
+        return updateImage(productId, image, true);
+    }
+    else{
+        throw Error;
+    }
+}
