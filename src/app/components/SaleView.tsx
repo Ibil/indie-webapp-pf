@@ -5,7 +5,7 @@ import '@app/app.css';
 import { Product } from '@app/model/Product';
 import { Sale } from '@app/model/Sale';
 import { SellLocation } from '@app/model/SellLocation';
-import { User } from '@app/model/User';
+import { User, UserRole } from '@app/model/User';
 import { getLocations } from '@app/services/Locations';
 import { getProducts } from '@app/services/Products';
 import { getSaleById } from '@app/services/Sales';
@@ -20,6 +20,7 @@ import { LoadingSpinner } from './common/LoadingSpinner';
 import { TableIlx } from './common/TableIlx';
 
 import tablePaddingStyles from './ProductTable.module.css';
+import { useAuth } from '@app/hooks/useAuth';
 
 const columnNames = {
   productName: 'Product Name',
@@ -51,6 +52,7 @@ export const buildTableBody = (data, rowIndex, history) =>
 export const SaleView: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
+  const { auth, setAuth } = useAuth();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
@@ -123,11 +125,15 @@ export const SaleView: React.FC = () => {
     }
   }
 
+  const getSaleSellerPromise = (): Promise<User[]> => {
+    return auth.role != UserRole.seller ? getUsers() : Promise.resolve([]);
+  }
+
   const getCustomedSale = (): Promise<any> => {
     return Promise.all(
       [
         getSaleById(getLastPathString(location.pathname)),
-        getUsers(),
+        getSaleSellerPromise(),
         getLocations(),
         getProducts()
       ]
@@ -146,7 +152,9 @@ export const SaleView: React.FC = () => {
       return {
         ...sale,
         items: mappedSaleItems,
-        sellerName: users.find(user => user.userId == sale.sellerId)?.name,
+        sellerName: auth.role != UserRole.seller ?
+          users.find(user => user.userId == sale.sellerId)?.name :
+          auth.username,
         sellLocation: locations.find(loc => loc.locationId == sale.locationId)?.address
       }
     });

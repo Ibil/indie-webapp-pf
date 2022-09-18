@@ -53,7 +53,8 @@ export const createSale = async (locationStock, skipRetry?: boolean) => {
         body: JSON.stringify(locationStock),
     });
     if (response.status >= 200 && response.status < 300) {
-        return;
+        const result = await response.json();
+        return result.data;
     }
     else if(response.status === 401 && !skipRetry){
         await refresh();

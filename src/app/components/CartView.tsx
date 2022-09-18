@@ -52,6 +52,7 @@ export const CartView: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
+  const [saleId, setSaleId] = useState<string>("");
 
   const clearBasket = () => {
     const newAuth = {
@@ -65,7 +66,8 @@ export const CartView: React.FC = () => {
   const makeSale = () => {
     setLoading(true);
     createSale(auth.cart)
-      .then(() => {
+      .then(saleData => {
+        setSaleId(saleData.saleId)
         setHasError(false);
         setLoading(false);
         clearBasket();
@@ -130,7 +132,7 @@ export const CartView: React.FC = () => {
       return <ErrorFetchingData message={"Sale could not be completed.Cart cleared. please check if product quantities have expired"} />
     }
     else if (hasSubmitted) {
-      return <Redirect to={'/viewSales'} />
+      return <Redirect to={'/viewSales/' + saleId} />
     }
     else if (auth.cart) {
       return <>
