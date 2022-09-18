@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import { SKATE_BASE64 } from 'src/mockData';
+import { LoadingSpinner } from './common/LoadingSpinner';
 import { default as gridItemStyle, default as imageStyles } from './griditemview.module.css';
 import { DropDown } from './tables/DropDown';
 
@@ -194,50 +195,58 @@ export const ViewProduct: React.FC = () => {
     }
   }
 
+  const drawViewArea = () => {
+
+    return <FlexItem className={gridItemStyle.align}>
+      <DescriptionList columnModifier={{
+        default: '2Col'
+      }}>
+        <DescriptionListGroup>
+          <DescriptionListTerm>Name</DescriptionListTerm>
+          <DescriptionListDescription>
+            {itemEditing.name}
+          </DescriptionListDescription>
+        </DescriptionListGroup>
+        <DescriptionListGroup>
+          <DescriptionListTerm>Description</DescriptionListTerm>
+          <DescriptionListDescription>
+            {itemEditing.description}
+          </DescriptionListDescription>
+        </DescriptionListGroup>
+        <DescriptionListGroup>
+          <DescriptionListTerm>Price</DescriptionListTerm>
+          <DescriptionListDescription>
+            {`${centsToCurrency(itemEditing.price)} € `}
+          </DescriptionListDescription>
+        </DescriptionListGroup>
+        <DescriptionListGroup>
+          <DescriptionListTerm>Availability</DescriptionListTerm>
+          <DescriptionListDescription>
+            {itemEditing.status}
+          </DescriptionListDescription>
+        </DescriptionListGroup>
+      </DescriptionList>
+    </FlexItem >
+  }
+
   return (
     <PageSection>
       {hasSubmitted ? <Redirect to={removeIdFromPathForGrid(location.pathname)} /> : undefined}
       <ActionGroup>
         <Button variant="secondary" onClick={() => history.goBack()} >Go back</Button>
       </ActionGroup>
-      <Flex>
-        <FlexItem className={gridItemStyle.align}>
-          {<img className={imageStyles.thumbnailGrid} src={itemEditing.image ?? SKATE_BASE64} alt="Product" />}
-        </FlexItem >
-        <FlexItem className={gridItemStyle.align}>
-          <DescriptionList columnModifier={{
-            default: '2Col'
-          }}>
-            <DescriptionListGroup>
-              <DescriptionListTerm>Name</DescriptionListTerm>
-              <DescriptionListDescription>
-                {itemEditing.name}
-              </DescriptionListDescription>
-            </DescriptionListGroup>
-            <DescriptionListGroup>
-              <DescriptionListTerm>Description</DescriptionListTerm>
-              <DescriptionListDescription>
-                {itemEditing.description}
-              </DescriptionListDescription>
-            </DescriptionListGroup>
-            <DescriptionListGroup>
-              <DescriptionListTerm>Price</DescriptionListTerm>
-              <DescriptionListDescription>
-                {`${centsToCurrency(itemEditing.price)} € `}
-              </DescriptionListDescription>
-            </DescriptionListGroup>
-            <DescriptionListGroup>
-              <DescriptionListTerm>Availability</DescriptionListTerm>
-              <DescriptionListDescription>
-                {itemEditing.status}
-              </DescriptionListDescription>
-            </DescriptionListGroup>
-          </DescriptionList>
-        </FlexItem >
-        <FlexItem className={gridItemStyle.align}>
-          {drawBuyArea()}
-        </FlexItem>
-      </Flex>
+      {loading ?
+        <LoadingSpinner /> :
+        <Flex>
+          <FlexItem className={gridItemStyle.align}>
+            {<img className={imageStyles.thumbnailGrid} src={itemEditing.image ?? SKATE_BASE64} alt="Product" />}
+          </FlexItem >
+          {drawViewArea()}
+          <FlexItem className={gridItemStyle.align}>
+            {drawBuyArea()}
+          </FlexItem>
+        </Flex>
+      }
     </PageSection>
   );
 }
