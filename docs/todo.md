@@ -6,16 +6,12 @@ location.state
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-	
-upload images
 
-
-
-
+preços em centimos?
 padding
 botao back para mobile em todo o lado
 storyboard
-preços em centimos?
+
 
 apresentacao ( ver pasta)
 validar user permissions to route
@@ -25,11 +21,12 @@ view products nao mostram info especifica por categoria <same reason below>
 missing disabled fields need to be mapped to tags 
 product form e view : tags unique : tags ver ficheiro remote
 
-MUST:
 
+imagens aws
+logout confirm
 
 Should:
-	notification for sucess or error on submit
+notification for sucess or error on submit
 https
 cookie persistent && best practices
 grid items : vertical align each item
@@ -38,14 +35,11 @@ topbar
 search
 
 
-
 Could:
 sale view : get only necessary products
 sort table fix
 grid items and table pagination
 table : actions in dots dropdown instead of button
 date picker in modal and set hour validations if same date
-listar produtos por ponto de venda
-consultar stock por ponto de venda
 reserva
-- gerir período de venda (desactivado)
+gerir período de venda (desactivado)
