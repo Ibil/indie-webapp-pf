@@ -172,7 +172,7 @@ export const ViewProduct: React.FC = () => {
     }
     else {
       return <Form onSubmit={e => { e.preventDefault(); }}>
-        <FormGroup>
+        <FormGroup label="Location" >
           <DropDown values={mapEnumValuesToDropDown()} getDropdownValue={getDropdownValue} startingValue={undefined} />
         </FormGroup>
         <FormHelperText isError={!formValid} isHidden={formValid} icon={<ExclamationCircleIcon />}>
