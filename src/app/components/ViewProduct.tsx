@@ -11,7 +11,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
-import { SKATE_BASE64 } from 'src/mockData';
+import { NO_IMAGE_BASE64 } from 'src/mockData';
 import { LoadingSpinner } from './common/LoadingSpinner';
 import { default as gridItemStyle, default as imageStyles } from './griditemview.module.css';
 import { DropDown } from './tables/DropDown';
@@ -256,7 +256,7 @@ export const ViewProduct: React.FC = () => {
         <LoadingSpinner /> :
         <Flex>
           <FlexItem className={gridItemStyle.align}>
-            {<img className={imageStyles.thumbnailGrid} src={itemEditing.image ?? SKATE_BASE64} alt="Product" />}
+            {<img className={imageStyles.thumbnailGrid} src={itemEditing.image ?? NO_IMAGE_BASE64} alt="Product" />}
           </FlexItem >
           {drawViewArea()}
           <FlexItem className={gridItemStyle.align}>

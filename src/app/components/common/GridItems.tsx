@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Flex, PageSection, Title } from '@patternfly/react-core';
 import { GridItem } from '@app/components/common/GridItem';
 import { ErrorFetchingData } from '@app/components/common/ErrorFetchingData';
-import { PANTS_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
+import { NO_IMAGE_BASE64, INDIDE_LOGO_GRID_ITEM_BASE64, SKATE_BASE64 } from 'src/mockData';
 import { getProducts } from '@app/services/Products';
 import { GridItemModel } from '@app/model/GridItemModel';
 import { ProductCategory } from '@app/model/Product';
@@ -34,7 +34,7 @@ export const GridItems = (props: props) => {
   const fillGrid = () => {
     if(items !== undefined) {
       return items.map((item) =>
-      <GridItem productId={item.productId} name={item.name} image={item.image ?? PANTS_BASE64} price={item.price} /> // fixme photo missing
+      <GridItem productId={item.productId} name={item.name} image={item.image ?? NO_IMAGE_BASE64} price={item.price} /> // fixme photo missing
     )}
     else{
        return <ErrorFetchingData/>;

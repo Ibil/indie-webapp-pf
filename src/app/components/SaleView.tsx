@@ -125,23 +125,17 @@ export const SaleView: React.FC = () => {
     }
   }
 
-  const getSaleSellerPromise = (): Promise<User[]> => {
-    return auth.role != UserRole.seller ? getUsers() : Promise.resolve([]);
-  }
-
   const getCustomedSale = (): Promise<any> => {
     return Promise.all(
       [
         getSaleById(getLastPathString(location.pathname)),
-        getSaleSellerPromise(),
         getLocations(),
         getProducts()
       ]
     ).then(zip => {
       const sale: Sale = zip[0];
-      const users: User[] = zip[1];
-      const locations: SellLocation[] = zip[2]
-      const products: Product[] = zip[3]
+      const locations: SellLocation[] = zip[1]
+      const products: Product[] = zip[2]
 
       const mappedSaleItems = sale.items.map(saleProduct => {
         return {
@@ -152,9 +146,7 @@ export const SaleView: React.FC = () => {
       return {
         ...sale,
         items: mappedSaleItems,
-        sellerName: auth.role != UserRole.seller ?
-          users.find(user => user.userId == sale.sellerId)?.name :
-          auth.username,
+        sellerName: sale.sellerName,
         sellLocation: locations.find(loc => loc.locationId == sale.locationId)?.address
       }
     });

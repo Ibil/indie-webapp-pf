@@ -1,5 +1,6 @@
 export interface Sale {
     saleId: string,
+    sellerName: string,
     customerId: string,
     sellerId: string,
     locationId: string,

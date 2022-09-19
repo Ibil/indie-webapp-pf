@@ -53,18 +53,16 @@ export const getItems = (): Promise<any[]> => {
     return Promise.all(
         [
             getSales(),
-            getUsers(),
             getLocations()
         ]
     ).then(zip => {
         const sales: Sale[] = zip[0];
-        const users: User[] = zip[1];
-        const locations: SellLocation[] = zip[2]
+        const locations: SellLocation[] = zip[1]
 
         return sales.map(sale => {
             return {
                 ...sale,
-                sellerName: users.find(user => user.userId == sale.sellerId)?.name,
+                sellerName: sale.sellerName,
                 sellLocation: locations.find(loc => loc.locationId == sale.locationId)?.address
             }
         })

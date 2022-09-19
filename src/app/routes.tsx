@@ -297,7 +297,7 @@ const protectedRoutes: AppRouteConfig[] = [
     label: 'Sales',
     path: '/viewSales',
     title: 'Sales',
-    allowedRoles: [UserRole.seller, UserRole.manager, UserRole.admin],
+    allowedRoles: [UserRole.manager, UserRole.admin],
   },
   {
     component: SaleView,
